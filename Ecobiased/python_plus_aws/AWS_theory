@@ -83,4 +83,42 @@
     Availability Zones -
 
     Why not we keep our data center at one region only why we have created availability zone?
-    
+    Actually if we put data center in one region rather than availability zone then there will be few
+    drawbacks
+    1) What will happened if current cut shut down suddenly.
+    2) What will happened if some terrorism happened.
+    These are the scenario they would have consider for designing aws global infrastructure.
+    Each availability zone will connect with different power house and with different network.
+    Just like each region will have their unique code similarly each availability zone will have unique
+    code.
+
+    Local zones -
+    When we wanted to keep my server inside a particular city in india, This time local zones will come
+    into the picture.
+    AWS say that if we keep our server inside local zones then in local zones it will give single digit
+    latency to load the page. For now it is not necessary that all the services of AWS will be available
+    to each local zones.
+
+7) What is EC2 ?
+    EC2 stands for Elastic compute cloud.
+    EC2 gives us a server on rent. That means we can create a virtual machine on AWS EC2 service.
+    While creating a virtual machine we can select multiple things such as
+
+    1) Which operating system you wanted to choose.
+    2) How many compute we need means number of cpu we need.
+    3) How many RAM we need for my virtual machine.
+    4) We can select speed of upload and download of data.
+    5) Firewall rules we can add means which all traffic it allow.
+    6) We can put bootstrap script while creating an instance. Which means whenever an instance will
+       create first of all this script will run. For example Allocate IP to that instance, Add to
+       DNS, Register in Iframe these kind of work we can add into bootstrap script or we can launch
+       our whole application.
+    7) How much storage we need for our server.
+
+    While creating Instance we need to create key-pair.
+    public key will goes to instance and private key we can store to access the instance after creation.
+
+8) What is Inbound Rules and Outbound rules?
+    Inbound means when we send request to server then on which port server will receive
+    that comes under inbound rules.
+    Outbound means where my server will communicate where he will give response.

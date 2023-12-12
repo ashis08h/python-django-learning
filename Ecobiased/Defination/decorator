@@ -1,0 +1,2 @@
+Decorator in python is a powerful method which takes another method as an argument and modify
+the original method and return another method. We use decorator with @ symbol.

@@ -1,0 +1,3 @@
+When we get data in multiple format for example when we pass data from object as name and
+salary and from another object if we pass data in this format name_salary then we can
+use the class method as an alternative constructor to handle this type of scenario.

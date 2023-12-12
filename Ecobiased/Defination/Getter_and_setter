@@ -1,0 +1,6 @@
+Getter are the methods in python from which we can access the value of a properties of an object.
+with help of @property decorator we can behave our methods as an properties of that object.
+
+Setter are the methods in python from which we can set the value of a property of the class.
+with help of @method_name.setter decorator we can set the value of a property.
+

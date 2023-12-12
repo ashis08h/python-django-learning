@@ -1,0 +1,252 @@
+class is a blueprint of an object which will have all the properties and methods.
+where properties are the data and methods are the action to be performed.
+
+object is an instance of a class which will have their own properties and methods.
+what are the methods which is defined inside a class their objects can use those methods.
+
+For example Person is a class it has their properties like name, age, dob and some methods like
+CanTalk(), CanWalk(), CanBreathe
+
+Abstract class
+
+Abstract class are a special type of class which can not be instantiated, In python we can create
+abstract class with help of ABC class from abc module. Basically it is a blueprint of the their child
+class.
+
+Abstract methods are a part of abstract class which will not have their implementation in abstract
+class their implementation will be present into their child class.
+we can create abstract method with help of abstractmethod decorator.
+
+Access modifiers or access specifiers in python are used to limit the access of a class variable
+or class methods outside of a class.
+
+There are three types of access modifiers in python
+
+1) Public -
+By default all the variables or methods which we create are public in nature. we can access these
+variables or methods outside of a class. All the instance variables which is used after self keyword
+are public variable.
+
+2) Private -
+When we declare a variable with double underscore are private in nature we can not use these variables
+or methods outside of a class.
+
+3) Protected -
+when we declare a variable with single underscore are protected in nature. we can access these
+variables outside of a class. generally we use protected variable for code convention purpose.
+
+Class method are a special type of class in python. We use class method to change the value of a
+class variable which is declare globally in to that class. Generally we declare class methods with
+@classmethod decorator.
+
+constructor a special type of methods present in a class which is automatically getting invoked
+once we create an object of that class. In python we use dunder method to create constructor __init__.
+when we pass argument from an object then we use constructor to defined those variables inside that
+class.
+
+There are two types of constructor in python
+1) Parameterized constructor -
+When we pass argument from an object creation then it is parameterized constructor.
+2) Default constructor -
+when we do not have any argument while creating object then it is default constructor.
+
+Class method used as alternative constructor -
+
+We can use class method as an alternative constructor in python.
+For example we are creating objects from two places and from both the places if we get argument
+in different formats then we use the class methods as an alternative constructor.
+
+Decorator in a python are a special type of function which takes a function as an argument and
+change the original method and return the another method. We declare decorator with @ symbol.
+
+dir method dir() will return all the methods, attribute of that thing which is passed under
+parenthesis.
+
+__dict__ it is a dunder method which is used to return into dictionary
+
+help() it is also a method which is used to give information of things which is passed under
+the ()
+
+dunder method - This is a special type of method which are used inside a class to manipulate the
+behaviour of an object. This is also known as magical method.
+
+__init__, __str__, __len__, __dict__
+
+Encapsulation in oops are a way to hide the internal state of an object and the object of that class
+can only be accessed through their object only.
+
+The benefit of encapsulation is we can protect our class to get access from unwanted places.
+Generally we do encapsulation with help of access modifiers.
+
+functional_caching - it is a technique in python which is used to store the result of a function
+and we can re use that result as per the requirement.
+we use @lru_cache decorator to do function caching.
+
+generators are a special type of method in the python which is used to create iterable sequence.
+it create a sequence on the fly whenever we request for next value then only it creates
+the sequence. the benefit of generator are it takes less memory. We use yield keyword to generate
+sequence.
+
+getter is a method in python from which we can access the value of a property of a class.
+we use @property decorator to behave our methods as a property.
+
+setter is a method in python from which we can set the value of a property of a class.
+we use @method_name.setter decorator to set a value of a property.
+
+Inheritance -
+In Inheritance we derive a class from a base class there after all the properties and methods of
+base class will be derived by the child class. In addition to that the derived class may have
+their own methods and properties.
+
+There are 5 types of inheritance in python
+
+Single inheritance
+When we derive a class from single parent class it is known as single inheritance
+this is basic inheritance.
+
+Multiple Inheritance
+When we derived a class with multiple parent class it is called multilevel inheritance
+Multilevel Inheritance
+When we derive a class from a parent class and one more class is derived from that child
+class it is known as multilevel inheritance
+Hierarichal inheritance
+when we derive multiple child class from a single parent class it is known as hierarichal inheritance
+hybrid inheritance
+when we use more that one type of inheritance it is known as hybrid inheritance.
+
+class variable are a variable which is declared inside a class but outside of any methods present
+in that class.
+Generally we store those type of values in the class variables which are commmon to all the instance.
+Instance variable are present inside a method of a class. it defined under __init__ method or we
+can say constructor of a class generally we store those type of values inside an instance variable
+which are their for each instance.
+
+Polymorphism is a feature in python where we will have similar objects of different classes.
+we treat that object as an object of common class.
+
+There are two types of polymorphism in oops.
+
+Compile time polymorphism
+In compile time polymorphism we will have same name of methods multiple times with different
+number of arguments. In python we handle this scenario with help of optional parameter.
+This is also known as method overloading.
+
+Runtime polymorphism
+In run time polymorphism we define a method of parent class from chile class.
+This is also known as method overriding.
+
+Oops -
+Before we were using procedural programing language where we used to write logic inside methods.
+then we have shifted to oops where we write our logics in method =s but we keep related methods
+and properties together inside a class. and we access the methods and the properties with help of
+objects. Oops also maps our variables with real world concepts.
+
+There are some features of oops
+
+Inheritance
+Polymorphism
+Encapsulation
+
+Operator overloading -
+Operator overloading is a feature in python where we redefined the behaviour of mathematical operator
+and comparison operator.
+In python we have few of them
+
+__add__, __sub__, __mul__
+
+We use modules and package to modularize our code
+modularized means - reusable, modular, and organized.
+Module - module in python is a .py file which will have method, variables and classes.
+we can use these methods, variables and classes after importing into the main scripts.
+the benefit of creating module is to avoid clashes between global variables.
+
+import module1
+
+package are a collection of modules which is used in bigger projects.
+__init__.py will be there inside package.
+we can import package as
+from package_name import module_name
+
+Package1
+    __init__.py
+    module1
+    module1
+    supackage
+        __init__.py
+        submodule1
+        submodule2
+
+request module -
+
+Request module is a module in python which is used to do http request in python
+it enables the communication with external server .
+
+
+self - self is a keyword in python which refers the current instance of a class
+it also help us to define and access the instance variable of a class.
+
+static method are a special type of method which does not need self keyword while defining
+the method and we can call this method without any instance of that class.
+we use @staticmethod decorator to declare a static method in python.
+
+super() keyword refers the parent class from a child class during inheritance
+we can access the methods of parent class from child class with help of super() keyword.
+
+Walrus operator is an operator in python which comes in 3.8 and onwards which assign the value
+of a variable in expression only.
+we use := operator as walrus operator.
+
+Copy an objects
+
+In python we copy an object in two ways:
+
+Shallow copy -
+In shallow copy we create a new object from an original object. The element of copied object will copy
+the reference of the element of original object.
+It means if we change the immutable elements inside copied object then original object will also
+change.
+
+deep copy -
+In deep copy we also create a new object from an original object. The element of copied object
+copied the element of original object recursively.
+In deep copy the copied object is independent from the original object.
+
+lambda method -
+Lambda method is also known as anonymous method. We use lambda method for one time use of any function
+for small work. There is no name for lambda function We use lambda keyword to define lambda function.
+
+lambda arguments: expression
+
+List comprehension - List comprehension we use to create a list from another list with applied
+some expressions to each element of that list.
+
+Dict comprehension - Dict comprehension we use to create a key value pair dictionary from another
+list with applied some expressions to each element of that list.
+
+Multithreading is way we can process multiple thread concurrently. For all the thread source and
+destination may be same.
+
+Because of GIL limitation multiprocess are more useful for cpu bound task.
+GIL - Global interpreter lock.
+
+Pickling & Un pickling - Picking and unpickling both are used to serialize and de serialize the python
+object into byte stream data and vice versa.
+
+Pickling - In python we use pickle.dump to serialize the object into byte stream data
+Unpickling - In python we use pickle.load to de serialize the byte stream data into object.
+
+unittest -
+
+In python unittest is a module which is used to write the test cases and execute it.
+We use unittest.TestCases class which contains test methods inside that.
+
+Test methods are the individual test case of a feature.
+
+Assertion - Assertion is used to pass an test case. we have some builtin assertion in unittest
+AssertTrue, AssertFalse, AssertEqual etc.
+
+Test discovery -
+unittest will discover all the test cases and run it which search pattern like 'test*.py'.
+
+
+

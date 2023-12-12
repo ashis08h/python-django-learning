@@ -1,0 +1,5 @@
+Operator overloading is a feature in python which is used to redefine the behaviour of
+mathematical operator and comparison operator.
+
+There are few operator overloading method
+__add__, __sub__, __mul__

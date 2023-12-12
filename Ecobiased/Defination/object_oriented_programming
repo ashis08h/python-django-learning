@@ -1,0 +1,11 @@
+Before we were using procedural programing where we used to write our logic inside methods.
+then we have shifted to oops where we bring all the related methods together inside a class.
+so in oops we write our logics inside methods and we keep related methods inside a class.
+in oops our code is more organized way and the oops maps our variable with real world concept.
+In oops we access the class methods, properties via objects.
+
+There are some feature of oops -
+Encapsulation
+Polymorphism
+Inheritance
+Method overriding

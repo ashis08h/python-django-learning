@@ -1,0 +1,597 @@
+1) How request works in dja ngo?
+
+    First of all request comes in manage.py then it will go to settings.py file where all the
+    setting, configuration, middleware, db connections will be there after that it will go to urls.py
+    after that it will go to respective views method or class there after it will go to models.py and
+    last it will goes to template.
+
+2) What is the difference between a project and an app in django?
+
+    A project is an entire application whereas an app is a module inside that project.
+    An app is used for a specific task and the project is a collection of apps.
+    for example a payment module is an app inside a e commerce project.
+
+    A single project may have multiple apps inside that.
+    A single app may have present inside multiple projects.
+    whenever we create an app we need to registered
+    that app into installed app list in settings.py file of django.
+
+    To create a project in django we use below command
+
+    django-admin startproject <project_name>
+
+    To create an app in django we use below command
+
+    python manage.py startapp <app_name>
+
+3) Explain the directory structure in django project.
+
+    When we create a project in django it creates a project name directory inside
+    that it creates manage.py file and one more directory with name of project only.
+
+    inside that inner project name directory it creates __init__.py, settings.py, urls.py, wsgi.py
+
+    project_name/
+        manage.py
+        project_name/
+            __init__.py
+            settings.py
+            urls.py
+            wsgi.py
+
+    Above are the directory structure when we create a project it comes.
+
+    manage.py - It is a command line utility which helps us to interact with django project. It also
+        helps us to create applications inside project, migrate the db, create superuser and some
+        other things also.
+
+    __init__.py - It tells us the current directory is a package.
+
+    settings.py - It is a congiguration or we can say settings file which consists all the
+        configurational settings, db connections, middleware etc
+
+    urls.py - It contains all the urls which is used in our projects.
+
+    wsgi.py - It is an entry point for our application which is used by the web server to serve our
+        project.
+
+4) Explain the directory structure of django apps?
+
+    When we create an app in a project it creates a directory which name will be app name inside that
+    it creates __init__.py file, admin.py file, apps.py file migrations directory, models.py,
+    tests.py, views.py.
+
+    app_name/
+        __init__.py
+        admin.py
+        apps.py
+        migrations/
+            __init__.py
+        models.py
+        tests.py
+        views.py
+
+    Above are the directory structure when we create an app inside project in django.
+
+    __init__.py - It indicate that current directory is a package.
+    admin.py - In this file we generally registered our models to see in the django admin, and we write
+        code when we wanted to do some changes in default django-admin ui.
+    apps.py - It consists applications configuration.
+    migrations - It consists all the migrations file created when we migrate our db.
+    models.py - It consists all the models structure which is used in tha project.
+    tests.py - It is used when we perform unit testing.
+    views.py - In this file we write our all the business logics.
+
+5) Why django is a loosely coupled framework?
+
+    A loosely coupled framework is those framework where frontend developer and backend developer
+    can work independently. The component which is used by frontend developer and the backend developer
+    will be independent.
+
+    Since django is based on MVT(Model View Template) architecture. In which we write server code
+    and client code separately. In template we write frontend code such as HTML, CSS and views.py
+    we can write server code.
+
+6) Explain migrations in django?
+
+    In django we use migrations to reflect the models changes like adding a model, deleting a
+    model, update a model etc to the database schema.
+
+    Instead of executing raw database query we change the models and then we run
+    a) python manage.py makemigrations
+    b) python manage.py migrate
+
+    commands to apply changes in db schema.
+
+    There are few more migrations command  -
+
+    python manage.py showmigrations - to see the list of all the migrations and their status.
+    python manage.py sqlmigrate - This command to show the raw sql query run on applied migration.
+
+7) What is django orm?
+
+    ORM stands for Object relational mapper, which used to perform crud operations in more pythonic
+    way. We can create, update, delete, and read data from databases without using any raw query.
+
+    The main benefit of using orm query is if we write a orm query for one database once,
+    same query we can use multiple times with multiple databases.
+
+    Some demerit also it has.
+    1) If we have complex and multiple joins there we can not use orm.
+    2) Where we have performances concerns.
+
+8) What do you mean by csrf token?
+    CSRF stands for cross site request forgery.
+    It protect our server with cross site request forgeries.
+    This token kindly takes place when someone tries to inject some malicious website links
+    or any javascript code.
+    CSRF token is a unique secret key which is generated in server side and pass to client side.
+    when user will do a request first server will verfy the csrf token then it will allows client
+    request to perform.
+
+9) What is queryset in django?
+    Generally queryset is a collection of sql queries.
+    In django queryset is a collection of object from our databases.
+    It is comparable to database select statement.
+
+10) What is the difference between select_related & prefetch_related?
+
+    Select_related and prefetch_related both are optimize the database query when we deal with
+    Foreignkey, OneToOneField.
+
+    Select_related works with those places where we have foreignkey, OneToOneField relationship.
+    Prefetch_related works with those places where we have reverse foreignkey, ManyToManyField.
+
+    Normal lookups
+    Hit a database here.
+    book = Book.objects.get(id=5)
+
+    Again hit a database
+    a = book.author
+
+    select_related lookups
+    Hit a database here
+    book = Book.objects.select_related('author')
+
+    Will not hit the database now.
+    a = book.author
+
+11) How static files define in django?
+
+    Websites generally need to serve additional files such as images, javascripts, css collectively
+    it called static files. We store static files under static folder in project app dir.
+    django provide django.contrib.staticfiles to manage static files.
+    we can configure static dir in below steps
+
+    a) In settings.py in installed_app list ensure that django.contrib.statifiles are there.
+    b) In settings.py file create a variable STATIC_URL = '/static/'
+    c) In template we can load static and use
+        {% load static %}
+        <img src="{% static 'myapp/imgage1.jpg'%}">
+
+12) What is the difference between flask, pyramid and django?
+
+    Flask - It is microframework used for small application with simpler requirements.
+    In flask you have to use external libraries. Flask is ready to use.
+
+    Pyramid - It is build for larger applications.
+
+    Django - It is also build for larger applications it include ORM also.
+
+13) Explain django admin and django admin interface?
+
+    Django admin panel is kind of graphical user interface which is used to perform
+    administrative task. To perform administrative task on any models to django admin
+    panel first need to register that model in to admin.py. When we deal with larger number of models
+    then admin panel will be very much useful to interact via GUI.
+
+    django-admin - It is a command line utility which perform administrative task.
+    django-admin --version - Version of django.
+    django-admin startproject <project_name> - Create project.
+    django-admin startapp <app_name> - create app.
+    django-admin runserver - start the django server.
+    django-admin test - Run tests for all the installed apps.
+    django-admin migrate - migrate the table.
+    django-admin makemigrations - create migrations file.
+    django-admin createsuperuser - create super user.
+    django-admin changepassword <username> - to update password of a username.
+
+14) What are the advantages and disadvantages of django?
+
+    Advantages -
+        a) Django is a python's framework and easy to learn.
+        b) Django follows DRY principle Don't repeat yourself.
+        c) Django provide rapid development.
+        d) Django is highly scalable.
+        e) Django provide high security.
+        f) Django enables user to separate business logic with html code.
+        g) Django provides an admin panel to perform administrative task.
+
+    Disadvantages -
+        a) Django is monolithic. You must know full system to work on this.
+        b) As it is monolithic it is bulkier in size so not suitable for small projects.
+        c) Django is totally based on django ORM.
+
+15) What is the django shortcut method to more easily render an html response?
+
+    django shortcut method to more easily render an HTML response is
+    "render_to_response"
+    It is depreciated in django 2.0 or more.
+
+16) What is the difference between Authentication and Authorization?
+
+    Authentication - Who are you?
+    Authorization means what are the permissions or access you have.
+
+    Authentication verify the user whereas authorization validate the users permissions.
+    authentication will happened before authorization.
+
+17) What is Token based authentication system?
+
+    A token based authentication is a system security system which will verify the user based on the
+    security token by server.
+
+18) What is django.shortcuts.render functions?
+
+    render function in django are used to render the application from views functions to template
+    with or without dictionary.
+
+    syntax is
+    render(request, index.html, contex = some_dict, content_type = None, status = None, using = None)
+
+19) Explain Q objects in django ORM?
+
+    Q object helps us to write complex ORM query. We can use Q objects in two way in filter we can
+    use in and operator as well as or operator.
+
+20) What is the significance of manage.py file in django?
+
+    The manage.py file automatically get created when we create a project. It is a command line utility
+    which helps developer to interact with the django project in various way. It is similar to
+    django-admin. When request come first it come to manage.py file then it want to settings.py file
+    after that urls.py then views.py then models.py then templates.
+
+21) What is the use of "include" functions in the urls.py file in django?
+
+    As in django project there may be many numbers of apps inside that. So It is not a good practice
+    to keep all the urls of all apps inside project urls file. We store urls of each apps in separate
+    urls.py file and we include all the apps urls.py in project urls.py with help of include function.
+
+22) What does "{% include %}" does in django?
+
+    It loads an another template inside the main template. We use this include in django template.
+
+    syntax -
+    {% include "template_name.html" %}
+
+23) What is django rest framework (DRF)?
+
+    It is a powerful module for building web APIs. Django rest framework helps us to create
+    restful api quickly.
+    The following are the significance reason that are making REST Framework perfect choice.
+
+    1) Web browser api
+    2) Serialization
+    3) Authentication policies
+
+24) What is a middleware in django?
+
+    Middleware is something which executes between request and response. In simple words we can say
+    it is just like a bridge between request and response.
+    Whenever we wanted to execute any logic or perform any security before reaching the request
+    to urls.py we can write in middleware. In django there are some builtin middlewares and we can
+    write our own custom middleware too.
+
+    //settings.py file
+        MIDDLEWARE=[
+            'django.middleware.security.SecurityMiddleware',
+            'django.contrib.session.middleware.SessionMiddleware',
+            'django.middleware.common.CommonMiddleware',
+            'django.middleware.csrf.CsrfViewMiddleware',
+            'django.contrib.auth.middleware.AuthenticationMiddleware',
+            'django.contrib.message.middleware.MessageMiddleware',
+            'django.middleware.clickjacking.XFrameOptionsMiddleware'
+        ]
+
+25) What is session in django?
+
+    In django Session is a mechanism to store data into server side. Whenever user login, django create
+    session identifier in to the cookies and the session will store into the server side.
+    Generally we store data in session in secure mode. In cookies it is not secure.
+    There is not size limit in the session storage but in cookies there is size limitation
+    cookies will store data in to client side. when we close the browser session data will clear
+    and when we clear the history both cookies as well as session data will be clear.
+
+    Enabling session in django -
+
+    1) Include session middleware in to middleware list which is there in settings.py file
+        django.contrib.session.middlewareSessionMiddleware
+
+    2) Include django.contrib.sessions app into install app list in settings.py file.
+
+    3) A session engine is specified in SESSION_ENGINE settings.
+        The default session is database backend session
+        django.contrib.sessions.backend.db
+
+26) What is django signals?
+
+    Django signals are the mechanism which used to notify a set of receiver when some action
+    performed in sender.
+
+    For example if we wanted to send email to user when an user entry is being created
+    we can do that with help of django signals.
+    so django signals helps us to perform some task on the base of some action without direct
+    coupling between sender and receiver.
+
+    Why we are using signals in real time project?
+
+        Decoupling - Signals allows decoupling between the sender and receiver.
+
+        Extensibility - we can add receiver in future also to perform some task without changing of
+            signals code.
+
+        Modularity - Signal make our code more modular. We can perform task without direct connection.
+
+        Reusability - Same signals can we connected to multiple receiver.
+
+    List of built in signals in django -
+    1)
+        django.db.models.pre_init
+        django.db.models.post_init
+
+        Send before and after models's __init__() method is getting called.
+
+    2)
+        django.db.models.signals.pre_save
+        django.db.models.signals.post_save
+
+        sends before and after model's save() method is getting called.
+
+    3)
+        django.db.models.signals.pre_delete
+        django.db.models.signals.post_delete
+
+        sends before and after model's delete() method is getting called.
+
+    4)
+        django.db.models.signals.m2m_changed
+
+        sent when ManyToManyField is changed.
+
+    5)
+        django.core.signals.request_started
+        django.core.signals.request_finished
+
+        sends before and after an Http request is started or finished.
+
+27) What are django exceptions?
+
+    django exceptions is an abnormal event which happen because of program failure. To catch
+    those exceptions in python we use try catch block.
+    In django there are few builtin exceptions classes already defined which we can use few of them are
+    below -
+
+    1) Django Exceptions class -
+        ObjectDoesNotExist - When object is not present.
+        MultipleObjectsReturn - When more than one objects returned for get method.
+        AppRegistryNotReady - When we use django models before loading the apps.
+        EmptyResultSet - Exceptions raised when query fails to return result set.
+        FieldDoesNotExist -
+        ViewDoesNotExist -
+        MiddlewareNotUsed -
+        etc
+
+28) How to make a variable available to all the templates?
+
+    step 1 -
+    create a context_processors.py file in app folder
+
+    step2 -
+    create a method my_custom_variable and return a dictionary with key and value.
+
+    step3 -
+    register the my_custom_variable method in the context_processors list in templates list
+    'myapp.context_processors.method_name'
+
+    So the variable which is present inside the dictionary will be available to all the templates
+    of that app.
+
+29) Why does django use regular expressions to define urls? Is it necessary to use them?
+
+    Django uses regular expressions to define urls because it fastrack the searching of urls.
+    It is not necessary to use them to define urls.
+
+    example
+
+        urlpatterns = [
+            path('articles/2003/', views.special_case_2003),
+            path('articles/<int:year>', views.archive_year),
+            path('articles/<int:year>/<int:month>', views.month_archive),
+            path('articles/<int:year>/<int:month>/<slug:slug>', views.article_details)
+        ]
+        In above example it will start searching from first.
+
+30) What is the difference between Django OneToOneField & ForeignKey Field?
+
+    In django both OneToOneField and ForeignKey filed are used to make relationship between two
+    models.
+
+    ForeignKey - ForeignKey represent many to one relationship between two models. That means
+    when we wanted to point multiple objects from one model to a single object of another object
+    then we use foreignKey. It takes two argument one is model name and another is on_delete.
+
+    OneToOneField - OneToOneField represent one to one relationship between two models.
+    In this relationship one object of one model will strictly linked with only one object of another
+    model in bi directional way. It also ensure uniqueness.
+
+    Example -
+        class Book(models.Model):
+            name = models.CharField(max_length=200)
+
+        class Auther(models.Model):
+            name = models.CharField(max_length=200)
+            book = models.ForeignKey(Book, on_delete=models.CASCADE)
+            description = model.TextField()
+
+        class Person(models.Model):
+            name = models.CharField(max_length=200)
+
+        class UserProfile(models.Model):
+            name = models.CharField(max_length=200)
+            user = models.OneToOneField(Person, on_delete=models.CASCADE)
+
+        In above example one author is associated with one book but one book may have associated
+        with many Authers.
+        and one user is associated with one person and reverse way one person will also associated
+        with one userprofile.
+
+31) Explain django Field class and its type?
+
+    In Django Field is a fundamental part of the model system. It represent the various types of
+    fields that can be used to define the structure of database tables.
+
+    1) CharField
+        name = models.CharField(max_length=200)
+    2) IntegerField
+        page_count = models.IntegerField()
+    3) FloatField
+        price = models.FloatField()
+    4) EmailField
+        contact = models.EmailField()
+    5) DateField and DateTimeField
+        event_dt = models.DateField()
+        event_date_time = models.DateTimeField()
+    6) BooleanField
+        is_completed = models.BooleanField()
+    7) ImageField
+        profile_pic = models.ImageField(upload_to='profile_pics/')
+    8) ForeignKey
+        auther = models.ForeignKey(Auther, on_delete=models.CASCADE)
+
+32) Explain how can we use file based Sessions?
+
+    In django we can use file based session to store data into file based system rather than database
+    or in memory. This scenario can be used in such a place where we don't want to write query to
+    get session variable.
+
+    By default database session is there in django we need to change that into file based
+    in settings.py file.
+
+    In setting.py we need to add
+    SESSION_ENGINE = 'django.contrib.sessions.backends.file'
+    SESSION_FILE = '/path/to/session/files'
+
+    Even though the file-based sessions are not stored in database, the session framework
+    still uses a small database table ('django_session') to keep track of session information.
+
+33) What is Jinja templating?
+
+    Jinja is a powerful and widely used template engine, Django has its own template engine.
+    when we pass some variables from views to template via context then with help of jinja templating
+    we can use those variable in templates.
+    we can write if else condition for loop and many more things in template.
+    The latest version of jinja is jinja2.
+
+34) What is serialization in django?
+
+    In django serialization is a process to convert a complex data type in to python native data type
+    such as JSON, XML.
+
+    In django there are some serialization classes such as serializers.Serializer,
+    serializers.ModelSerializer to convert models data into json or xml data.
+
+35) What are Generic views in django?
+
+    In django we generic views are the in-built views which helps us to do some common task.
+    such as when we wanted to display list of objects of a model we can use ListView when we wanted
+    to display a single object we can use DetailView etc.
+
+36) What is mixin in django?
+
+    Mixin is a just like multiple inheritance in django which is used to inherit properties and method
+    from multiple classes.
+
+37) Explain the caching strategies in the django?
+
+    Caching is a technique to store the response of a function to use this response next time
+    when it is asked to be used.
+    Django provides robust caching technique to store a dynamic web pages so that it will not take load
+    time again and again for each requests.
+
+    Some common strategies in django:
+
+        a) Page level caching. - Store entire page in caching.
+        b) Template fragment caching. - Store some part in template in caching.
+        c) Object level caching. - Store database queryset result in caching.
+        d) Cache middleware. - Store entire site of views in caching.
+
+38) What are the strategies we follow to restore the data of database incase of corruption?
+Ans - To Involve combination of restore and backup we can restore the database.
+    1) Need to take regular backup.
+        python manage.py dumpdata > backup.json
+
+    2) Need to restore data from backup file.
+        python manage.py loaddata backup.json
+
+39) How to rollback a migrations in django?
+Ans - python manage.py migrate your_app 002_provious_migrations
+
+40) What are the built-in modules present in django?
+Ans - Django consists multiple built-in modules which provides many functions to use it for developing
+    django applications.
+
+    Few of them are -
+
+    django.db - Contain modules for database models and querysets, allowing you to interact with database.
+
+    django.urls - Provides functions for working with URLS, We import path and re_path function
+        from django.urls.
+
+    django.views - Include generic views to perform some common task such as displaying list of objects,
+        view detail of a particular object.
+
+    django.forms - offer classes for creating html forms.
+
+    django.template - Provide tools for working with templates include context and template classes for
+        rendering dynamic pages.
+
+    django.middleware - Contain middleware components that process request and responses globally, such as
+        SecurityMiddleware, SessionMiddleware, authenticationMiddleware.
+
+    django.contrib.auth - Implements user authentication and authorization providing a user model,
+        authentication views and middleware.
+
+    django.contrib.admin - offers a powerful customizable admin interface for managing data in application.
+
+    django.contrib.session - Handles session management, allowing you to store and retrieve arbitrary data
+        on a per-site-visitor basis.
+
+    django.contrib.message - Provide a messaging framework for passing temporary message between views.
+
+    django.contrib.staticfiles - Manage static files(css, javascript, images) and serves them during
+        development.
+
+    django.contrib.contenttypes - Allows you to use generic relations and retrieve information about
+        installed models.
+
+    django.contrib.sites - Enable you to manage multiple sites from single django project.
+
+    django.contrib.sitemaps - Helps you to generate XML sitemaps for your django powered site.
+
+    django.utils - contain various utility functions and classes used throughout django.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

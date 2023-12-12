@@ -1,0 +1,7 @@
+These are special types of method which we can use inside a class and it can help us to
+manipulate objects and their behaviour. These magical methods are also known as dunder method and
+we write those methods with double underscore surroundings.
+
+For example -
+
+__init__, __str__, __len__, __repr__

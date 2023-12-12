@@ -1,0 +1,120 @@
+Python like other programing language has various design patterns which solve common problems in
+software development.
+
+1) Singleton Pattern
+2) Factory Method pattern
+3) Abstract Factory pattern
+4) Builder pattern
+5) Prototype pattern
+6) Adapter pattern
+7) Decorator pattern
+8) Observer pattern
+9) Command pattern
+10) Strategy pattern
+11) State pattern
+12) Template method pattern
+
+
+1) Singleton pattern -
+
+    The singleton design pattern ensures that a class has only one instance and it provide global
+    point of access of that instance.
+    we can use this pattern in many real time places.
+
+    Explanation -
+
+    Since we need to restrict the class to generate object multiple times.
+    As we know that everytime when we generate object constructor is getting called everytime,
+    so if we restrict to call the constructor then our job will done. so first thing we will make
+    our constructor as private after making private no one can create object outside of that class.
+
+    now still we can create object from same class so what we will do will create a method
+    in that will call constructor and we will create class variable and inside that method we will
+    add a check if it is null then only will create object else nothing.
+
+    this is called lazy way.
+
+    one more method is there
+
+    in class variable only we will generate object and that variable will be static.
+    so in generate an object whenever class load. this is called eager way.
+
+    both are not safe for thread. so we need to use sync block to prevent from breaking .
+
+    still we can break singleton class by using reflection api to prevent from that we can
+    return runtime error when class static variable has some data.
+
+    1) Web application where we wanted to use db connection there we can use above design pattern
+    to establish the connection with db at one time and exit the db at one time.
+
+    2) When we wanted to add logger into entire project.
+
+    3) We can use singleton design pattern for configuration settings.
+
+2) Factory design pattern -
+
+    It is also known as factory method design pattern.
+    When we have super class and there are multiple child class then if we wanted to create objects
+    of child classes as per the input and requirement.
+    In above scenario we can use Factory design pattern.
+
+    basically we create a class which has all the responsibility that of which child class we need to
+    create objects.
+
+    The super class will be either interface or a abstract class.
+
+    Basically in factory design pattern we create a class and in that class we will create objects
+    and return objects of another class as per parameter.
+
+    Advantages of factory design pattern -
+
+    1. Encapsulation of object creation -
+        The factory design pattern encapsulate the code of object creation and separate the object
+        creation process with client. The client will know about factory method only.
+
+    2. Code Organization -
+        Here code will be more organized and object creation code will be centralized.
+
+    3. Reuse of object creation code -
+        Easily we can reuse the code of object creation from anywhere in the project.
+
+    4. Dynamic object creation -
+        In factory design pattern we can create different types of object dynamically ie runtime.
+        suppose we need to communicate with different different databases so we can create object
+        of each database on run time only and change.
+
+    In real world project we can use factory design pattern in below use case -
+
+    1. Database connection management -
+        Where we need to switch between different different database connection.
+
+    2. GUI Frameworks -
+        When we need to display different GUI for different clients we can use Factory design patterns.
+
+    3. Logging Framework -
+        Suppose for one client we wanted to display logs on console and for another clients
+        we wanted to store logs in a file so we here we can use above design patterns.
+
+    4. File format read/write -
+        When we are dealing with different file type there we can use.
+
+3) Abstract factory design pattern -
+
+    In abstract factory design pattern we add one more abstract layer of class ie abstract factory class
+    between factory class and the class of which we need to generate object. So in this design
+    pattern the even factory class also will not know about the implementation of a class
+    which will generate object of main class.
+
+4) Builder design pattern -
+
+    In factory design pattern there are few demerit such as if we have more number of argument
+    present in the class of which we wanted to create object then it is difficult to remember the
+    order of the parameter.
+    And there will be too much load on factory class because of complex logic.
+    when there will be few optional parameter.
+    so to overcome with
+    above demerit of factory design pattern builder design pattern has implemented.
+
+    In builder design pattern we create object step by step and finally return the final object
+    with desired values of attributes.
+    Builder design pattern helps us to create immutable objects.

@@ -1,0 +1,7 @@
+Lambada functions are also known as as anonymous functions which is used when we wanted to create
+a one time use method for small work. It does not have any name.
+In python we use lambda keyword to declare a lambada function.
+
+syntax
+lambda arguments: expression
+

@@ -1,0 +1,50 @@
+Command to install django
+ - pip install django
+
+ Command to check django version
+ - django-admin --version
+ - python -m django --version
+
+ Command to check all the version installed modules.
+ - pip freeze
+
+ Command to create a project
+ - django-admin startproject <project_name>
+
+ Command to create an app in django
+ - django-admin startapp <app_name>
+ - python manage.py startapp <app_name>
+
+ Command to run a project
+ - python manage.py runserver
+
+ Command to create a migration file inside migrations folder
+ - python manage.py makemigrations
+
+ Command to reflect the changes in the database permanently
+ - python manage.py migrate
+
+ Command to see the raw sql query executing behind applied migration execute the command
+ - python manage.py sqlmigrate app_name migration_name
+ - python manage.py sqlmigrate nitapp 0001
+
+ Command to see all migrations
+ - python manage.py showmigrations
+
+ Command to see app specified migrations
+ - python manage.py showmigrations <app_name>
+
+ Command to create superuser
+ - python manage.py createsuperuser
+
+ Command to view a database schema of an existing database
+ - python manage.py inspectdb
+
+ Command to view all items in a  model
+ - Users.objects.all()
+
+ Command to view filtered items in a model
+ - Users.objects.filter(name='ashish')
+
+ Command to get a particular item in a model
+ - Users.objects.get(id=25)

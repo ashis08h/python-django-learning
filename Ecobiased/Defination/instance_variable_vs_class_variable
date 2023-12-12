@@ -1,0 +1,9 @@
+oops maps variables and methods with real world problems and it groups all the methods, variables
+and all the logics together.
+
+Class variables are defined as class level we declare the variable outside of any methods inside
+the class. We generally store those value in class variables which are common to
+all the instances. Each instance will use the class variables.
+
+Instance variables are defined as object level. Each instance will have their own variable.
+They are defined inside init method and usually store variable which is specific to each instance.

@@ -1,0 +1,12 @@
+Boto3 - Just like django, flask are the libraries of python for web development in similar
+for aws thing we have boto3 sdk (Software development kit).
+
+Boto3 allows us to directly create, update and delete AWS services from our python scripts.
+Boto3 is built on the top of botocore module.
+
+Configure credentials of your AWS account on using aws cli commands
+
+Q) What is AWS CLI?
+ The AWS command line interface (AWS CLI) is a unified tool to manage your aws services. with just
+ one tool to download and configure, you can control multiple AWS services from the command line
+ and automate them through scripts.

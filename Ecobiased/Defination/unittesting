@@ -1,0 +1,17 @@
+In python unittest is a built-in testing framework which allows us to write and execute test
+cases of the code. In python we have unittest modules to write test cases.
+
+In unittest we create a test case class with unittest.TestCase class which contains all the test case
+methods.
+
+Test case methods are the individual test cases inside the test case class.
+
+Assertion -
+Assertion are the conditions or boolean expression in which should be True to pass a test case.
+unittest.TestCase will give variety of assert methods like
+assertTrue, assertEqual, assertFalse etc
+
+Test Discovery
+
+unittest will discover and run all the testcases by searching modules that
+match pattern like 'test_*.py'.

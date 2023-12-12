@@ -1,0 +1,16 @@
+Polymorphism is a feature of oops where we will have similar objects from different classes.
+we treat the object of same common class. it also helps developers to write feasible code.
+
+There are two types of polymorphism -
+
+a) Compile time polymorphism
+b) Run time polymorphism
+
+Compile time polymorphism -
+
+It is also known as method overloading where we have same name of objects with different number of
+arguments. In python we have optional parameter concept to handle above scenarios.
+
+Run time polymorphism -
+
+It is also known as method overriding where we can define the method of parent class.

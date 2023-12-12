@@ -1,0 +1,6 @@
+Object is an instance of a class, which will have their own properties and it will use the methods
+which is defined inside their class.
+
+for example A person is a class which have some properties like name, age and some method like canSpeak()
+canWalk() so each instance of that class will have their own name and age and all the instances
+will have these two methods canSpeak() and canWalk().

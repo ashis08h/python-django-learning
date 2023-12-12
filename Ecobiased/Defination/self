@@ -1,0 +1,2 @@
+self is a keyword in oops which refer the current instance of a class.
+It also helps to access variables of the class from a method which is present inside that class.

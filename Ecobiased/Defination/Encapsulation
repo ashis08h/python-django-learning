@@ -1,0 +1,5 @@
+Encapsulation is a feature of oops where we hide the internal state of an object and the classes can
+only be accessed or modified by object itself.
+
+The benefit of encapsulation is we can protect our class to get accessed or modified via unwanted way.
+we generally take help of access modifiers to encapsulate the internal state of an objects.

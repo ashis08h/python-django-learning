@@ -1,0 +1,5 @@
+Multithreading is a way in python in which we can process multiple thread concurrently at a time.
+source and target may be same for all the threads. python provides threading module for this.
+
+Because of the GIL limitation multiprocessing is more effective for cpu bound tasks.
+GIL - Global interpreter lock

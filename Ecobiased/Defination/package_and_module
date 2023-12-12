@@ -1,0 +1,27 @@
+Both packaage and modules in python are used to modularize our codes.
+modularize means reusable, modular, organized.
+Module in a python are .py file which consists variable, methods and classes.
+Basically we encapsulate the methods, classes or a variable inside a module and use those variable,
+classes and methods after importing into the main script.
+Modules also help us to avoid clashes between global variables.
+
+example -
+import module1
+
+
+Package is a collection of modules. It used in bigger projects in which we group similar modules in
+one package. __init__.py file will be there inside package.
+
+new_package
+  __init__.py
+  module1.py
+  module2.py
+  module3.py
+  subpackage
+    __init__.py
+    submodule1.py
+    submodule2.py
+    submodule3.py
+
+example -
+from package1 import module1

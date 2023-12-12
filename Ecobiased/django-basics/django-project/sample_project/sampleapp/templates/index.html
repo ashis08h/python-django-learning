@@ -1,0 +1,15 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/app.css' %}">
+</head>
+<body>
+<p class="first_p">This is index.html</p>
+<img class="first_image" src="{% static 'images/Screenshot (87).png' %}" alt="images">
+<p>{{my_custom_variable}}</p>
+<p>{{my_project_custom_method}}</p>
+</body>
+</html>

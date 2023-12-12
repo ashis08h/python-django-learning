@@ -1,0 +1,86 @@
+1) What is AWS - Traditional vs cloud computing.
+    Before when we wanted to launch a website we need to do few things before website development.
+    First we need to purchase a server and keep into some garage, Server needs cool place so need to keep
+    AC also. Our server should run 24 hours daily so need to hire a person for maintenance. Roughly we need
+    almost 1lakh rupees to do above things before we develop my website.
+    After above things still we have two major problem with this.
+    a) Suppose we assume that 10 thousand person will come to my website at starting so we have purchased
+        big server to maintain it but only 10 people are hitting my website so company will go in loss.
+    b) Suppose we assume that 10 thousand person will come to my website at starting so we have purchase
+        a server to maintain it but 10 lakh users are hitting my website daily so our website will crash.
+    Now AWS came and he is saying that you develop your application and all the maintenance work i will
+    handle for you. I will give you guarantee that your server will run 24 hours daily. Whenever you need
+    more number of servers i will provide and whenever you need less number of server i can remove some
+    server for you and i will take money for that much of hours or min or sec at which your server will run.
+    This is called cloud computing benefit.
+
+2) Cloud services
+    There are three types of cloud services
+    1) IaaS (Infrastructure as a service)
+        Whenever all the hardware will be belongs to service provider and on that they will create a
+        OS and provide that OS to us. We can decide what are the software platform we will install as
+        per our requirements. This type of service is called Iaas (Infrastructure as as service).
+        EC2 is an Iaas.
+
+    2) PaaS (Platform as a service)
+        In PaaS we use all the services of IaaS ie on the top OS we install some services and configure it
+        also then we can sell those things to users with some more money that IaaS.
+        In this service user will only manage their application and there data that's it.
+        RDS is a service in AWS which based on PaaS.
+
+    3) Saas (Software as a service)
+        In SaaS Everything will be managed by service provider only. In this service the user data will
+        be there with service provider only. Few companies do not use this service because of data issue.
+        We use google email this is an example to SaaS where we do not configure or install it on the
+        server.
+
+4) Type of cloud.
+    There are three types of cloud.
+    1) Public cloud
+        It is available publicly in the world for everyone. Anyone can use this cloud from anywhere
+        and they can create their own resources their.
+
+    2) Private cloud
+        It is not available publicly for everyone in the world. We can use this cloud in company network.
+        We can use public cloud and customize things and can make it as private cloud.
+
+    3) Hybrid cloud
+        It is a combination of public cloud as well as private cloud.
+
+5) How AWS charge?
+    AWS charge based on three things
+    a) Compute - How many cpu, we use in AWS.
+    b) Storage - How much storage we have used in AWS.
+    c) Data Transfer - Download or Upload from outside.
+
+6) Global infrastructure in AWS.
+    In Aws three things are there
+    Region - It contains number of availability zones.
+    Availability Zones - It contains data centers.
+    Data Centre - It is a physical block of storage of data.
+
+    Region -
+
+    Why AWS need multiple availability zones in the world why can't just make one availability zone
+    in America or India and handle all the data from there?
+
+    1) It depends on the number of audience present from which part of world. If we create keep our server
+        near by the maximum audience place then it is easy to serve.
+
+    2) Fore some government website government does not allow to place their data outside of the country.
+
+    3) Disaster recovery - In case of any desaster such as flood, fire generally we keep a replica of
+        one region into another region.
+        All the region are connected through private network ocean wire. The speed of data transfer
+        in it is 100 zb/sec.
+
+    4) Cost effectivity - For example the cose of electricity is not same in USA as well as India.
+
+    In AWS all the regions will have their name and code.
+    It is not mandatory that all the services of AWS will be present in all the regions.
+    cost of same services may change also region to region.
+
+    Availability Zones -
+
+    Why not we keep our data center at one region only why we have created availability zone?
+    

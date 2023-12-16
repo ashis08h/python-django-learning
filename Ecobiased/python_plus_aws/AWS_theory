@@ -251,3 +251,71 @@
         more pdf we can use it.
 
     3) Memory optimized
+        when we have use of more memory then we use memory optimized instance type.
+        where we keep data into in memory there we need to take instance type as memory optimized.
+        in this instance type we use caching.
+
+    4) Accelerated computing
+        When we have work related to graphics related work. GPU. Or we have some work like Machine
+        learning work.
+
+    5) Storage optimized instance
+        When we have work such as more number of read and write data in to the database. then we can use
+        storage optimized instance. Like data ware housing work. DFS.
+
+19) what is On demand instance?
+    On demand instance is a type of instance where  AWS create instance on demand.
+    AWS wil charge more in case of on demand instance.
+    for 1st 1 min it will take price of whole min after 1 min it will take amount of each sec.
+
+20) What is Reserve instance?
+    we use Reserve instance where we know at the starting only that we need instance for at least
+    3 years 4 years. AWS will give discount up to 72% in reserved instance.
+
+    Discount depends upon 4 things.
+    a) Operating system, Instance type, Region.
+    b) Time period - for 3 year AWS will give more discount then for 1 year.
+    c) If you pay whole amount at one time to all the year which you have selected then AWS
+        will give you more discount.
+    d) Convertable instance or non convertable instance.
+
+21) What is Spot instance?
+    In this instance we need to do bid, whenever someone come which is ready to pay more than you
+    AWS will give instance to that person. There is no relibility here. You will get a certain amount
+    of time after that that instance will be terminated by AWS from your account.
+    Here discount may be up to 90% also.
+    It is useful when we have some work which requires more computing but for less time suppose for
+    1 hour or 2 hours. And we can run those jobs at any time whenever instance will come we can start
+    job.
+
+22) What is Dedicated hosts?
+    A dedicated hosts is a physical EC2 server dedicated for your use only. More costly it is.
+
+    use case -
+    BYOL - bring your own license
+    Security purpose.
+
+23) what is Saving plans?
+    Here we have commitment that in 1 hour how much amount we can to pay to AWS.
+    Then AWS will assign you instance as he wants according to your budget.
+    up to 72% discount.
+
+24) How to create and access windows instance?
+    We can create a windows machine in same way as linux just need to chose windows operating system.
+
+    Steps to connect widows machine through windows machine.
+    choose a windows instance click on connect go to RDP clint tab.
+    download remote desktop file.
+    double click on that file.
+    It will as password click get password on RDP client tab and upload key file path there.
+    get the password and connect.
+
+    From linux machine i can connect the windows machine with help of Remina tool.
+
+25) How to check instance meta data with user data in AWS?
+    Meta data  -
+        Public Ip, AMI Id, Private Ip
+
+    ip -a This command will not give you public ip address.
+    In AWS we have a magic ip address. With help of magic ip address in curl command we can see all the
+    meta data of an instance.

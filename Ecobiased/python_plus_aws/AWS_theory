@@ -105,6 +105,10 @@
     While creating a virtual machine we can select multiple things such as
 
     1) Which operating system you wanted to choose.
+    2) we can Select AMI(Amazon machine image).
+    3) We can choose architecture of the virtual machine.
+    4) We can choose instance type of that instance like t2-micro,etc.
+    5) Can select existing security groups or can create new one.
     2) How many compute we need means number of cpu we need.
     3) How many RAM we need for my virtual machine.
     4) We can select speed of upload and download of data.
@@ -122,3 +126,128 @@
     Inbound means when we send request to server then on which port server will receive
     that comes under inbound rules.
     Outbound means where my server will communicate where he will give response.
+
+9) How to access the ec2 instance?
+    There are multiple ways to connect with the instances.
+    1)
+        I have accessed instance with help of ssh
+        ssh -i <name of pem file> <username>@<public dns>
+        by default username of a ubuntu machine will be ubuntu.
+        at place of public dns we can keep public ip also in above ssh command.
+
+        some time we get an error warning unprotected private key file.
+        so here we need to assign read permission to only owner not anyone.
+        AWS will not allow a pem file which is not private to access instance.
+        chmod 400 <name of pem file>
+
+        command to check os name inside instance -
+        cat /etc/os-release
+        command to check the ram of an instance
+        free -m
+        command to check the number of cpu we have in the instance
+        lscpu
+        command to check the storage available in instance
+        df -h
+        command to check private ip address
+        ip a
+    2) For windows machine where ssh will not work there we can use putty to access it.
+    3) Using git bash.
+    4) In instance list select a particular instance then click on connect button.
+        go to ec2 instance connect tab and click on connect.
+        In this way we did not need any tool to connect our instance we can connect in the browser only.
+
+10) Default availability zone under mumbai region is ap-south-1a so how aws manage the load
+    between all the availability zones?
+    Basically for different user if we create server in same availability zone name then there
+    is no guarantee that both are same availability zone.
+    AWS point different availability zones having same name for different users.
+
+11) Install NGINX in EC2 Instance and deploy sample application in Ec2.
+    command to login as a root in an instance
+    sudo -i
+    command to update an instance
+    apt-get update
+    command to install nginx
+    apt-get install nginx
+    command to check the nginx configuration
+    nginx -t
+    command to check the nginx service status
+    service nginx status
+    command to check what are there in localhost ip in nginx
+    curl localhost
+    in /var/www/html directory by default index.nginx-debian.html file will be there.
+    if we create index.html page with some content then if we do curl localhost
+    it will load index.html page instead of index.nginx-debian.html file.
+
+12) If we terminate an instance then by default EBS will get delete or not?
+    Yes if we choose all the default value while creating instance then when we delete an instance
+    EBS connected with that instance will also get deleted.
+    While creating of ec2 instance we can configure also that after deleting an instance ebs storage
+    should also delete or not.
+    Need to go to advance option in storage configuration part select yes or no there.
+    By default it wil be yes. That means if we delete an instance ebs will also get deleted.
+
+13) How to configure user-data or bootstrap script for an ec2 instance?
+    While creating an instance in advance option there is a text area where we need to write shell
+    script for adding bootstrap script.
+    when this instance will launch automatically bootstrap script will execute.
+
+    sample shell script
+
+    #/bin/bash
+
+    apt-get update
+    apt-get install nginx -y
+    echo "I am Ashish Kumar" > /var/www/html/index.html
+
+    The user-data script will always run as a root user not as a ubuntu user.
+
+14) AWS Security Groups.
+    It is a firewall which will place before the ec2 instance where we can write rules which
+    port or which ip address's traffic will
+    come or which traffic will not reach at the instance.
+    We can write rules only for allow traffic rules not for denied traffic rules that means
+    we can set rule such as ip address A can reach to ec2 instance ip address B can reach to instance.
+    but we can not write rule such as ip address C can not reach the traffic.
+
+    There are two types of rule Inbound rule and Outbound rule
+    Inbound Rule - what traffic will reach to the instance. we can write such rule here.
+        By default nothing will come.
+        Here we can choose port as well as ip address to allow.
+    Outbound Rule - What are the ip address or port on which the instance will give response.
+        By default all traffic will come.
+
+    ssh - default port 22
+    Http - default port 80
+
+15) Can we add more than on security groups to one instance?
+    Yes
+    We can change or add security groups to a running instance on the fly also.
+
+16) How to add another security group to a running instance on the fly?
+    1) Go to instance list page.
+    2) Select a particular instance
+    3) Click on action and select security
+    4) Choose a security group and add that sg.
+
+    Note - We can attach same security groups to multiple instance as well as we can add multiple
+    security groups to same instance.
+
+17) Instance Type.
+    we can go to compare instance and compare the instance. we can increase or remove table column of
+    instance also after going to settings symbol.
+
+    example =
+    t2micro - Here t is instance class 2 is generation of that class and micro is based on size.
+
+18) Types of instance type?
+
+    1) General purpose
+        It is a balanced compute, memory and network bandwidth.
+        example t2micro
+
+    2) Compute Optimized
+        where we need more cpu example for gaming purpose we can use it, where ever we need to generate
+        more pdf we can use it.
+
+    3) Memory optimized

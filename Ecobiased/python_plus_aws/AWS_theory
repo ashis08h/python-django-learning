@@ -7,7 +7,7 @@
     a) Suppose we assume that 10 thousand person will come to my website at starting so we have purchased
         big server to maintain it but only 10 people are hitting my website so company will go in loss.
     b) Suppose we assume that 10 thousand person will come to my website at starting so we have purchase
-        a server to maintain it but 10 lakh users are hitting my website daily so our website will crash.
+        a server to maintain it, but 10 lakh users are hitting my website daily so our website will crash.
     Now AWS came and he is saying that you develop your application and all the maintenance work i will
     handle for you. I will give you guarantee that your server will run 24 hours daily. Whenever you need
     more number of servers i will provide and whenever you need less number of server i can remove some
@@ -23,8 +23,8 @@
         EC2 is an Iaas.
 
     2) PaaS (Platform as a service)
-        In PaaS we use all the services of IaaS ie on the top OS we install some services and configure it
-        also then we can sell those things to users with some more money that IaaS.
+        In PaaS we use all the services of IaaS ie on the top OS we install some services and configure
+        it also then we can sell those things to users with some more money than IaaS.
         In this service user will only manage their application and there data that's it.
         RDS is a service in AWS which based on PaaS.
 
@@ -48,7 +48,7 @@
         It is a combination of public cloud as well as private cloud.
 
 5) How AWS charge?
-    AWS charge based on three things
+    AWS charge based on three factor
     a) Compute - How many cpu, we use in AWS.
     b) Storage - How much storage we have used in AWS.
     c) Data Transfer - Download or Upload from outside.
@@ -56,7 +56,7 @@
 6) Global infrastructure in AWS.
     In Aws three things are there
     Region - It contains number of availability zones.
-    Availability Zones - It contains data centers.
+    Availability Zones - It contains number of data centers.
     Data Centre - It is a physical block of storage of data.
 
     Region -
@@ -64,7 +64,7 @@
     Why AWS need multiple availability zones in the world why can't just make one availability zone
     in America or India and handle all the data from there?
 
-    1) It depends on the number of audience present from which part of world. If we create keep our server
+    1) It depends on the number of audience present from which part of world. If we keep our server
         near by the maximum audience place then it is easy to serve.
 
     2) Fore some government website government does not allow to place their data outside of the country.
@@ -78,7 +78,7 @@
 
     In AWS all the regions will have their name and code.
     It is not mandatory that all the services of AWS will be present in all the regions.
-    cost of same services may change also region to region.
+    cost of same services may change region to region also.
 
     Availability Zones -
 
@@ -107,7 +107,7 @@
     1) Which operating system you wanted to choose.
     2) we can Select AMI(Amazon machine image).
     3) We can choose architecture of the virtual machine.
-    4) We can choose instance type of that instance like t2-micro,etc.
+    4) We can choose instance type of that instance like t2-micro, t2-nano etc.
     5) Can select existing security groups or can create new one.
     2) How many compute we need means number of cpu we need.
     3) How many RAM we need for my virtual machine.
@@ -123,8 +123,8 @@
     public key will goes to instance and private key we can store to access the instance after creation.
 
 8) What is Inbound Rules and Outbound rules?
-    Inbound means when we send request to server then on which port server will receive
-    that comes under inbound rules.
+    Inbound means when we send request to server then what are the ports or ip address from where
+    server can accept request that comes under inbound rules.
     Outbound means where my server will communicate where he will give response.
 
 9) How to access the ec2 instance?
@@ -182,7 +182,7 @@
 12) If we terminate an instance then by default EBS will get delete or not?
     Yes if we choose all the default value while creating instance then when we delete an instance
     EBS connected with that instance will also get deleted.
-    While creating of ec2 instance we can configure also that after deleting an instance ebs storage
+    While creating ec2 instance we can configure also that after deleting an instance EBS storage
     should also delete or not.
     Need to go to advance option in storage configuration part select yes or no there.
     By default it wil be yes. That means if we delete an instance ebs will also get deleted.
@@ -204,13 +204,14 @@
 
 14) AWS Security Groups.
     It is a firewall which will place before the ec2 instance where we can write rules which
-    port or which ip address's traffic will
+    port or from which ip address's traffic will
     come or which traffic will not reach at the instance.
+
     We can write rules only for allow traffic rules not for denied traffic rules that means
     we can set rule such as ip address A can reach to ec2 instance ip address B can reach to instance.
     but we can not write rule such as ip address C can not reach the traffic.
 
-    There are two types of rule Inbound rule and Outbound rule
+    There are two types of rules Inbound rule and Outbound rule
     Inbound Rule - what traffic will reach to the instance. we can write such rule here.
         By default nothing will come.
         Here we can choose port as well as ip address to allow.
@@ -234,7 +235,7 @@
     security groups to same instance.
 
 17) Instance Type.
-    we can go to compare instance and compare the instance. we can increase or remove table column of
+    we can compare the instance. we can increase or remove table column of
     instance also after going to settings symbol.
 
     example =
@@ -270,7 +271,8 @@
 
 20) What is Reserve instance?
     we use Reserve instance where we know at the starting only that we need instance for at least
-    3 years 4 years. AWS will give discount up to 72% in reserved instance.
+    3 years or 4 years or ay particular number of years. AWS will give discount up to 72% in reserved
+    instance.
 
     Discount depends upon 4 things.
     a) Operating system, Instance type, Region.
@@ -281,7 +283,7 @@
 
 21) What is Spot instance?
     In this instance we need to do bid, whenever someone come which is ready to pay more than you
-    AWS will give instance to that person. There is no relibility here. You will get a certain amount
+    AWS will give instance to that person. There is no reliability here. You will get a certain amount
     of time after that that instance will be terminated by AWS from your account.
     Here discount may be up to 90% also.
     It is useful when we have some work which requires more computing but for less time suppose for
@@ -296,7 +298,7 @@
     Security purpose.
 
 23) what is Saving plans?
-    Here we have commitment that in 1 hour how much amount we can to pay to AWS.
+    Here we have commitment that in 1 hour how much amount we can pay to AWS.
     Then AWS will assign you instance as he wants according to your budget.
     up to 72% discount.
 
@@ -307,7 +309,7 @@
     choose a windows instance click on connect go to RDP clint tab.
     download remote desktop file.
     double click on that file.
-    It will as password click get password on RDP client tab and upload key file path there.
+    It will ask password, click to get password on RDP client tab and upload key file path there.
     get the password and connect.
 
     From linux machine i can connect the windows machine with help of Remina tool.
@@ -319,3 +321,147 @@
     ip -a This command will not give you public ip address.
     In AWS we have a magic ip address. With help of magic ip address in curl command we can see all the
     meta data of an instance.
+    curl 169.254.169.254/latest/meta-data/ami-id
+    we can get dynamic data also with same way.
+
+26) when we stop an instance and again start an instance public ip address will change how to keep
+    same ip address then after re run the instance.
+
+    There is a concept of elastic ip or we can sy static ip in Ec2 instance where we can reserve the
+    ip address.
+
+    Steps to reserve an elastic IP address.
+    1) In EC2 dashboard inside Network & Security section click on Elastic IP.
+    2) Click on Allocate Elastic Ip Address.
+    3) Allocate
+
+    So with above steps an Ip will generate, Now we need to allocate that generated IP address to
+    EC2 instance.
+
+    steps to associate new generated IP Address to an instance.
+    1) In elastic Ip list click on action and select Associate Elastic Ip Address.
+    2) Choose an instance on which you wanted to associate.
+    3) Click Associate to associate it.
+
+    Up to know we can reserve by default 5 elastic ip address. We can increase the quota also by writing
+    email to AWS.
+
+    How AWS charge for elastic Ip address.
+    If you create an elastic ip address and it that ip address attached to an instance and that instance
+    is running then AWS will not charge anything for elastic IP because anyway AWS will give you one
+    dynamic IP address if you have not taken any static ip.
+    But If you create an elastic ip and that you have not attached to any instance or if attached
+    instance is stopped then it will charge you for elastic ip address.
+
+27) How to release an elastic IP address.
+    In elastic ip list select a particular ip the click on action
+    click on Dissociate Elastic IP Address then click on Disassociate.
+    Once you disassociate the elastic ip then one dynamic ip address will associate to that instance
+    which you have release.
+
+    Now we can release an elastic ip address.
+
+28) What is EBS(Elastic block storage)?
+    We can attach multiple EBS volume to one instance.
+    EBS is just like a hard disk which is attahed to instance.
+
+    Can we attach one EBS to multiple instance?
+    There are 6 types of EBS out of that 2 we can attach to multiple EC2 instance (IO1, IO2) and remaining 4 we can
+    attach with single instance only.
+
+    When we create an EBS in some availability zone such as ap-south-1 then we can attach this EBS in
+    those instance which is there in same availability zones because EBS will be there inside
+    availability zones. If we wanted to move an EBS from one availability zones to another we can do that
+    with help of snapshot.
+
+    We can increase the size of EBS volume run time only.
+
+29) What is instance store root device type in AMI?
+    In instance store root device type we create our EBS volume in same place where our ec2 instance
+    will be there. The benefit of this will be there will be less latency of read/write data from EBS.
+    The negative things is if we delete an instance then EBS will also be deleted.
+    If we stop and start the machine also data will loss.
+    So when speed matter that place we use instance-store root type device.
+
+    when AWS will terminate any instance because of some problem facing, then first it will give
+    notification to the user who are using that instance thenAWS will stop the instance then if user will
+    start that instance again then it will start somewhere else. and if Instance-store are attached to
+    this instance then there will be data loss if AWS will stop the instance.
+
+    Whenever we create an EBS then AWS will create a replica of that EBS in same Availability zone.
+
+30) How to create an EBS and attach to an instance?
+    Steps to create an EBS.
+
+    1) In EC2 dashboard in Elastic block storage click on volumes.
+    2) Click on create volume.
+    3) We can choose volume type, size, Availability zones, we can encrypt also then we can click on
+        create.
+
+    While creating instance in network settings in subnet option we can choose availability zones
+    where we wanted to create instance.
+
+    command to check list of elastic block storage in to an instance.
+    lsblk
+
+    Steps to attach or detach the volume to an instance
+
+    1) Select an EBS volume and click on action.
+    2) Choose attach volume then we will get dropdown to select instance.
+    3) In dropdown only those instance will ome which is created in same availability zone where
+        EBS created.
+    4) Click on attach.
+
+    same way in action we can detach volume also.
+
+    Steps to use a newly added EBS.
+
+    1) command to format an EBS
+        sudo mkfs.ext4 /dev/xvdf
+
+    2) create a dir
+        sudo mkdir /test
+
+    3) command to login as sudo
+        sudo su
+
+    4) command to go root dir
+        cd /
+
+    5) command to mount test dir
+        mount /dev/xvdf /test/
+
+    6) command to check if a dir is mounted or not
+        mountpoint /test
+
+    7) Command to create some files in /test
+        cd /test
+        touch 1 2 3 4 5
+        echo "I am ashish" > demo.txt
+
+    8) Command to unmount a dir
+        umount /test/
+
+    After unmount EBS will be there but in unmounted state this is as same as when we have a pendrive
+    attached with a laptop and then we have clicked on eject option but not yet removed.
+    When we detach the EBS then it will remove with that system.
+
+    command to check if an ebs has already some data
+    sudo file -s /dev/xvdf
+
+31) How to increase size of a running EBS?
+    Steps to increase the storage of EBS
+
+    1) Select an EBS and click on action and click modify volume.
+    2) Change the storage size and click on modify.
+
+    command to check the list of file system size
+    dh -f
+
+    command to check the list of block storage size
+    lsblk
+
+    After above command only block storage will modify but file system will not modify yet
+    we need to do below command.
+
+    resize2fs /dev/xvdf where xvdf is device name.

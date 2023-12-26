@@ -465,3 +465,222 @@
     we need to do below command.
 
     resize2fs /dev/xvdf where xvdf is device name.
+
+32) How to resize the root EBS volume?
+    When we execute command resize2fs /dev/xvda1 - it will give you The filesystem is already
+    2068731 (4k) blocks long.  Nothing to do!
+
+    For resizing the root storage first we need to grow part the partition which is present in that
+    storage.
+
+    sudo growpart /dev/xvda 1 where 1 is the 1st part of xvda storage.
+    With above command we have increase the partition size but still we need to increase the file system
+    inside xvda1 storage.
+
+    resize2fs /dev/xvda1
+
+    xfs growfs - to resize xfs file system. not ext4.
+
+33) How to connect one EBS volume with multiple instances?
+    If we wanted to create exact similar instances two times then while creating instance one option
+    is there to select number of instances we an use that.
+
+    While creating EBS if we choose EBS type as IO2 or IO1 the that multi attach checkbox will come.
+    we can check and uncheck that. In some region IO1 EBS type may not have multi attach feature.
+
+    In only nitro based instance we can attach the single EBS volume. not in XEN based instance.
+    t2 is XEN t3 is Nitro.
+
+    We can not change instance type while running the instance. we hav to stop th instance then
+    we can change the instance type one by one.
+
+    Select an instance then click on action then click on instance settings then change instance type.
+
+    Now in same way we select a volume and in action click on attach instance and one by one we can
+    attach the instances to that EBS volume.
+
+    In the shared EBS volume we need to create such a file system which is cluster aware.
+    normal ext4 or xfs will not work.
+
+34) Types of EBS volumes.
+    IOPS - Input Output per seconds.
+    Throughput (MB/SEC) - Means how much MB of data it can transfer in 1 sec.
+
+    Above two things are there when we create an EBS volume.
+
+    There are 7 types of EBS volume we have.
+    1) GP2 - 1:3 ratio means for 1 gb storage 3 IOPS.
+    2) GP3 - minimum IOPS starts with 3000
+    3) IO1 - When we need to do high speed data transfer. for mission critical application.
+    4) IO2 - When we need to do high speed data transfer. for mission critical application.
+    5) COLD HDD SC1 - used to big data like data ware house - starting storage 125 GB
+    6) Throughput optimized HDD st1 - used to big data like data ware house - starting storage 125 GB.
+    7) Magnetic (standard) - Not recommendable by AWS now, before we were using it.
+
+    Note - When ever you need to perform high speed data transfer we need to choose IO1 or IO2.
+           GP1, GP2, GP3 are the balanced EBS volume between speed and price.
+           By default GP2 (general purpose SSD) will be selected while creating EBS.
+           Max value of IOPS will be minimum in COLD HDD SC1 then Throughput optimized HDD st1
+           then GP2, GP3, IO1, IO2.
+           Magnetic is cheapest one.
+           We can not take COLD HDD and Throughput optimized HDD as a root volume of an instance.
+
+35) What is snapshot in AWS?
+    We can take snapshot of EBS volumes in AWS. snapshot is like point of time means if we have taken
+    a snapshot of my EBS at 6:04:23 pm then after this instant of time it will not store anything.
+    We take this snapshot usually for backup purpose. We can come revert also to that snapshot if we
+    want. If by mistake we run rm command or rmdir command at those types of situation we can use
+    snapshot. AWS will store the snapshot in s3 bucket.
+    EBS volume is availability zone specific.
+    snapshot is region specific.
+
+    How we can move EBS data from one availability zone to another availability zone?
+    We create snapshot of an EBS volume of one availability zone and then move that snapshot to another
+    availability zone and then we can create another EBS from that snapshot.
+
+    AWS store data into snapshot into incremental ways. for example suppose we have created a snapshot
+    of 50 GB then we can created a snapshot then again if we added 10 GB more then if we create snapshot
+    then it will not create snapshot of whole 60 GB it will create snapshot of only 10 GB.
+    So in this way we can reduse the storage cost.
+
+    If we delete a snapshot then AWS will transfer the data to just next incremental snapshot blindly.
+
+    command to create a file system
+    file -s /dev/xvdb
+
+    command to return a string multiple time and store that into a text file
+    yes "Ashish" >> abc.txt
+
+    Steps to create snapshot -
+    1) select an EBS volume then click on action.
+    2) click on snapshot create.
+    3) fill a name of snapshot generally give name of EBS plus date time stamp.
+
+    In Elastic block store section snapshot is there. we can see the list of snapshots.
+
+    Steps to create EBS volume from a snapshot
+    1) Select a snapshot and click on action.
+    2) click on create volume from snapshot.
+        Here we can create volume from a snapshot with either equal storage or greater than the main
+        EBS volume. We can change the instance type, Availability zones.
+    When we create a volume from second snapshot then AWS will aggregate all the previous snapshot and
+    populate all the data into new EBS.
+
+36) How to schedule snapshot creating daily or weekly at a time?
+    Whenever we create aN EBS volume with some name it will create a tag.
+    we can add another tag also to an EBS volume.
+
+    Steps to schedule a job which create snapshot for backup daily.
+    1) In elastic block store click on Lifecycle manager
+    2) Create new lifecycle policy and click on next step.
+    3) We will get some options like schedule name, frequency, Every, starting at, Retention type
+        (COUNT, AGE) - how many previous snapshots you wanted to keep.
+    4) Some more advance options will be there.
+    5) Click on review policy.
+    6) It wil go to review policy then again we click on review policy to create.
+
+    can we move a snapshot from one region to another region?
+    Yes
+
+37) How to enable retention rule(recyclebin rule) of EBS snapshot?
+    We can write retention rule(Recyclebin rule) of EBS snapshot as well as AMI.
+
+    Steps to create recyclebin rule of snapshots.
+    1) Click on snapshots in Elastic block storage.
+    2) click on recyclebin button and and click on create retention rule.
+    3) Here file rule name, description, resource type (Snapshot or AMI), Apply to all,
+        Retention period and the click on create retention rule.
+    4) We can select whether retention rule will be block or unblock. Means once we create retention
+        rule user can edit or not later.
+
+    Steps to see the list of retention rules.
+    1) Go to list of snapshots and click on recyclebin button.
+    2) You will get three options create new retention rule, Resources where you can see the deleted
+        EBS and Retention rules where you can see the list of existing retention list.
+    3) We can recover the deleted EBS also from recycle bin.
+
+    For AWS the default region is N.virginia. Once AWS will launch anything new they will test here only
+    first.
+
+38) How to copy a snapshot from one region to another region?
+    1) Select a snapshot and click on copy snapshot.
+    2) Choose a destination region and click on copy snapshot.
+    3) While copy a snapshot you ca encrypt your snapshot also and the EBS volume which you will create
+        from an encrypted snapshot will also be encrypted.
+
+    EBS volume is a SAN (Storage area network)
+
+39) Encrypt the EBS volume.
+    When we encrypt an EBS volume It will stored in SAN in encrypted format and data will transfer
+    from EBS to EC2 instance in encrypted format only.
+
+    When you will go to create snapshot from an encrypted EBS volume by default that snapshot will be
+    encrypted only.
+
+    When we will create a volume from an encrypted snapshot the volume will also be encrypted.
+    While creating volume from snapshot we will ot be able to un encrypt it.
+    When we will create a volume from an unencrypted snapshot the volume will also be unencrypted but
+    we can check the checkbox to encrypt it during creation of Volume.
+
+    According to AWS if an EBS volume is encrypted there will not be any latency while reading or
+    writing the data into AWS.
+
+    How to enable a by default encrypted checkbox?
+        When we enable the thr by default encrypted checkbox then whenever we create an EBS volume by
+        default encrypt checkbox will be checked.
+
+        Steps to enable default encrypted checkbox.
+            1) Go to EC2 Dashboard.
+            2) Right side you will get Account attributes.
+            3) Click on Data protection and security and click on manage in EBS encryption.
+            4) Enable the checkbox and click on update EBS encryption.
+
+40) What is Tag in AWS?
+    In AWS Tag is a key value pair that you can assign to aws resources, including Amazon Elastic
+    Block Storage volumes. Tags are the meta data that provide the additional information about
+    your resources and help you to organize, categorize and manage them more effectively. Each tag
+    consists of a key and a corresponding value.
+
+41) AWS AMI (Amazon Machine Image)
+    AMI stands for Amazon Machine Image.
+    Suppose we wanted to install an OS to my system then we need to bring a pen-drive having bootable
+    os file. So we can install os to many system with help of that pen-drive.
+    So AMI is just like that pen-drive where we can configure an operating system and we can
+    configure some other things also like we can install and setup nginx, we can deploy our applications
+    also there. After that whenever we create an instance with that AMI by default those configurations,
+    setup and our applications will be deployed there.
+
+    Steps to create AMI of an instance.
+        step 1
+            1) Select an instance do right click and click on AMI and template and click on create AMI.
+            2) we can create AMI by clicking on action and click on AMI and template and click on create
+                AMI.
+        step2
+            1) Since Instance is EBS volume instance so create a snapshot of the root volume then from
+                that snapshot we can create Image while clinking on action.
+
+        Steps to create an instance from an AMI.
+            1) Select an AMI and click on launch instance from AMI button.
+            2) Or we can create instance by normal way by selecting the custom AMI which will be there
+                in My AMIs tab.
+
+        Whenever we create an AMI AWS will create a snapshot behind the screen.
+
+42) How to share an AMI to other users?
+
+    1) Select that AMI click on action and then edit AMI permissions.
+    2) Fill the shared accounts with the usernames. We can make the AMI public also so anyone
+        can use that.
+
+    We can copy an AMI from one region to another region also by clicking on action button.
+
+    Steps to delete an AMI.
+    1) First need to de register the AMI then from snapshot we can delete the snapshot.
+
+43) AWS Load Balancer.
+    Basically when we more users came to our server then our server will start giving response slow.
+    At one time came that our server will become chock. To prevent with this issue we bring a concept
+    of load balancer. Now we will not hit the public IP of instance directly, We will hit the IP
+    of the load balancer then load balancer will hit the public IP of instance.
+
+

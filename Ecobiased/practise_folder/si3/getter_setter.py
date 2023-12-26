@@ -12,7 +12,7 @@ class MyClass:
 
     @return_value.setter
     def return_value(self, new_value):
-        self.value = self.value / 100
+        self.value = new_value / 100
 
 
 c1 = MyClass(67)

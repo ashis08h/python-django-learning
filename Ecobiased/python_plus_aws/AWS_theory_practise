@@ -1,0 +1,736 @@
+1) What is AWS - Traditional vs cloud computing?
+
+    Before when we wanted to create an application before that we need to do several things
+    First we need to purchase server and we need to hire a garrage where we can keep our server.
+    Since server needs cool place so need to purchase AC also.
+    Since we need to run our website 24 hours daily so need to hire some persons for maintenance.
+    In above things roughly 1 lakh or rupees will go before creation of applications only.
+
+    After above fix still we will have two major problems.
+    a) Suppose at starting we thought that 10 thousands user will come to our application so we have
+        purchased a server which can handle 10 thousands but there are only 10 people hitting our
+        application daily. So company will come in loss.
+
+    b) Suppose at starting we thought that 10 thousands user will come to our application so we have
+        purchased a server which can handle 10 thousands but there are 10 lakhs of people hitting our
+        application daily. So our server will freeze because of that.
+
+2) Cloud service.
+
+    There are three types of cloud service.
+
+    a) Iaas (Infrastructure as a service) - In Iaas all the hardware will be there by service
+        provider. On that service provider will install an operating system and deliver to user.
+        User will install and configure the software as per their requirements. EC2 instance is an example
+        of Iaas service.
+
+    b) Saas (Software as a service) - In Saas the service provider will use all the features
+        of Iaas and install and configure some set of software on that. User will only take care of their
+        Application and their data. The price of Saas will be costlier then the Iaas. RDS is an example
+        of Saas.
+
+    c) Paas (Platform as a service) - In Paas everything will be there with service provider only in fact
+        data also. Many company do not recommended Paas. Gmail is an example of Paas. No need to configure
+        or install anything.
+
+3) Types of cloud.
+
+    There are three types of cloud.
+
+    a) Public cloud - This type of cloud is available publicly everywhere in the world for everyone.
+        Anyone can create their resources from anywhere.
+
+    b) Private cloud - This type of cloud is not available publicly everywhere in the world or everyone.
+        Private cloud can be access in the company network only.
+
+    c) Hybrid cloud - This type of cloud is the combination of more than one type of cloud.
+
+4) How AWS charge?
+
+    AWS charge based on three factors -
+
+    a) Compute - No of cpu used.
+    b) Storage - How much storage we use.
+    c) Data transfer - How much data transfer outside of server.
+
+5) Global infrastructure in AWS
+
+    In AWS three things are there
+
+    Region - It contains the numbers of availability zones.
+    Availability zones - It contains of numbers of data centre.
+    Data centre - It consists a physical storage of data.
+
+    Region -
+
+    Why AWS need multiple availability zones in the world why can't just make one availability zone in
+    America or India and handle all the data from there?
+
+    1) It depends on the numbers of audience present from which part of world. If we keep our server
+    near by maximum audience it will be easy to load the page.
+
+    2) Some government do not allow their data to be placed outside of their country.
+
+    3) Disaster Recovery - In case of any disaster such as flood, earthquake or in case of fire generally
+        we use to keep copy of one region data into another region.
+
+        All the regions are interconnected through sea optical wire and data transfer at the speed of
+        100 zb/sec.
+
+    4) Cost effectively - The electricity cost in USA will be not same as in India.
+
+    In AWS all the regions will have one unique code.
+    It is not necessary that all the services will be available in all the regions. And price of one
+    service may vary regions to regions also.
+
+    Availability zones -
+
+    Why not we keep all data centers in one region only why we have created availability zones?
+
+    Actually if we put all the data centers in one regions there will be few drawbacks
+
+    1) What will happened id suddenly power cut happened.
+    2) What will happened if terrorism attack.
+
+    These are the scenarios they have considered while designing global infrastructure of AWS.
+    Each Availability zone will be connect with different power house and different networks.
+
+    Just like each region have their own unique code same way each availability zones will have their
+    own unique code.
+
+    Local zones -
+
+    When we wanted to keep our server in any particular city of a country then local zones come into play
+    AWS say if a server is placed in local zones the n that city server will give single digit latency
+    to load the page. For now it is not necessary that each service will be available to each local
+    zones.
+
+6) What is EC2?
+
+    EC2 stands for elastic compute cloud.
+    AWS EC2 will give server on rent to use. We can create virtual machine on the AWS EC2 service.
+    While creating EC2 instance we can select multiple things.
+
+    a) Which operating system you wanted to choose.
+    b) Which AMI you wanted to choose we can choose our custom AMI also.
+    c) We can choose Architecture of the virtual machine.
+    d) We can select Instance type of an instance such as t2-micro, t2-name etc.
+    e) We can either select an existing security groups or we can generate new one also.
+    f) We can choose how many compute we need compute means no of CPU.
+    g) How much RAM we need we can choose.
+    h) We can select speed of upload or download data also.
+    i) We can set Firewall rule in security groups. Firewall rules means from which IP or port
+        we allow to our server and on which Ip or port my server can send response or communicate.
+    j) We can put bootstrap scripts while creating EC2 instance. Once the instance will create first of
+        all this bootstrap script will run automatically.
+    k) How much storage we need we can choose.
+
+    While creating instance we create a key value pair the public dta will goes to instance and the
+    private keys file will come to user from that file they can access their instance.
+
+7) What is Inbound and Outbound rules?
+
+    In security groups we configure Inbound and Outbound rules and we attach the security groups
+    with instance.
+    Inbound rules - from which port or Ip address we can send request to my server.
+    Outbound rules - on which port or Ip address my server can communicate.
+
+8) How to access the EC2 instance?
+
+    There are multiple ways to connect with EC2 instance.
+
+    a)  I used to access the instance through ssh.
+
+        command to connect with ssh
+        ssh -i <youtube.pem> <username>@<public dns>
+        by default for ubuntu machine username will be ubuntu
+        In place of public dns we can use public ip also.
+
+        Sometime we get error while connecting with instance this may happened because of the pem key file.
+        The pem key file should be private AWS will not allow the public key file to access the instance.
+        Read access of file should only with owner.
+
+        command to make the pem file as private.
+        chmod 400 <name of the pem file>
+
+        command to check OS name inside instance.
+        cat /etc/os-release
+
+        command to check the ram of the instance.
+        free -m
+
+        command to check the no of CPU in the instance.
+        lscpu
+
+        command to  check the storage available in the instance.
+        df -h
+
+        command to check the private API
+        ip -a
+
+    b)  For windows machine since we can not do ssh so we use Putty to connect with instance.
+    c) We can connect with git bash also in windows machine.
+    d) In instance list select an instance click on connect then go to EC2 instance connect tab and
+        click on connect button that's it. In this process we do not need any tool. In the web browser
+        only we can connect with instance.
+
+9) Default availability zone of mumbai region is ap-south-1a so how AWS will manage the load between
+    all the availability zones?
+
+    For different user if a server has created in same name of availability zone of a region, There is
+    no guarantee that for all the user server is created in same availability zone. AWS in  backend will
+    point different different availability zone to a name of availability zone for different users.
+
+10) Install NGINX in EC2 Instance and deploy the sample application in the EC2.
+
+    Command to login as root.
+    sudo -i
+    Command to update the instance
+    apt-get update
+    command to install NGINX
+    apt-get install nginx
+    command to check the configuration of nginx
+    nginx -t
+    command to check the nginx service status
+    service nginx status
+    command to check what are there in nginx localhost ip.
+    curl localhost
+    In /var/www/html directory we will have index.nginx-debian.html file by default it will load on
+    localhost. If we create an index.html file in /var/www/html.index.html then in curl localhost
+    index.html content will load.
+
+11) If we terminate an instance then by default EBS will get delete or not?
+
+    Yes If we choose all the by default options while creating an instance then once we terminate the
+    instance the linked EBS will also be delete. But we can configure the EBS deletion while creating
+    the instance in advance option of storage configuration part we can select yes or no option.
+    By default it will be yes means whenever we delete an instance EBS will also get delete.
+
+12) How to configure user-data or bootstrap script for an EC2 instance?
+
+    While creating an instance in advance option we will get a text area there we can write the shell
+    script. Once the instance will create first of all the bootstrap script will execute.
+
+    Sample bootstrap script.
+
+    #bin/bash
+
+    apt-get update
+    apt-get install nginx -y
+    echo "I am Ashish Kumar" > /var/www/html/index.html
+
+    The user data script will always run as a root user not as ubuntu user.
+
+13) AWS security groups?
+
+    It is a firewall which place before the EC2 instance where we can write rules from which port or Ip
+    request will come and on which port or Ip the instance server will send response or communicate.
+
+    We can configure rule in such a way that a specific port is allowed to send request. we can not
+    configure a rule such that a specific port is disallow to reach on server.
+
+    There are two types of rules.
+    1) Inbound Rule -The traffic which can reach to the server.
+        by default it is empty, we can choose ip address or port to allow on server.
+
+    2) Outbound Rule - The traffic on which my server will send response by default all the service
+        will be selected.
+
+    ssh - default port - 22
+    http - default port - 80
+
+14) Can we add more than one security groups to one instance?
+
+    Yes
+    We can add new security groups or we can change te existing security groups also to a running
+    instance on the fly.
+
+15) How to add another security group to a running instance on the fly?
+
+    Steps to add another security group to a running instance on the fly -
+
+        1) Go to list of instances.
+        2) Select an instance and click on action.
+        3) click on security and choose a security group to add to that instance.
+
+    Note - We can add multiple security group to an instance as well as we can add a security group
+    to multiple instances.
+
+16) Instance Type
+
+    We can compare the instance. we can increase or remove the table columns of instance after clicking
+    on settings symbol.
+
+    Example -
+    t2micro - Here t is instance class, 2 is generation of that class and micro is based on the size.
+
+17) Types of Instance?
+
+    There are five types of instance.
+
+    a) General purpose instance
+        It is a balanced compute, memory and network bandwidth instance. Example t2micro.
+
+    b) Compute optimized instance
+        When we have some work which needs more number of cpu such as creation of more pdf works, for
+        gaming purpose then we choose compute optimized instance.
+
+    c) Memory optimized instance
+        When we require more memory here we keep data into memory there we choose memory optimized
+        instance for example caching related works.
+
+    d) Accelerated computing instance
+        When we have works related to graphics related works, GPU then we need to choose Accelerated
+        computing instance. Example machine learning works.
+
+    e) Storage optimized instance
+        When we need to do more read and write data into database then we can choose storage optimized
+        instance. Like data warehousing works.
+
+18) What is On demand instance?
+
+    On demand instance is a type of instance where AWS create instance on demand. AWS will charge more
+    money for on demand instance.
+
+    For 1st min AWS will charge cost of whole minute after that AWS will charge cost of each seconds.
+
+19) What is reserve instance?
+
+    When at starting only we know that for a particular no of period we need the instance such as for
+    3 years or 4 years. then we can take reserve instance. AWS will give discount up to 72% on reserve
+    instance.
+
+    Discount depends upon 4 things.
+    1) Operating system, Instance type, region
+    2) Time period AWS will give more discount if you will take server for 3 years than 1 years.
+    3) If you pay whole amount for all time period at once then AWS will give more discount.
+    4) Convertible instance and non convertible instance.
+
+20) What is spot instance?
+
+    In this instance we need to Bid. Whenever someone will come are who is rady to pay more than you AWS
+    will the the instance to them. This type of instance has no reliability. AWS will give you some time
+    period after that they will remove the instance from your account.
+    This type of instance is useful which require more compute, more memory and for less time.
+    AWS will give up to 92% discount.
+
+21) What is Dedicated hosts?
+
+    Dedicated hosts is an EC2 instance hosts which is dedicated for your uses only.
+    It is used for security purpose.
+
+    BYOL - Bring your own license.
+
+22) What is saving plans?
+
+    Here you have give commitment that in 1 hour how much of amount you can pay to AWS then AWS will
+    give you instance as per your budget. Here AWS will give you up to 72% discount.
+
+23) How to create and access windows machine instance?
+
+    We can create a windows machine instance in same way as linux machine just need to select windows
+    operating system.
+
+    Steps to access a windows instance from a windows machine.
+    a) Select a windows instance from the list of instance list.
+    b) click on connect and go to RDP client tab.
+    c) Download remote desktop file and double click on that file.
+    d) It will ask password then generate password from RDP client tab.
+    e) Get the password and connect.
+
+    Note: - To connect the windows machine from a linux machine by use of Renima tool.
+
+24) How to check instance meta data with user data in AWS?
+
+    Meta data - Public Ip, Private Ip, AMI Id
+
+    ip -a - This command will give you private ip address not the public ip address.
+    In AWS there is a magical ip address with help of magic ip address in curl command we can get
+    meta data. curl 169.254.169.254/latest/meta-data/ami-id
+
+    In the same way we can get dynamic data also of an instance.
+
+25) When we stop an instance and again start an instance public ip address change, how to keep same IP
+    address then after re run the instance.
+
+    In AWS there is a concept of static Ip called elastic Ip. We can generate an elastic ip address
+    and attach to the instance.
+
+    Steps to reserve the IP address.
+    a) In elastic dashboard in the network and security section click on elastic Ip.
+    b) Click on allocate elastic ip address
+    c) Allocate.
+
+    Above steps will generate the elastic ip address now need to allocate the new generated ip address
+    to the instance.
+
+    Steps to allocate the elastic ip address to an instance.
+    a) In elastic ip list click on action and select associate elastic ip address.
+    b) choose an instance you wanted to associate.
+    c) click associate to associate it.
+
+    Up to now we can reserve up to 5 elastic ip address for an account. For more than that we need to
+    write email to AWS.
+
+    How AWS will charge for elastic ip address?
+
+    If you created an elastic ip address and if that ip you allocate to an instance then aws will not
+    charge anything for that because anyway AWS will give you a dynamic ip address.
+    But if that elastic ip address is not attached to any of the instance or if the allocated instance
+    is stopped then AWS will start charging you.
+
+26) How to release an elastic ip address?
+
+    Steps to release the ip address.
+
+    a) Select an elastic ip address from the list of elastic ips.
+    b) click on action and click on disassociate elastic ip then click on disassociate.
+    Once you disassociate the elastic ip then automatically a dynamic ip address will assign to the
+    instance which you disassociate.
+
+27) What is EBS(Elastic block storage)?
+
+    We can attach multiple EBS to a single instance.
+    EBS is just type of a hard disk which is attached to instance.
+
+    Can we attach one EBS to multiple instances?
+    There are seven types of EBS out of that 2 we can attach with multiple instances IO1, IO2 and
+    remaining 5 we can attach with single instance.
+
+    When we create an EBS into an availability zone such as ap-south-1a then we can attach to those
+    instance only which belongs to same availability zone. Because EBS stay inside availability zone.
+    We can move the EBS from one availability zone to another with help of snapshot.
+
+    We can increase the storage of an EBS in run time also. but we can't decrease the storage.
+
+28) What is instance store root device type?
+
+    In instance store root device type we create an EBS in same place where EC2 instance is there.
+    The benefit of instance store root device type is it will give very less latency while reading
+    or writing data from EBS. The negative things of instance store root device type is when we delete
+    an instance EBS will automatically get delete. If we start and stop the machine also data will lose.
+
+    So when speed matter that type of place we can create instance store root device type.
+    When AWS will terminate any instance because of any issues then AWS will notify all the users first
+    which is linked with that Instance then AWS will stop the instance first. If user will re start the
+    instance then that instance will start somewhere else and if instance store device is attached to
+    that instance then there will be data loss.
+
+    Whenever we create an EBS AWS will create a replica of that EBS in same availability zone.
+
+29) How to create an EBS ans attach to an instance?
+
+    Steps to create an EBS
+    a) In EC2 dashboard in elastic block storage part click on volume.
+    b) click on create volume.
+    c) We can select volume type, size availability zones and we can create EBS in encrypted or decrypted
+        mode also.
+
+    While creating instance in network setting in subnet option we can select an availability zone for
+    instance.
+
+    Command to check list of elastic block storge inside instance.
+    lsblk
+
+
+    Steps to attach or detach the EBS with instance.
+    a) Choose an EBS in the volume list and click on action.
+    b) Choose attach volume then we will get dropdown to select an instance.
+    c) In dropdown only those instances will come which is there in same availability zone as EBS.
+    d) Click on attach.
+
+    Same way we can detach the instance from EBS also in action.
+
+    Steps to use a newly added EBS.
+
+    a) After creating and attaching a new EBS we need to format it before use.
+        command to format a newly added EBS.
+        - sudo mkfs.ext4 /dev/xvdf
+
+    b) create a dir.
+        - sudo mkdir /test
+
+    c) command to login as sudo.
+        - sudo su
+
+    d) command to go root dir.
+        - cd /
+
+    e) command to mount test dir.
+        - mount /dev/xvdf /test
+
+    f) command to check if dir is mounted or not.
+        - mountpoint /test
+
+    g) command to create some files in test dir.
+        touch 1 2 3 4 5 6
+        echo "I am ashish" > sample.txt
+
+    h) command to unmount a dir
+        unmount /test
+
+    After unmount a directory it will be there but in unmounted state in same way as we have a pen drive attached with a
+    laptop and we clicked eject.
+    Once we detach the EBS from instance then directory will remove as same as we have removed the pen drive from
+    laptop.
+
+    command to check if EBS has already some data or not.
+    sudo file -s /dev/xvdf
+
+30) How to increase the storage of a running EBS volume.
+
+    Steps to increase a storage of a running EBS.
+    a) Select an EBS and click on action.
+    b) click on modify volume button.
+    c) Change the storage and click on modify.
+
+    We can only increase the EBS size we can not decrease it.
+
+    command to check list of file system size.
+    dh -f
+
+    command to check the list of block storage and size.
+    lsblk
+
+    After modify the storage of EBS through the AWS only block storage size got modified not the
+    file system.
+
+    command to modify the filesystem also
+    resize2fs /dev/xvdf where xvdf is the name of block storage.
+
+31) How to resize the root volume EBS?
+
+    with sudo resize2fs command the root volume file will not modify it will give you error that the
+    filesystem is already 2068731 (4k) blocks long. Nothing to do!
+
+    for resizing the root storage first we need to grow part the partition which is the part of that
+    EBS.
+
+    sudo growpart /dev/xvda 1 where xvda 1 is the first partition of the EBS.
+    with above command we can increase the partition but not the file system, then we need to do.
+    sudo resize2fs /dev/xvda1
+
+    Incase of xfs file system not ext4 file system.
+    xfs growfs
+
+32) How to connect an EBS with multiple instances?
+
+    If we wanted to create multiple instance exactly same in one time there is an option number of instance
+    we can give number of instance we wanted to create while creating instance only.
+
+    While creating instance if we choose IO1, IO2 then one multi attach checkbox will come there we need
+    to checked. In some region of IO1 multi checkbox may not come also.
+    one more thing we can attach same EBS to those multiple instances which are nitro based instance,
+    not the XEN based instances. t2 is a XEN based instance t3 is a nitro based instance.
+
+    We can not change the instance type while running the instance, we need to stop the instance then
+    we can change the instance type of that instance one by one.
+
+    Steps to change the instance type.
+    a) Select an instance and click on action.
+    b) click on instance setting and then change the instance type.
+
+    Now in same way how we attach the volume to an instance one by one we can attach the instances to
+    an EBS.
+
+    In the shared EBS volume we need to create such a file system which is cluster aware, normal ext4 and
+    xfs file system will not work.
+
+33) Types of EBS volume.
+
+    IOPS - Input Output per second.
+    Throughput (MB/Sec) - The number of data in MB transfer in 1 sec.
+
+    Above two things are their when we create volume.
+
+    There are seven type of EBS volume in AWS.
+    1) GP2 - 1:3 Ratio means for 1 GB of storage 3 IOPS.
+    2) GP3 - minimum IOPS starts with 3000
+    3) IO1 - Used where we need high speed of data transfer, mission critical mode.
+    4) IO2 - Used where we need high speed of data transfer. mission critical mode.
+    5) Cold HDD SC1 - Used to big data like data warehouse, starting storage 125 GB.
+    6) Throughput optimized HDD ST1 - Used to big data like data warehouse, starting storage 125 GB.
+    7) Magnetic (standard) - Not recommended by AWS, Now we are not using it before we used to use that.
+
+    Note: - Whenever you need to perform high speed data transfer we need IO1, IO2. GP2, GP3 are the
+        general purpose EBS volume between speed and price. By default GP2 is selected when we use to
+        create EBS. Max value of IOPS will be minimum in Cold HDD SC1 then Throughput optimized HDD ST1
+        then GP2, GP3, IO1, IO2.
+        Magnetic is cheapest one. We can not take Cold HDD SC1 and Throughput optimized HDD ST1 as a root
+        volume.
+
+34) What is snapshot in AWS?
+
+    We can take snapshot of EBS volume in AWS. Snapshot is just like a point of time. means if we take
+    snapshot at 7 pm then after 7 pm it will not store any that into the snapshot. We take snapshot for
+    backup. we can come revert also to previous snapshot at any time if we need. If by mistake we run
+    rm command or rmdir command then this type of situation we can deal with backups.
+
+    Snapshot will store data into s3. EBS volume is an availability zone specific in similar snapshot is
+    a region specific based.
+
+    How we can move EBS data from one availability zone to another?
+    We can achive above things with help of snapshot. We can create a snapshot of an EBS volume then we can
+    move that snapshot to another availability zone then in the new availability zone we can create an
+    EBS from that snapshot.
+
+    AWS snapshot will store data incrementally which means that suppose we have 50 GB data into EBS volume
+    we create a snapshot then again we have added 10 GB extra then if we re create the snapshot then AWS
+    will not create snapshot of whole 60 GB data it will create snapshot of only new 10 GB data. So in this
+    way we reduse the storage cost.
+
+    If we delete a snapshot AWS will transfer the data into just next incremental snapshot blindly.
+
+    command to create a file system
+    sudo file -s /dev/xvdb
+
+    command to return a string multiple time and store into a file.
+    yes "Ashish" >abc.txt
+
+    steps to create a snapshot.
+
+    a) Select an EBS from a EBS list and click on action.
+    b) Click on snapshot create.
+    c) Fill the name of snapshot generally we give name of EBS and time stamp.
+
+    In elastic block storage part snapshot is there there list of snapshot will be there.
+
+    Steps to create a volume from an EBS.
+
+    a) select a snapshot and click on action.
+    b) click on create volume from a snapshot.
+
+    Here we can create a volume from a snapshot either greater than the main volume or equal to the main
+    volume. We can not create a volume which less than the main volume. We can change the Instance
+    type, availability zone. When we create a volume from a second or third snapshot then AWS will
+    aggregate all the data from their previous snapshot and create volume.
+
+35) How to schedule a job to create a snapshot daily or weekly at a time?
+
+    Whenever we create a EBS it creates a tag also with name of EBS. We can create a custom tag of EBS
+    also.
+
+    Steps to schedule a job which create snapshot daily.
+
+    a) In elastic block storage life cycle manager is there click on it.
+    b) create new life cycle manager and click on next step.
+    c) We will get some options like schedule name, every, frequency, starting at, retention type
+        (count, age) how many count or how much of time we can keep the older snapshot.
+    d) Some more advance options will be there.
+    e) Click on review policy.
+    f) It will go to review policy again we need to click on review policy to create.
+
+    Can we move snapshot from one region to another?
+    Yes
+
+36) How to enable retention rule(Recyclebin) of EBS snapshot?
+
+    We can write retention rule of snapshot or AMI.
+
+    steps to create retention rule of snapshot.
+
+    a) Select on a snapshot from snapshot list.
+    b) click on recyclebin button and create retention rue.
+    c) Here fill the rule name, description, resource type (AMI or Snapshot), apply to all, retention
+        period and click on create retention rule.
+    d) We can select retention as blocked or unblock means once the retention will create user can
+        edit or not.
+
+    steps to see the list of retention rules.
+
+    a) go to list of snapshots and click on recyclebin.
+    b) You will get three options.
+        1) Create new retention rule - where you can create new rule.
+        2) Resources - Where you can see the deleted EBS snapshots.
+        3) Retention rules - Where you can see the existing retentions.
+
+        We can recover the deleted EBS from recyclebin.
+
+    For AWS their default region is N.virginia here only AWS will test first once they will deploy.
+
+37) How to copy a snapshot from one region to another?
+
+    Steps to copy a snapshot from one region to another is
+
+    a) Select a snapshot from list of snapshots.
+    b) Click on copy snapshot.
+    c) Select the destination region where you wanted to paste.
+    d) While copying a snapshot we can encrypt a snapshot and the EBS which will create from an
+        encrypted snapshot will also be encrypted in nature.
+
+    EBS volume is a SAN (Storage area network)
+
+38) Encrypt the EBS volume?
+
+    When we encrypt an EBS Volume. Volume will be stored in to SAN(Storage Area Network) in encrypted
+    form. Data will transfer from volume to EC2 instance in encrypted form also.
+    When you will go to create a snapshot from an encrypted EBS volume by default the snapshot will be
+    encrypted only.
+
+    When we will create an EBS volume from an encrypted snapshot then the EBS volume will be encrypted
+    only we will not get options also to un encrypt.
+    But when we create an EBS volume from an un encrypted snapshot then we will get options to encrypt
+    also. According to AWS if EBS is encrypted then there will not be any latency for reading or writing
+    data from EBS.
+
+    How to enable a by default checked checkbox of encrypted for an EBS volume while creating EBS?
+
+    When we checked the checkbox of encrypted then whenever we create a volume with by default option
+    it will created an encrypted volume only.
+
+    Steps to enable a default checkbox for encryption.
+
+    a) In Ec2 dashboard in the right side you will get account attributes.
+    b) Click on data protection and security and click on manage in EBS encryption.
+    c) Enable the checkbox and click on update EBS encryption.
+
+39) What is Tag in AWS?
+
+    In AWS tag is a key value pair which store the meta data about a resource including Amazon elastic
+    block storge volume. Tags are meta data which store additional data about the resources of which we
+    assign. Tags help us to organize, categorize and manage more efficiently the resources. Each tag has
+    its key and their corresponding value.
+
+40) AWS AMI (Amazon machine image)
+
+    AMI stands for Amazon machine image.
+    Suppose we wanted to install an os to a laptop. then we need to get a bootable pen drive. with help
+    of that pen drive we can install os in multiple laptops. So AMI is just like that pen drive where
+    we can install a operating system and some other configurations set up also such as install nginx,
+    deploy the whole applications also.Now whenever we create a new instance from that AMI automatically
+    those configurations or set up will be available to that instance.
+
+    Step to create AMI of an instance.
+
+    step 1 -
+        1) Select an instance do right click and click on AMI and template and click on create AMI.
+        2) We can create an AMI after clicking on Action ad click on AMI and template then create AMI.
+
+    step 2 -
+        Since instance is EBS volume instance so create a snapshot of the root volume then from that
+        snapshot create image by clicking on action.
+
+    Whenever we create an AMI AWS will create a snapshot behind.
+
+41) How to share an AMI to other users?
+
+    1) Select the AMI and click on action then edit AMI permissions.
+    2) Filled the shared accounts with the shared usernames. We can make the AMI public also so anyone can
+        use that.
+
+    We can copy an AMI from one region to another region also by clicking on action button.
+
+    steps to delete an AMI.
+    1) First we need to de register an AMI then from snapshot we can delete the snapshot.
+
+42) AWS load balancer.
+
+    Basically when more users will start coming on our server then the server will start giving response
+    slow. After some time It will chock also. To prevent with this type of issue AWS has come with a
+    approach of AWS load balancer. In this approach user will not hit the public IP of instance directly,
+    user will hit the public IP of load balancer then load balancer will hit the public IP of instance.
+
+
+
+
+

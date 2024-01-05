@@ -479,7 +479,7 @@
 
     In setting.py we need to add
     SESSION_ENGINE = 'django.contrib.sessions.backends.file'
-    SESSION_FILE = '/path/to/session/files'
+    SESSION_FILE_PATH = '/path/to/session/files'
 
     Even though the file-based sessions are not stored in database, the session framework
     still uses a small database table ('django_session') to keep track of session information.
@@ -502,7 +502,7 @@
 
 35) What are Generic views in django?
 
-    In django we generic views are the in-built views which helps us to do some common task.
+    In django generic views are the in-built views which helps us to do some common task.
     such as when we wanted to display list of objects of a model we can use ListView when we wanted
     to display a single object we can use DetailView etc.
 
@@ -534,7 +534,7 @@ Ans - To Involve combination of restore and backup we can restore the database.
         python manage.py loaddata backup.json
 
 39) How to rollback a migrations in django?
-Ans - python manage.py migrate your_app 002_provious_migrations
+Ans - python manage.py migrate your_app 002_previous_migrations
 
 40) What are the built-in modules present in django?
 Ans - Django consists multiple built-in modules which provides many functions to use it for developing
@@ -579,6 +579,59 @@ Ans - Django consists multiple built-in modules which provides many functions to
     django.contrib.sitemaps - Helps you to generate XML sitemaps for your django powered site.
 
     django.utils - contain various utility functions and classes used throughout django.
+
+Django rest framework
+
+41) What is API?
+
+    API stands for application programming interface. we can say like it is a bridge or an interface
+    which will help us to communicate between two software such as UI Screen and database.
+
+    Basically it is an interface that allows two programs/software to talk to each other.
+    With help of API we can display the data on our website from other server also like youtube, Google.
+    Generally we use JSON format data in API to communicate with other server. We send data in json and
+    other server will also send back data into json only.
+    So there will be an URL of external server API, we need to hit that URL then that URL will give
+    response in terms of JSON.
+
+    Six steps to have fully working APIS -
+    1) Install python, django and djangorestframework.
+    2) Setup dango models.
+    3) Setup serializers.
+    4) Setup views.
+    5) Setup urls.
+    6) Test your APIS.
+
+42) How to install and use djangorestframework in django project?
+
+    a) First install djangorestframework with below command
+        pip install djangorestframework
+    
+    b) add 'rest_framework' in INSTALLED_APPS in settings.py file.
+
+    c) If in browser you wanted to restrict only get request we need to add default
+        permission in settings.py file.
+
+        REST_FRAMEWORK = {
+            # Use Django's standard `django.contrib.auth` permissions,
+            # or allow read-only access for unauthenticated users.
+            'DEFAULT_PERMISSION_CLASSES': [
+                'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+            ]
+        }
+    d) If you use browsable API then for login and logout we need to add below URL
+        in project urls.py file
+
+        urlpatterns = [
+            ...
+            path('api-auth/', include('rest_framework.urls'))
+        ]
+
+43) How we convert data into json in djangorestframework?
+
+    With help of serializer we can do that. we need to make a python file serializers.py
+
+
 
 
 

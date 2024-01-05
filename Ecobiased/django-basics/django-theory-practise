@@ -426,3 +426,49 @@ There are few caching strategies in
 2) Template fragment caching - To store a part of template in cache.
 3) object level caching - To store queryset in cache.
 4) cache middleware - To store entire set of views in cache.
+
+37) What are the strategies we follow to restore the data of database incase of corruption?
+Ans - We use to follow combination of backup and restore strategies.
+
+    command to take backup of data
+        python manage.py dumpdata > data.json
+
+    command to restore the data
+        python manage.py loaddata data.json
+
+38) How to rollback migrations in django?
+Ans - python manage.py migrate your_app previous_migration_name
+
+39) What are the builtin modules present in the django?
+Ans -
+    Django consists of multiple builtin modules which helps developer to create good application.
+
+    1) django.db - contain modules of database to communicate with database.
+
+    2) django.views - contain modules of generic view to perform some common tasks like ListView,
+                        DetailView, View.
+
+    3) django.forms - contain modules of django forms which help us to write html forms.
+
+    4) django.urls - contain modules of urls it give path, re_path, include methods.
+
+    5) django.contrib.sites - Contain modules to handle multiple sites in one project.
+
+    6) django.template - Provide tools to work with templates.
+
+    7) django.middleware - Contain middleware components which will work between requests and response.
+
+    8) django.contrib.admin - Contain modules to work with django builtin admin portal.
+
+    9) django.contrib.auth - Provide tool to work with authentiction and authorization with user model.
+
+    10) django.contrib.staticfiles - provise tool to work with static files like (image, css, js)
+
+    11) django.contrib.session - Handles sessions means store data into sessions as per site visitors.
+
+    12) django.contrib.sitemaps - Helps us to generate XML sitemaps.
+
+    13) django.contrib.messages - Helps us with messge framework, provide tools to transfer temporary
+        message between views.
+
+    14) django.utils - provide multiple functions.

@@ -23,9 +23,9 @@
         EC2 is an Iaas.
 
     2) PaaS (Platform as a service)
-        In PaaS we use all the services of IaaS ie on the top OS we install some services and configure
-        it also then we can sell those things to users with some more money than IaaS.
-        In this service user will only manage their application and there data that's it.
+        In PaaS we use all the services of IaaS ie on the top OS service provider will install
+        some services and configure it also then we can sell those things to users with some more money
+        than IaaS. In this service user will only manage their application and there data that's it.
         RDS is a service in AWS which based on PaaS.
 
     3) Saas (Software as a service)
@@ -34,7 +34,7 @@
         We use google email this is an example to SaaS where we do not configure or install it on the
         server.
 
-4) Type of cloud.
+3) Types of cloud.
     There are three types of cloud.
     1) Public cloud
         It is available publicly in the world for everyone. Anyone can use this cloud from anywhere
@@ -47,13 +47,13 @@
     3) Hybrid cloud
         It is a combination of public cloud as well as private cloud.
 
-5) How AWS charge?
-    AWS charge based on three factor
+4) How AWS charge?
+    AWS charges based on three factor
     a) Compute - How many cpu, we use in AWS.
     b) Storage - How much storage we have used in AWS.
     c) Data Transfer - Download or Upload from outside.
 
-6) Global infrastructure in AWS.
+5) Global infrastructure in AWS.
     In Aws three things are there
     Region - It contains number of availability zones.
     Availability Zones - It contains number of data centers.
@@ -99,7 +99,7 @@
     latency to load the page. For now it is not necessary that all the services of AWS will be available
     to each local zones.
 
-7) What is EC2 ?
+6) What is EC2 ?
     EC2 stands for Elastic compute cloud.
     EC2 gives us a server on rent. That means we can create a virtual machine on AWS EC2 service.
     While creating a virtual machine we can select multiple things such as
@@ -110,9 +110,9 @@
     4) We can choose instance type of that instance like t2-micro, t2-nano etc.
     5) Can select existing security groups or can create new one.
     2) How many compute we need means number of cpu we need.
-    3) How many RAM we need for my virtual machine.
+    3) How much RAM we need for my virtual machine.
     4) We can select speed of upload and download of data.
-    5) Firewall rules we can add means which all traffic it allow.
+    5) Firewall rules we can add under security groups, means which all traffic it allow.
     6) We can put bootstrap script while creating an instance. Which means whenever an instance will
        create first of all this script will run. For example Allocate IP to that instance, Add to
        DNS, Register in Iframe these kind of work we can add into bootstrap script or we can launch
@@ -159,7 +159,7 @@
 10) Default availability zone under mumbai region is ap-south-1a so how aws manage the load
     between all the availability zones?
     Basically for different user if we create server in same availability zone name then there
-    is no guarantee that both are same availability zone.
+    is no guarantee that both are in same availability zone.
     AWS point different availability zones having same name for different users.
 
 11) Install NGINX in EC2 Instance and deploy sample application in Ec2.
@@ -221,7 +221,7 @@
     ssh - default port 22
     Http - default port 80
 
-15) Can we add more than on security groups to one instance?
+15) Can we add more than one security groups to one instance?
     Yes
     We can change or add security groups to a running instance on the fly also.
 
@@ -265,7 +265,7 @@
         storage optimized instance. Like data ware housing work. DFS.
 
 19) what is On demand instance?
-    On demand instance is a type of instance where  AWS create instance on demand.
+    On demand instance is a type of instance where AWS create instance on demand.
     AWS wil charge more in case of on demand instance.
     for 1st 1 min it will take price of whole min after 1 min it will take amount of each sec.
 
@@ -277,12 +277,12 @@
     Discount depends upon 4 things.
     a) Operating system, Instance type, Region.
     b) Time period - for 3 year AWS will give more discount then for 1 year.
-    c) If you pay whole amount at one time to all the year which you have selected then AWS
+    c) If you pay whole amount at one time of all the years which you have selected then AWS
         will give you more discount.
-    d) Convertable instance or non convertable instance.
+    d) Convertible instance or non convertible instance.
 
 21) What is Spot instance?
-    In this instance we need to do bid, whenever someone come which is ready to pay more than you
+    In this instance we need to do bid, whenever someone will come who are ready to pay more than you
     AWS will give instance to that person. There is no reliability here. You will get a certain amount
     of time after that that instance will be terminated by AWS from your account.
     Here discount may be up to 90% also.
@@ -327,7 +327,7 @@
 26) when we stop an instance and again start an instance public ip address will change how to keep
     same ip address then after re run the instance.
 
-    There is a concept of elastic ip or we can sy static ip in Ec2 instance where we can reserve the
+    There is a concept of elastic ip or we can say static ip in Ec2 instance where we can reserve the
     ip address.
 
     Steps to reserve an elastic IP address.
@@ -347,14 +347,14 @@
     email to AWS.
 
     How AWS charge for elastic Ip address.
-    If you create an elastic ip address and it that ip address attached to an instance and that instance
+    If you create an elastic ip address and if that ip address attached to an instance and that instance
     is running then AWS will not charge anything for elastic IP because anyway AWS will give you one
     dynamic IP address if you have not taken any static ip.
     But If you create an elastic ip and that you have not attached to any instance or if attached
     instance is stopped then it will charge you for elastic ip address.
 
 27) How to release an elastic IP address.
-    In elastic ip list select a particular ip the click on action
+    In elastic ip list select a particular ip then click on action
     click on Dissociate Elastic IP Address then click on Disassociate.
     Once you disassociate the elastic ip then one dynamic ip address will associate to that instance
     which you have release.
@@ -363,14 +363,14 @@
 
 28) What is EBS(Elastic block storage)?
     We can attach multiple EBS volume to one instance.
-    EBS is just like a hard disk which is attahed to instance.
+    EBS is just like a hard disk which is attached to instance.
 
     Can we attach one EBS to multiple instance?
-    There are 6 types of EBS out of that 2 we can attach to multiple EC2 instance (IO1, IO2) and remaining 4 we can
-    attach with single instance only.
+    There are 6 types of EBS out of that 2 we can attach to multiple EC2 instance (IO1, IO2) and
+    remaining 4 we can attach with single instance only.
 
     When we create an EBS in some availability zone such as ap-south-1 then we can attach this EBS in
-    those instance which is there in same availability zones because EBS will be there inside
+    those instance only which is there in same availability zones because EBS will be there inside
     availability zones. If we wanted to move an EBS from one availability zones to another we can do that
     with help of snapshot.
 
@@ -384,7 +384,7 @@
     So when speed matter that place we use instance-store root type device.
 
     when AWS will terminate any instance because of some problem facing, then first it will give
-    notification to the user who are using that instance thenAWS will stop the instance then if user will
+    notification to the user who are using that instance then AWS will stop the instance then if user will
     start that instance again then it will start somewhere else. and if Instance-store are attached to
     this instance then there will be data loss if AWS will stop the instance.
 
@@ -408,7 +408,7 @@
 
     1) Select an EBS volume and click on action.
     2) Choose attach volume then we will get dropdown to select instance.
-    3) In dropdown only those instance will ome which is created in same availability zone where
+    3) In dropdown only those instance will come which is created in same availability zone where
         EBS created.
     4) Click on attach.
 
@@ -485,13 +485,13 @@
     If we wanted to create exact similar instances two times then while creating instance one option
     is there to select number of instances we an use that.
 
-    While creating EBS if we choose EBS type as IO2 or IO1 the that multi attach checkbox will come.
+    While creating EBS if we choose EBS type as IO2 or IO1 then that multi attach checkbox will come.
     we can check and uncheck that. In some region IO1 EBS type may not have multi attach feature.
 
-    In only nitro based instance we can attach the single EBS volume. not in XEN based instance.
+    In only nitro based instance we can attach the multi EBS volume. not in XEN based instance.
     t2 is XEN t3 is Nitro.
 
-    We can not change instance type while running the instance. we hav to stop th instance then
+    We can not change instance type while running the instance. we have to stop the instance then
     we can change the instance type one by one.
 
     Select an instance then click on action then click on instance settings then change instance type.
@@ -518,7 +518,7 @@
     7) Magnetic (standard) - Not recommendable by AWS now, before we were using it.
 
     Note - When ever you need to perform high speed data transfer we need to choose IO1 or IO2.
-           GP1, GP2, GP3 are the balanced EBS volume between speed and price.
+           GP2, GP3 are the balanced EBS volume between speed and price.
            By default GP2 (general purpose SSD) will be selected while creating EBS.
            Max value of IOPS will be minimum in COLD HDD SC1 then Throughput optimized HDD st1
            then GP2, GP3, IO1, IO2.
@@ -567,7 +567,7 @@
     populate all the data into new EBS.
 
 36) How to schedule snapshot creating daily or weekly at a time?
-    Whenever we create aN EBS volume with some name it will create a tag.
+    Whenever we create an EBS volume with some name it will create a tag.
     we can add another tag also to an EBS volume.
 
     Steps to schedule a job which create snapshot for backup daily.
@@ -588,7 +588,7 @@
     Steps to create recyclebin rule of snapshots.
     1) Click on snapshots in Elastic block storage.
     2) click on recyclebin button and and click on create retention rule.
-    3) Here file rule name, description, resource type (Snapshot or AMI), Apply to all,
+    3) Here fill the rule name, description, resource type (Snapshot or AMI), Apply to all,
         Retention period and the click on create retention rule.
     4) We can select whether retention rule will be block or unblock. Means once we create retention
         rule user can edit or not later.
@@ -596,7 +596,7 @@
     Steps to see the list of retention rules.
     1) Go to list of snapshots and click on recyclebin button.
     2) You will get three options create new retention rule, Resources where you can see the deleted
-        EBS and Retention rules where you can see the list of existing retention list.
+        EBS snapshots and Retention rules where you can see the list of existing retention list.
     3) We can recover the deleted EBS also from recycle bin.
 
     For AWS the default region is N.virginia. Once AWS will launch anything new they will test here only
@@ -605,7 +605,7 @@
 38) How to copy a snapshot from one region to another region?
     1) Select a snapshot and click on copy snapshot.
     2) Choose a destination region and click on copy snapshot.
-    3) While copy a snapshot you ca encrypt your snapshot also and the EBS volume which you will create
+    3) While copy a snapshot you can encrypt your snapshot also and the EBS volume which you will create
         from an encrypted snapshot will also be encrypted.
 
     EBS volume is a SAN (Storage area network)
@@ -618,7 +618,7 @@
     encrypted only.
 
     When we will create a volume from an encrypted snapshot the volume will also be encrypted.
-    While creating volume from snapshot we will ot be able to un encrypt it.
+    While creating volume from snapshot we will not be able to un encrypt it.
     When we will create a volume from an unencrypted snapshot the volume will also be unencrypted but
     we can check the checkbox to encrypt it during creation of Volume.
 
@@ -626,7 +626,7 @@
     writing the data into AWS.
 
     How to enable a by default encrypted checkbox?
-        When we enable the thr by default encrypted checkbox then whenever we create an EBS volume by
+        When we enable the the by default encrypted checkbox then whenever we create an EBS volume by
         default encrypt checkbox will be checked.
 
         Steps to enable default encrypted checkbox.
@@ -678,8 +678,8 @@
     1) First need to de register the AMI then from snapshot we can delete the snapshot.
 
 43) AWS Load Balancer.
-    Basically when we more users came to our server then our server will start giving response slow.
-    At one time came that our server will become chock. To prevent with this issue we bring a concept
+    Basically when more users came to our server then our server will start giving response slow.
+    At one time will come that our server will become chock. To prevent with this issue we bring a concept
     of load balancer. Now we will not hit the public IP of instance directly, We will hit the IP
     of the load balancer then load balancer will hit the public IP of instance.
 

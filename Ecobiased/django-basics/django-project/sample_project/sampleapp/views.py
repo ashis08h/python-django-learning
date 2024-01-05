@@ -1,7 +1,8 @@
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
-from .models import Book, Author, Employee, Manager, Post, School, SaraswariVidyaMandir, Person, Man, Woman
+from .models import (Book, Author, Employee, Manager, Post, School,
+                     SaraswariVidyaMandir, Person, Man, Woman)
 from django.db.models import Q
 from django.shortcuts import render
 from django.db.models.signals import post_save, pre_init
@@ -88,14 +89,14 @@ def access_model(sender, *args, **kwargs):
 class PostListView(ListView):
 
     model = Post
-    template_name = 'post_list.html'
+    template_name = 'posts.html'
     context_object_name = 'posts'
 
 
 class PostDetailView(DetailView):
 
     model = Post
-    template_name = 'post_details.html'
+    template_name = 'post_detail.html'
     context_object_name = 'post'
 
 

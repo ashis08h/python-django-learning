@@ -682,5 +682,67 @@
     At one time will come that our server will become chock. To prevent with this issue we bring a concept
     of load balancer. Now we will not hit the public IP of instance directly, We will hit the IP
     of the load balancer then load balancer will hit the public IP of instance.
+    
+    By default AWS load balancer will use round robin algorithm where 1st request to 1st server 2nd request to 2nd server and so on.
+
+    AWS load balancer will always send request to a healthy instance only. If an instance is stopped then AWS load balancer will not send request to that.
+
+    There are four types of load balancer - 
+
+    a) Application load balancer
+        application load balancer will work on application layer. 
+    b) Network load balancer
+        Network load balancer will work on transport layer.
+    c) Gateway load balancer
+    d) Classic load balancer 
+
+    Steps to create classic load balancer.
+    a) In EC2 dashboard in load balancing part click on load balancer.
+    b) Create three EC2 instances in different availability zones.
+    c) click on create load balancer and Choose classic load balancer and click on create.
+    d) Fill the load balancer name, scheme(internet-facing or internal) Internal means 
+        the load balancer can not access the public ip when we have server also in our 
+        company private network then we can use internal scheme else internet-facing.
+        need to select mappings means which availability zones,  configure security groups, configure listner and routing means on 80 port of load balancer if any request comes we will transfer to 80 port of out instances, configure health checks means if we have any instance stopped load balancer will not send request to that instance. for this we need to create a page were 200 status should return if everything is alright.
+    e) Choose what are the instances we need to send requests.
+    f) Click on create load balancer.
+
+    In health check few points are there we need to configure
+    ping protocol - HTTP
+    Ping Port - 80
+    Ping Path - /index.html
+    Response timeout - It sends request if it did not received response up to response time then load balancer will think that particular instance is not okay.
+    Interval - 30 sec - time interval between each failed requests.
+    Unhealthy threshold - When some instance got damaged then up to what number load balancer will test after that it will not start sending requests on that instance.
+    healthy threshold - when we have repair our instance then up to what number load balancer will test then it will start sending the requests to that particular instance.  
+
+44) How to access a load balancer?
+
+    With help of dns we can access the load balancer. DNS we will get in description of a 
+    particular load balancer.
+
+    When we add the load balancer to multiple instnces then if we enter the dns name of the load balancer in browser url it will point to any of the instance but still we can access the instance with there IP address but it is not a good practice.
+
+    Steps to restrict the access of instances IP address.
+    1) Remove HTTP AND HTTPS from inbound rule of those security groups which are associated with those instances.
+    
+    2) Add the HTTP and in source add the security groups name of the load balancer to all the security groups which are associated with the instances.
+
+    We can remove or add new instances from a load balancer.
+    Manage instances option is there to perform that task.
+
+45) Benefit of using load balancer in AWS?
+
+    If we use load balancer in AWS it provides following things.
+
+    a) High availability - Chances to availability of your server will be more
+    b) Load balancing - Share the load between multiple servers.
+    c) Fault tolerance - If a instance is fault it will not send the request to that, we  can configure heath checks there.
+
+    classic load balancer works on both the layer application layer as well as transport layer. that means classic load balancer works on that layer on which application layer works as well as the layer on which network layer works.
+
+    Steps to delete a classic load balancer.
+
+    select a load balancer from list and in action you will get option to delete load balancer.
 
 

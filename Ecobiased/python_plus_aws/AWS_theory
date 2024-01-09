@@ -745,4 +745,66 @@
 
     select a load balancer from list and in action you will get option to delete load balancer.
 
+46) Application load balancer.
+
+    In classic load balancer if any user will send a request then it will come on load balancer and then from that load balancer as per the congiguration it will go to different instances.
+
+    In Application load balancer when user will send request then it will come on load balancer and then from that load balancer it will go to target group. target groups contains a number of instances. If we add a new instance to that target group then automatically by load balancer traffic will come.
+
+    Minimum one target group we need for application load balancer.
+
+    Real scenario example - 
+
+    1) Suppose we have a e learning website then in one target group we can add those instances in one group. Now we have a marketting page also for student cources such as student.website.com we can create few instances and keep in another target group.
+
+    2) Suppose we wanted to redirect traffic on one target group for those users which will open our website on laptop or desktop and we can redirect traffic to another target groups for those users who open our application in mobile.
+
+47) Shell script to install nginx and print server ip.
+
+    #!bin/bash
+
+    apt-get update
+    apt-get install nginx -y
+    echo "this is $(hostname)" > /var/www/html/index.html
+
+48) How to create target group for application load balancer?
+
+    a) In EC2 dashboard in load balancing part click on target group then click on create target group.
+
+    b) In target group we can add instances or ips or lambda functions or another application load balancer.
+
+    c) We can add target group name, protocol-port (HTTP), IP address type (IPV4, IPV6), health check, tags.
+
+    d) after that click on next then We can choose instances then click on create target group.
+
+    Steps to create application load balancer - 
+
+    a) In EC2 dashboard in load balancing part click on load balancer the click on create inside application load balancer
+    
+    b) here also same way as classic load balancer we need to add load balancer name, and in port configuration we need to choose the target group name, we can create or choose eisting security groups also.
+    
+    c) click on create button to click application load balancer.
+
+49) How to create an instance which will run on ip/test
+
+    #!bin/bash
+
+    apt-get update
+    apt-get install nginx -y
+
+    mkdir -p /var/www/html/test
+    echo "This is $(hostname) " > /var/www/html/test/index.html
+
+    since application load balancer works on application layer so this load balancer will have path, query parameters with it.
+    query parameters means website.com?platform=mobile
+
+50) How to redirect different target groups as per path?
+
+    a) After creating another target group go to load balancer list.
+    b) select a load balancer and go to listeners and rules tab.
+    c) select a rule and click on manage rule then add rules.
+    d) fill tag name, then choose condition and fill the value of that condition.
+    e) then choose the target group name then next and create.
+
+
 

@@ -806,5 +806,221 @@
     d) fill tag name, then choose condition and fill the value of that condition.
     e) then choose the target group name then next and create.
 
+51) How to see logs of nginx on a server?
+    cd /var/log/nginx/
+    tail -f *.log
+
+52) How to get client id when someone hit load balancer ip?
+    When user hit the ip of an instance directly then in nginx logs client ip address 
+    will come but when some user will hit dns of load balancer then in the logs of nginx instead of client ip address ip of load balancer will be stored.
+
+    To fix this issue we need to change in nginx configuration. Belo code we need to add in nginx conf.
+
+    log_format main 'new log -> $remote_addr - $remote_user [$time_local] "$request" '
+                        '$status $body_bytes_sent "$http_referer" '
+                        '"$http_user_agent" "$http_x_forwarded_for"';
+    add above line before below line
+    access_log /var/log/nginx/access.log main;
+    
+    command to open nginx conf file
+
+    after above changes need to reload the nginx service
+
+    service nginx reload
+
+    cd /etc/nginx/
+    sudo su
+    vi nginx.conf
+
+    We can restrict the client ip to be stored in to nginx logs with help of load balancer 
+
+    steps to restrict the client ip to be stored in the nginx
+    
+    a) Select the nginx fron list of nginx.
+    b) click on action and click on edit load balancer attribute.
+    c) select remove option of "x-forwarded-for header" by default it will be append.
+    d) click on save changes button.
+
+    We can do multiple things in load balancer attribute settings.
+    such as we can store the access log in to s3 bucket.
+    we can restrict the clint ip to be shared.
+    we can drop an invalid header (hacker header).
+    we can preserve client port.
+
+53) What is group level stickness?
+    By default in load balancer group level stickness is off. suppose if we have two instances attached to the load balancer then In off condition when user will send request to load balancer then the lod balancer will send the request either on server 1 or server 2. so in case of off condition load balancer will balance the request perfectly.
+
+    When we on the group-level stickness then if any server by chance become damaged or stopped the the load balancer will start sending the request to another server then when that server will on after that also load balancer will stick to same server on which they were sending the request. we can change the group-level settings on or off in edit rule settings. we can specifies the timeout also that after some hours again it will start sending the request on the other server.
+
+    Steps to change stickness of a target groups.
+
+    a) Select a target group and click on action.
+    b) Click on edit target group attributes
+    c) checked the turn on stickness and specify the stickness duration.
+    d) Click on save changes.
+
+    We can redirect to a plain text or HTML page in case of any path intead of any target group. Need to perform same steps how we manage different path redirect to different target groups.
+
+    We can add ssl certificate also in load balancer.
+
+    steps to add ssl certificate.
+
+    1) Click on add listner.
+    2) Choose HTTPS in prtocol dropdown.
+    3) Then in security listner settings you will get default ssl/tls server certificate.
+        choose import certificate and need to paste ssl certificate details such as private key, certificate body, certificate chain(optional) and click on ADD. 
+
+54) What is cross zone load balancing?
+
+    By default cross zone load balancing is enabled.
+    In case of cross zone load balancing enable 
+    if we have total 10 instance 2 in availability zone a and 8 in availability zone b
+    then if we have 100 requests then 10 10 requests will go on each instances.
+
+    but if we disable the cross zone load balancing then it will divide according to availability zone so in availability zone a 50 50 requests will go on each server and in availability zone b 6.25 requests will come in each server.  
+
+55) Network load balancer.
+    It works on transport layer.
+    It is a port specific balancer.
+    Since application layer has more data like he knows hostname, query parameter so these details load balancer will fetch from requests so it takes time because it parse more data. But network load balancer works on the transport layer so it will have less data it parse less data so it is faster than the application load balancer.
+    it can perform more requests per seconds than the application layer.
+
+    In Network load balancer we can add only port configuration with target groups we can not configuration such a thing like path rule which we can do in application load balancer.
+    By default cross load balancing will be disable in network load balancer.
 
 
+56) Auto scaling in AWS?
+    As number of users on the server will increase then number of servers will also increase or as number of users will decrease then number of servers will also decrease this is called auto scalling.
+
+    There are two types of scalling 
+    a) Vertical scaling 
+        In vertical scaling we resize the server size means same server if earlier it was t2-micro then we will change it into t2-large or t2-medium. this is called vertical scaling.
+
+        usecase - 
+        if we are using some paid operating system then we will have their license.
+        so there we can increase or decrease same server size if we use multiple servers then we nee to purchase more license more cost will come.
+
+        Incase of database we can use vertical scaling.
+
+    b) Horizontal scaling
+        In horizontal scaling in load balancer we will increase the number of servers as user will increase and number of server will decrease as user will decrease.
+
+        Incase of horizontal scaling AWS should know before only if new server will come then what will their security group, which AMI it will use so those details we need to tell AWS before only.
+
+    Steps to configure horizontal scaling.
+
+    a) In EC2 dashboad inside instance part click on launch teplate and click on create launch template button.
+    b) Fill the forms it will same as EC2 instance form.
+    c) Click on create.
+
+    Steps to create auto scaling group.
+        a) In EC2 dashboard in auto scaling click on auto scaling group.
+        b) click on create auto scaling group.
+        c) Need to fill name, desc, need to select launch template.
+        d) Need to select VPC and choose availability zones.
+        e) Need to enter desired limits, minimum limits and max desired limits.
+        f) Click on next next and create.
+
+    Now since we have given 1 in minimum limit so minimum 1 instance will be available anytime if we delete that instance then also automatically as per the auto scaling group one instance will be created.
+    We can edit the auto scaling group also.
+
+    So in the production server we do not create instance from the traditional way we just increase of decrease the desired limit of a auto scaling groups as per the users.
+
+    When we delete an auto scaling group then all the instances related to those scaling group will automatically delete.
+
+57) What is the role of health check timing while creating auto scaling group?
+    When we create an instance then just after create instance bootstrap sript will strt running so it will take time so we enter some deconds in health check timing to tell auto scaling group that after 300 or any number seconds you use that instance.
+
+    If we select 2 desired limit then two instance will create after that if we edit the auto scaling group and change to then it will automatially terminate one instance.
+    nd auto scaling group is smart enough that it will create instance in all the selected availability zones while creating launch template or auto scaling group.
+
+58) How to do auto scaling in AWS?
+    Means when number of user increase number of servers increase and vice-versa.
+    There are three way to do that.
+    
+    1) Scheduled action -  
+        Here we can give details like when we wanted to increase or decrease the number of servers like saturday or some specific day, timezone, every 5 min these types of data we can enter there.
+
+    2) predictive scaling policies - 
+        In Predictive scaling AWS will only predict after seeing the past history of the instance users. Here we will have one option to enable sale based on forecast.
+    
+    3) Dynamic scaling policies - 
+        Here we will have three policy type 
+        a) Simple policy
+            Here we can enter one condition that if CPU optimization will become 90 percent we need to set cloudwatch alarm and add one instance.
+
+        b) Step policy - 
+            This is just like simple policy with more than one condition.
+
+        c) Target tracking scaling -
+            Here we can add instance if average cpu utilization is some percentage (40%).
+ 
+59) How to increase the CPU utilization?
+    a) connect the instance with ssh.
+    b) apt-get update
+    c) apt-get install stress
+    d) stress -c 5
+
+60) What is default cooling time period?
+    This is the time when one instance is added the after what time next instance will add or delete. This option will be available in aut scaling group.
+
+61) What is auto scaling with load balancer?
+    We can add auto scaling by selecting load balancer option also.
+
+62) What is the difference between power off and hibernet?
+    Power off and hibernet are two different states that a computer can be in, each serving distinct purpose.
+
+    Power off - 
+        when you power off a computer, It completely shut down. All the running process and applications are closed, and the computer's hardware is powered down.
+
+        When you turn on the computer back on, It goes though entire boot process, loading the operating system and initializing all the hardware components.
+    
+    Hibernet - 
+        When you hibernet your computer, It saves the current state of the system, including all the open applications, documents to the hardware.
+
+        The computer then power off, but next time when you power on the computer, it restore the system to it's previous state. The process is faster than the regular boot because the operating system does not need to load from scatch, and all your previously open applications are right where you left them.
+
+    Key differences:
+        Speed - Hibernating and resuming is generally faster than the full power off and boot.
+
+        State Preservation - Hibernet preserve your system's state, including open allications and documents, while a power off does not.
+
+        Power consumption - When power off a system, computer requires no power. In hibernet mode, some minimal power is still used to keep the system's state stored in the memory.
+
+    In AWS EC2 instance we can enable terminate protection and stop hibernate behaviour in advance settings.
+
+    Placement group - 
+        In AWS data center there will be many blocks or we can say in simple word almirah inside that multiple racks will be there. So in placement group we can place our instances in same racks.
+
+        Benefit of this is the communication between the instances will be very much faster.
+
+        There is a drawback of this if that rcks got destroyed some how then our application will be stoped completely if our all the instances present inside one racks.
+
+63) How to terminate an instance if we enable the terminate protection while creating an instance?
+
+    Steps-
+        a) Select an instance from instance list.
+        b) Click on action and click on instance settings.
+        c) un check the checkbox then save.
+        d) Now we can terminate the instance.
+    
+    command to check uptime of an instance - 
+    uptime
+    It will get details when this instance has created, number of users, load averge.
+
+
+64) Network interfaces.
+    How to connect multiple networks to a instance.
+
+    Steps to create network interfaces
+
+    a) In network & security part in EC2 dashboard click on network nterface.
+    b) Click on create network interface.
+    c) Fill the details and click on create.
+
+    Steps to attach the network to an instance.
+    a) Select a network from network list.
+    b) click on action and attach.
+    c) Choose a network and attach.
+
+    Same way we can detach and delete the network also.

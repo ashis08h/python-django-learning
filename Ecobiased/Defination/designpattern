@@ -37,7 +37,7 @@ software development.
     one more method is there
 
     in class variable only we will generate object and that variable will be static.
-    so in generate an object whenever class load. this is called eager way.
+    so it generate an object whenever class load. this is called eager way.
 
     both are not safe for thread. so we need to use sync block to prevent from breaking .
 

@@ -72,7 +72,7 @@ behaviour of an object. This is also known as magical method.
 
 __init__, __str__, __len__, __dict__
 
-Encapsulation in oops are a way to hide the internal state of an object and the object of that class
+Encapsulation in oops are a way to hide the internal state of an object and the methods of that class
 can only be accessed through their object only.
 
 The benefit of encapsulation is we can protect our class to get access from unwanted places.
@@ -106,17 +106,21 @@ this is basic inheritance.
 
 Multiple Inheritance
 When we derived a class with multiple parent class it is called multilevel inheritance
+
 Multilevel Inheritance
 When we derive a class from a parent class and one more class is derived from that child
 class it is known as multilevel inheritance
+
 Hierarichal inheritance
 when we derive multiple child class from a single parent class it is known as hierarichal inheritance
+
 hybrid inheritance
 when we use more that one type of inheritance it is known as hybrid inheritance.
 
 class variable are a variable which is declared inside a class but outside of any methods present
 in that class.
 Generally we store those type of values in the class variables which are commmon to all the instance.
+
 Instance variable are present inside a method of a class. it defined under __init__ method or we
 can say constructor of a class generally we store those type of values inside an instance variable
 which are their for each instance.
@@ -132,7 +136,7 @@ number of arguments. In python we handle this scenario with help of optional par
 This is also known as method overloading.
 
 Runtime polymorphism
-In run time polymorphism we define a method of parent class from chile class.
+In run time polymorphism we define a method of parent class from child class.
 This is also known as method overriding.
 
 Oops -

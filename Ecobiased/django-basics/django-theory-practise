@@ -27,7 +27,7 @@ Ans - Whenever request comes first of all it comes to manage.py page then it wil
 Ans - A project is an entire application whereas an app is a module inside the project.
     app is a small feature and the collection of app is known as project.
 
-    we can have multiple apps inside the project and we may have single present inside multi[le project.
+    we can have multiple apps inside the project and we may have single app present inside multiple project.
     In django whenever we create an app we need to register that app inside installed app list in settings.py
     file of a project.
 
@@ -64,7 +64,7 @@ Ans - Whenever we create a project by default a directory creates with project n
 
 4) Explain the directory structure of a django apps?
 Ans - Whenever we create an app by default one package create with name as app name.
-    inside the dir one __init__.py file, views.py, models.py, apps.py, models.py, admin.py, tests.py
+    inside the dir one __init__.py file, views.py, models.py, apps.py, admin.py, tests.py
     file creates and one migrations folder inside that __init__.py file will create.
 
     app_name /
@@ -85,7 +85,7 @@ Ans - Whenever we create an app by default one package create with name as app n
     admin.py - It is a file where we register our models to get visible on django admin and if we wanted to
                change any builtin design or configuration of django admin we write code in admin.py file.
     views.py - In this file we write all hr business logics.
-    migrations dir - It this migrations dir all the migrations files get stored.
+    migrations dir - In this migrations dir all the migrations files get stored.
 
 5) Why django called loosely coupled framework?
 Ans - A loosely coupled framework is such a framework where service code and client code are independent.
@@ -94,7 +94,7 @@ Ans - A loosely coupled framework is such a framework where service code and cli
     and in template we rite client side code ie frontend code.
 
 6) Explain migrations in django?
-Ans - In django migrations are used to apply the changes in models into databases. Instead of writing
+Ans - django migrations are used to apply the changes in models into databases. Instead of writing
     raw query we change in models and some comand to apply the changes.
 
     python manage.py makemigrations - Command to create a migration file.
@@ -267,12 +267,12 @@ Ans - Session in django store a data into server side. Generally we store data i
     Whenever user will login django create a session identifier in cookies and data will store into session.
     There is no size limit of data to store into session. The default session used by django is database
     backend session. Whenever we close browser session data will go and whenever we clear the history
-    both session andcookies data will go.
+    both session and cookies data will go.
 
     Steps to enabling session in django are
     1) Need to add SessionMiddleware in middleware list in settings.py file.
     django.contrib.session.middleware.SessionMiddleware
-    2)Need to add django.contrib.session app insto installed_app list in settings.py file.
+    2)Need to add django.contrib.session app into installed_app list in settings.py file.
     3) A session engine specified in SESSION_ENGINE in settings file by default it is database
     backend session.
     django.contrib.sessions.backend.db
@@ -287,7 +287,7 @@ Ans - Signals in django are a mechanism which is used to notify all the receiver
     Wy we are using signals in real time project
 
     1) Decoupling - Signals allows decoupling between sender and receiver.
-    2) Extensible - In future we can add numbers of receiver whout changing the main code of sender.
+    2) Extensible - In future we can add numbers of receiver without changing the main code of sender.
     3) Modularity - Signals make code more modular. we can perform task without direct connection.
     4) Reusability - We can use same signals to multiple receivers.
 
@@ -309,7 +309,7 @@ Ans - Signals in django are a mechanism which is used to notify all the receiver
         django.core.signals.request_finished
 
 27) What are django exceptions?
-Ans - django exceptions are used to handlre program failure. In python we have try except block to handle
+Ans - django exceptions are used to handle program failure. In python we have try except block to handle
     failure. In django there are some built-in classes already written for exceptions few of them are -
 
     1) ObjectDoesNotExist

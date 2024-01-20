@@ -1,4 +1,4 @@
-1) How request works in dja ngo?
+1) How request works in django?
 
     First of all request comes in manage.py then it will go to settings.py file where all the
     setting, configuration, middleware, db connections will be there after that it will go to urls.py
@@ -631,6 +631,24 @@ Django rest framework
 
     With help of serializer we can do that. we need to make a python file serializers.py
 
+44) In models.py what are the things we can write in django?
+
+    Model Classes
+    Field Options
+    Relationships
+    Model Methods
+    Meta class
+    Custom managers
+        class MyModelManager(models.Manager):
+            def get_special_objects(self):
+                return self.filter(special=True)
+
+        class MyModel(models.Model):
+            name = models.CharField(max_length=100)
+            special = models.BooleanField(default=False)
+
+            objects = MyModelManager()
+    signals
 
 
 

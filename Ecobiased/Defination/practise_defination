@@ -252,5 +252,49 @@ AssertTrue, AssertFalse, AssertEqual etc.
 Test discovery -
 unittest will discover all the test cases and run it which search pattern like 'test*.py'.
 
+what is the difference between array and list in python?
+
+    In python array is a data structure that store elements of same type in fixed size and take less
+    memory than a list.
+
+    The main difference between list and array are in array we can store similar type of element and
+    in list we can store different types of elements.
+
+    List has more property but it takes more memory than an array. Array has their fixed size it will
+    not change, but list has dynamic size we can append elements, remove elements later also.
+
+    To use array we need to import array first.
+
+    from array import array
+
+    my_array = array('i', [1, 2, 3, 4]) # Here i denotes the type of elements of array.
+
+In python how many way we can declare tuple?
+
+    1) Using parenthesis
+        my_tuple = (1, 2, 3)
+
+    2) using tuple constructor
+        my_tuple = tuple([1, 2, 3])
+
+    3) using a comma
+        my_tuple = 1, 2, 3
+
+    4) creating an empty tuple
+        my_tuple = ()
+
+    5) tuple with single element
+        my_tuple = (34,)
+
+    List
+
+    my_list = [1, 2, 3]
+    my_list = list([1, 2, 3])
+    my_list = [x for x in range(3)]
+    my_list = []
+    my_list = [[1,2,3],['a', 'b', 'c']]
+    single_list = [23]
+
+
 
 

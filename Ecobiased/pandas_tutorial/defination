@@ -1,0 +1,24 @@
+command to install pandas
+    pip install pandas
+command to install jupyter notebook
+    pip install jupyter
+command to launch jupyter notebook
+    jupyter notebook
+
+1) What is pandas?
+    Pandas is an open source data analysis library written in python.
+    
+    It leverage the power and speed of numpy to make data analysis and preprocessing easy for data scientist.
+
+    It provides rich and highly roboust data operations.
+
+    Numpy is fast because it is written in c programming language and pandas uses the speed and power of numpy. So to do analysis with pandas is much faster than the python list, tuple, dictionary, array.
+
+2) Why we use pandas for data analysis if excel sheet is already there?
+    We use an external library pandas in python to analyse the data because in pandas we can use all the functionalities of python but in excel we can not. With help of pandas we bring the data into the code then it is easy to analyse the data.
+
+    if we open large data file in excel then sometime it does not load the whole files.
+    In the excel cells there is a limitation of data also.
+
+In pandas i one column data will be uniform if we insert different data type inside a column then it will become object.
+

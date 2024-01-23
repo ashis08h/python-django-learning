@@ -20,5 +20,39 @@ command to launch jupyter notebook
     if we open large data file in excel then sometime it does not load the whole files.
     In the excel cells there is a limitation of data also.
 
-In pandas i one column data will be uniform if we insert different data type inside a column then it will become object.
+In pandas in one column data will be uniform if we insert different data type inside a column then it will become object.
 
+Pandas data structure.
+
+    Pandas has two types of data structures:
+
+    1) Series - It is a one dimensional array with indexes, It stores a single column or row of data in dataframe.
+
+    2) Dataframe - It is a tabular spreadsheet like structure representing rows each of which contain one or multiple columns.
+
+One dimensional array(labled) capable of holding any typeof data series.
+A two dimensional data(labled) structure with columnsof potentially different data types of data - DataFrame
+
+each column data type will be same inside a dataframe.
+
+when we update a data of a column of a dataframe like df[0][0] = 'abc' then setting with copy warning will come.
+
+newdf2 = newdf
+
+view and copy
+
+It means newdf2 is a view of newdf if you change any value of a cell in newdf2 then in newdf will that change will reflect just like shallow copy in the python.
+
+Ex - new_df2 = new_df
+    new_df2 = new_df[:]
+
+when we do copy then it will behave like deep copy in python means if we change the element of copied dataframe then original dataframe will not change.
+
+Ex - new_df2 = new_df.copy()
+
+When we set some value of a cell by channing means df[0][0] then pandas will not confirm whether it will return views or copy because of this confusion it gives warning setting with copy warning.
+To overcome with this warning we use loc method.
+
+Ex - 
+df.loc[0, 0] = 'ash' where first zero is index of the dataframe and second zero is column of the dataframe. 
+    

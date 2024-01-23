@@ -295,6 +295,22 @@ In python how many way we can declare tuple?
     my_list = [[1,2,3],['a', 'b', 'c']]
     single_list = [23]
 
+What is the difference between NAN and None in python?
+
+    NaN - It stands for Not a number. It is typically associated with numeric data
+    type especially in the context of floating-point arithmetic.
+    
+    NaN is used in the context of numeric data, particularly when a mathematical
+    operation results in an undefined or unpresentable value.
+    
+    None - None is a special constant representing the absence of a value or a null
+    value in python.
+
+    None is a general placeholder representing the absence of a value, commonly used
+    in various situations, such as the default return value for functions that do not 
+    explictly return a value.
+    
+
 
 
 

@@ -54,5 +54,8 @@ When we set some value of a cell by channing means df[0][0] then pandas will not
 To overcome with this warning we use loc method.
 
 Ex - 
-df.loc[0, 0] = 'ash' where first zero is index of the dataframe and second zero is column of the dataframe. 
+df.loc[0, 0] = 'ash' where first zero is index of the dataframe and second zero is column of the dataframe.
+
+What is the difference between loc and iloc in python?
+    When we wanted to select an element based of the name of index and the column then loc will use and whenever we wanted to find an element with number of index it will start with 0 then we need to use iloc where it dooes not depend upon the name of the index or columns.
     

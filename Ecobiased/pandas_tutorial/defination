@@ -58,4 +58,28 @@ df.loc[0, 0] = 'ash' where first zero is index of the dataframe and second zero 
 
 What is the difference between loc and iloc in python?
     When we wanted to select an element based of the name of index and the column then loc will use and whenever we wanted to find an element with number of index it will start with 0 then we need to use iloc where it dooes not depend upon the name of the index or columns.
-    
+
+
+What is data science?
+    Data science or data analytics is a process of analyzing large set of data points to get answers or questions related to that data set.
+
+What is data munging or data wrangling?
+    Process of cleaning messy data is called data munging or data wrangling.
+
+What is dtaframe in pandas?
+    Dataframe is a main object in pandas. It is used to represent data with rows and columns(tabular or excel spreadsheet like data.)
+
+What are the different ways of creating dataframe?
+    1) Using csv.
+    2) Using Excel.
+    3) From python dictionary.
+    4) From list of tuples.
+    5) from list of dictionaries.
+    6) read_hdf
+    7) read_sql
+    8) read_json
+    9) read_html
+    10) read_stata
+    11) read_sas
+    12) read_pickle
+    13) read_clipboard

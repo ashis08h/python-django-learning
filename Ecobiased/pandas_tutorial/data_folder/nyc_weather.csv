@@ -1,0 +1,8 @@
+EST,Temprature,DewPoint,Humidity,Sea Level PressureIn,VisibilityMile,WindSpeedMPH,PrecipitationIn,CloudCover,Events,WindDirDegree
+01/01/16,38,23,52,30.03,10,8,0,5,,281
+01/02/16,36,18,46,30.02,10,7,0,3,,275
+01/03/16,40,21,47,29.86,10,8,0,1,,277
+01/04/16,25,9,44,30.05,10,9,0,3,Rain,345
+01/05/16,20,-3,41,30.57,10,5,0,0,,333
+01/06/16,33,4,35,30.5,10,4,0,0,Rain,259
+01/07/16,35,3,29,30.09,10,,0,4,,345

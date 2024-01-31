@@ -26,10 +26,10 @@ software development.
     Since we need to restrict the class to generate object multiple times.
     As we know that everytime when we generate object constructor is getting called everytime,
     so if we restrict to call the constructor then our job will done. so first thing we will make
-    our constructor as private after making private no one can create object outside of that class.
+    our constructor as private after making private, no one can create object outside of that class.
 
-    now still we can create object from same class so what we will do will create a method
-    in that will call constructor and we will create class variable and inside that method we will
+    now still we can create object from same class so what we will do, we will create a method,
+    in that method will call constructor and we will create class variable and inside that method we will
     add a check if it is null then only will create object else nothing.
 
     this is called lazy way.
@@ -112,9 +112,15 @@ software development.
     order of the parameter.
     And there will be too much load on factory class because of complex logic.
     when there will be few optional parameter.
-    so to overcome with
+    so to overcome with that
     above demerit of factory design pattern builder design pattern has implemented.
 
-    In builder design pattern we create object step by step and finally return the final object
+    In builder design pattern we create an object step by step and finally return the final object
     with desired values of attributes.
     Builder design pattern helps us to create immutable objects.
+
+5) Observer design pattern -
+
+    The observer design pattern are the behavioural design pattern where an object, known as the
+    subject, maintains a list of its dependents, called observers, and notifies them of any
+    state changes, usually by calling one of their methods.

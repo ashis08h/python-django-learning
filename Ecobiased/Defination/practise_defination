@@ -5,7 +5,7 @@ object is an instance of a class which will have their own properties and method
 what are the methods which is defined inside a class their objects can use those methods.
 
 For example Person is a class it has their properties like name, age, dob and some methods like
-CanTalk(), CanWalk(), CanBreathe
+CanTalk(), CanWalk(), CanBreathe()
 
 Abstract class
 
@@ -35,8 +35,8 @@ or methods outside of a class.
 when we declare a variable with single underscore are protected in nature. we can access these
 variables outside of a class. generally we use protected variable for code convention purpose.
 
-Class method are a special type of class in python. We use class method to change the value of a
-class variable which is declare globally in to that class. Generally we declare class methods with
+Class method are a special type of method in python. We use class method to change the value of a
+class variable which is declared globally in to that class. Generally we declare class methods with
 @classmethod decorator.
 
 constructor a special type of methods present in a class which is automatically getting invoked
@@ -119,7 +119,7 @@ when we use more that one type of inheritance it is known as hybrid inheritance.
 
 class variable are a variable which is declared inside a class but outside of any methods present
 in that class.
-Generally we store those type of values in the class variables which are commmon to all the instance.
+Generally we store those type of values in the class variables which are common to all the instance.
 
 Instance variable are present inside a method of a class. it defined under __init__ method or we
 can say constructor of a class generally we store those type of values inside an instance variable
@@ -168,6 +168,7 @@ import module1
 
 package are a collection of modules which is used in bigger projects.
 __init__.py will be there inside package.
+similar to modules package also used to avoid the clashes between module names.
 we can import package as
 from package_name import module_name
 
@@ -200,6 +201,19 @@ Walrus operator is an operator in python which comes in 3.8 and onwards which as
 of a variable in expression only.
 we use := operator as walrus operator.
 
+difference between Set and FrozenSet:
+In python both set and frozenset are used to store unique elements collections.
+Set is mutable but frozenset is immutable.
+
+Immutable - Immutable refers to an object whose state cannot modified after it is created.
+Once immutable object is created it's value or contents can not be changed.
+
+Example - Numbers, Strings, Tuple, Frozenset
+Mutable -Mutable refers to an object whose state can be modified after it is created. means we can
+add, remove element of a immutable objects.
+
+Example - Lists, Dictionary, Sets, Bytearrays
+
 Copy an objects
 
 In python we copy an object in two ways:
@@ -207,7 +221,7 @@ In python we copy an object in two ways:
 Shallow copy -
 In shallow copy we create a new object from an original object. The element of copied object will copy
 the reference of the element of original object.
-It means if we change the immutable elements inside copied object then original object will also
+It means if we change the mutable elements inside copied object then original object will also
 change.
 
 deep copy -
@@ -301,14 +315,14 @@ What is the difference between NAN and None in python?
     type especially in the context of floating-point arithmetic.
     
     NaN is used in the context of numeric data, particularly when a mathematical
-    operation results in an undefined or unpresentable value.
+    operation results in an undefined or un presentable value.
     
     None - None is a special constant representing the absence of a value or a null
     value in python.
 
     None is a general placeholder representing the absence of a value, commonly used
     in various situations, such as the default return value for functions that do not 
-    explictly return a value.
+    explicitly return a value.
     
 
 

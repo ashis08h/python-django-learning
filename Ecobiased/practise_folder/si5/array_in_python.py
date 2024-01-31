@@ -17,4 +17,4 @@ boolean_array = array('b', [True, False])
 print("boolean_array", boolean_array)
 
 print(integer_array[2])
-print(integer_array[1:4:2] # here last 2 is step same as list.
+print(integer_array[1:4:2]) # here last 2 is step same as list.

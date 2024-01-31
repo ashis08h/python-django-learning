@@ -83,3 +83,9 @@ What are the different ways of creating dataframe?
     11) read_sas
     12) read_pickle
     13) read_clipboard
+
+fillna - To fill missing values using different ways.
+interpolate - To make a guess on missing values using interpolation.
+dropna - To drop with missing values.
+
+In the interpolate method by default it is linear but we can use multiple things like quadratic, polynomial, cubic etc.

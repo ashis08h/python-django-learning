@@ -5,6 +5,7 @@ class Employee:
     def __init__(self):
         self.name = 'Ashish'
 
+    @classmethod
     def change_company(cls, new_company):
         cls.company_name = new_company
 

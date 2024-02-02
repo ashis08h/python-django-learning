@@ -1,0 +1,187 @@
+COALESCE - COALESCE is used to handle NULL values column by replacing with some default values.
+    select fcast_item, COALESCE(disc_dt, 'N/A') as disc_dt, src_sys from In_Bundles;
+
+SUM, AVG, MAX, MIN - In sql server SUM, AVG, MAX, MIN are the aggregate functions used to perform
+calculations on a set of values within a specified column of tables. These functions are often used in
+combination with the GROUP BY clause to calculate aggregate values of groups of rows.
+
+SUM:
+    select SUM([exch_rate_loc_to_usd]) from [In_CurrencyConversionNew];
+
+AVG:
+    select AVG([exch_rate_loc_to_usd]) from [In_CurrencyConversionNew];
+
+MAX:
+    select MAX([exch_rate_loc_to_usd]) from [In_CurrencyConversionNew];
+
+MIN:
+    select MIN([exch_rate_loc_to_usd]) from [In_CurrencyConversionNew];
+
+LIMIT:
+    In sql server we used to do limit by top(100)
+    select top(100) [iso_curcy_cd], [iso_curcy_code] from [In_CurrencyConversionNew];
+
+ORDER BY:
+    select * from [o9.ssis.Amway].[dbo].[In_CurrencyConversionNew] order by [Date] DESC;
+
+WHERE:
+      select * from [o9.ssis.Amway].[dbo].[In_CurrencyConversionNew] where
+      [Date] = '2019-12' order by [Date];
+
+FORMAT:
+    In the SQL server FORMAT is used to display the datetime column data into some format like
+    'dd/mm/yyyy'
+    It will only format the date field column value. It will not work with nvarchar column data
+    directly for nvarchar column types we need to use convert function to convert into datetime
+    field then apply format.
+    like below example
+
+    select FORMAT([Date], 'MM/dd/yyyy') from [In_CurrencyConversionNew];
+    select FORMAT(CONVERT(DATE, [Date], 20), 'MM/dd/yyyy') from [In_CurrencyConversionNew];
+
+CASE STATEMENT:
+     CASE
+	    WHEN [Date] = '2020-03' THEN 'ASHISH'
+	    WHEN [Date] IS NULL THEN 'KUMAR'
+	    ELSE 'SAH'
+	 END
+     FROM [o9.ssis.Amway].[dbo].[In_CurrencyConversionNew];
+
+JOINS:
+    Joins are use to get data from more than one table.
+
+    LEFT JOIN -
+        Returns all the rows from the left table and the matched rows from the right table.
+        If there are no matching rows, NULL values are included for the columns from the right table.
+
+        SELECT si.[Item], si.[Location], mi.[fcast_item] FROM [Stg_ItemLocAttr] si
+        LEFT JOIN [o9.ssis.Amway].[dbo].[Master_Item_Latest] mi
+        ON si.[Item] = mi.[fcast_item];
+
+    RIGHT JOIN -
+        Returns all the rows from the right table and the matched rows from the left table.
+        If there are no matching rows, NULL values are included for the columns from the left table.
+
+        SELECT si.[Item], si.[Location], mi.[fcast_item] from [Stg_ItemLocAttr] si
+        RIGHT JOIN [Master_Item_Latest] mi
+        ON si.[Item] = mi.[fcast_item];
+
+    INNER JOIN -
+        Returns the rows when there is a match in both the tables based on the join conditions.
+
+        SELECT si.[Item], si.[Location], mi.[fcast_item] from [Stg_ItemLocAttr] si
+        RIGHT JOIN [Master_Item_Latest] mi
+        ON si.[Item] = mi.[fcast_item];
+
+    FULL OUTER JOIN -
+        Returns all the rows when there is a match in one of the tables. NULL values are
+        included for the columns that do not have a match.
+
+        SELECT * FROM [Stg_ItemLocAttr] si
+        FULL JOIN [Master_Item_Latest] mi
+        ON si.[Item] = mi.[fcast_item];
+
+    CROSS JOIN -
+        Returns the cartesian product of the two tables, ie all the possible combinations of
+        rows from the two tables.
+
+        SELECT si.[Item], si.[Location], mi.[fcast_item] from [Stg_ItemLocAttr] si
+        CROSS JOIN [Master_Item_Latest] mi;
+
+    SELF JOIN -
+        Joins a table to itself based on a related columns.
+
+        SELECT il1.[Item], il2.[Location] FROM [Stg_ItemLocAttr] il1
+        INNER JOIN [Stg_ItemLocAttr] il2 ON il1.[Item] = il2.[IntroProgram];
+
+MERGE STATEMENT -
+    In SQL SERVER, the MERGE statement is used to perform an upsert operation which means it can
+    insert, update or delete records in the target table based on the results of a join with a source
+    table. The MERGE statement allows you to efficiently synchronize two tables based on a specified
+    condition.
+
+    MERGE INTO [test_table_1] as target
+    USING [test_table_2] as source
+    ON target.id = source.id
+    WHEN MATCHED THEN
+    UPDATE SET target.name = source.name
+    WHEN NOT MATCHED BY target
+    INSERT (id, name)
+    VALUES (source.id, source.name)
+    WHEN NOT MATCHED BY source
+    DELETE;
+
+    Note:
+        target_table - The table where data will be merged.
+        source_table - The table or query whose data will be used to merge.
+        join_column - The column which is used to merge the source table and target table.
+        WHEN MATCHED - specifies what action to take when a match found.
+        WHEN NOT MATCHED BY target - specifies what action to take when a row exist in the source
+            table but not exist in the target table.
+        WHEN NOT MATCHED BY source - specifies what action to take when a row exist in the target
+            table but not exist in the source table.
+
+REPLACE -
+    SELECT REPLACE([column_name], '89078', 'NA')
+    FROM [In_Initiative]
+
+TRUNCATE TABLE STATEMENT -
+    TRUNCATE TABLE [In_Initiative];
+
+INSERT INTO STATEMENT -
+    INSERT INTO [test_table_2] (id, name)
+    select id, name from [test_table_1];
+
+    INSERT INTO [test_table_2] (id, name)
+    VALUES (4, 'ashish'), (5, 'kumar');
+
+CONCATENATION -
+    select '_' + column_name1 + '_' + column_name2 from [test_table_2];
+
+CONVERT -
+    convert function is used to convert data type of a value.
+
+    SELECT CONVERT(VARCHAR(10), integer_column) as string_value FROM test_table_2;
+    SELECT CONVERT(nvarchar(10), id) + '_' + name from [test_table_2];
+
+CAST -
+    cast function is used to convert data type of a value.
+
+    SELECT CAST(integer_column as VARCHAR(10)) as string_value FROM test_table2;
+    SELECT CAST(id as nvarchar(10)) + '_' + name from [test_table_2];
+
+UNION -
+    SELECT id, name FROM [test_table_1]
+    UNION
+    SELECT id, name FROM [test_table_2];
+
+DISTINCT -
+    It will return unique values.
+    SELECT DISTINCT name FROM [test_table_2];
+
+ORDER OF EXECUTION OF CLAUSE -
+    SELECT column1, column2
+    FROM table_name
+    WHERE condition
+    GROUP BY column1
+    HAVING aggregate_function(column2) > value
+    ORDER BY column1 ASC
+    OFFSET 10 ROWS FETCH NEXT 10 ROWS ONLY;
+
+    Example -
+
+    SELECT [DATE], SUM([RecordId]) FROM [Stg_TNA]
+    WHERE [LOC_L1] = 'KR_07'
+    GROUP BY [DATE] HAVING SUM([RecordId]) > 1
+    ORDER BY [DATE] DESC
+    OFFSET 3 ROWS FETCH NEXT 10 ROWS ONLY;
+
+ISNULL -
+    isnull function is used to handle null values in the column.
+    SELECT ISNULL([TNA], 'N/A') FROM [Stg_TNA];
+
+What is the difference between isnull and coalesce in sql server?
+
+
+
+

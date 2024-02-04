@@ -144,6 +144,10 @@ CONVERT -
     SELECT CONVERT(VARCHAR(10), integer_column) as string_value FROM test_table_2;
     SELECT CONVERT(nvarchar(10), id) + '_' + name from [test_table_2];
 
+    In case of convert into date format it takes 3 arguments.
+
+    SELECT CONVERT(DATE, column_name, 120) FROM table_name;
+
 CAST -
     cast function is used to convert data type of a value.
 
@@ -181,6 +185,290 @@ ISNULL -
     SELECT ISNULL([TNA], 'N/A') FROM [Stg_TNA];
 
 What is the difference between isnull and coalesce in sql server?
+    In sql server both the ISNULL function and COALESCE function used to handle null values.
+    but there are differences in their behaviour and usage.
+
+    ISNULL function -
+    ISNULL function used to replace NULL values with a specified replacement value.
+    ISNULL function will accept only two argument.
+    syntax -
+        SELECT ISNULL(Column1, 0) AS NewColumn
+        FROM Table;
+
+    COALESCE function -
+    The COALESCE function used to return the first non-NULL value among its arguments.
+    The COALESCE function will accept multiple arguments.
+    syntax -
+        SELECT COALESCE(Column1, Column2, Column3, 'No Value') AS NewColumn
+        FROM Table;
+
+LEFT -
+    The LEFT function is used to extract a specified number of characters from the left side of
+    a string.
+    SELECT LEFT([ROOT], 3) FROM [Stg_TNA];
+
+RIGHT -
+    The RIGHT function is used to extract a specified number of characters from the right side of
+    a string.
+    SELECT RIGHT([ROOT], 3) FROM [Stg_TNA];
+
+SUBSTRING -
+    In SQL server, the SUBSTRING function is used to extract a substring from a string. It allows
+    you to retrieve a portion of the characters from a specified position within the string.
+
+    SELECT SUBSTRING([ROOT], 3, 3) from [Stg_TNA];
+    Here first 3 is start point it will count from 1 not with zero and the second screen is
+    for length.
+
+DATEDIFF -
+    In sql server the DATEDIFF is a function used to calculate the difference between two dates,
+    returning the the result in a specified datepart(such as days, months, years)
+    SELECT DATEDIFF(DAY, '01-02-2024', '03-05-2024');
+    SELECT DATEDIFF(MONTH, '01-02-2024', '03-05-2024');
+    SELECT DATEDIFF(YEAR, '01-02-2024', '03-05-2024');
+
+IS NULL CONDITION IN WHERE CLAUSE -
+    SELECT * FROM [Stg_TNA] WHERE [TNA] IS NULL;
+
+GETDATE -
+    In sql server GETDATE() function is used to retrieve the current system date and the time from
+    SQL SERVER operating system. It return the current date and time as a datetime data type.
+
+    SELECT GETDATE() AS current_date_time;
+
+IF ELSE CONDITION -
+    IF (SELECT IsManager FROM Employee WHERE name = 'ashish') = 1
+        BEGIN
+            UPDATE Employee
+            SET LastName = LastName + '_manager'
+            WHERE EmployeeId = 1
+        END
+    ELSE
+        BEGIN
+            UPDATE Employee
+            SET LastName = LastName + '_employee'
+            WHERE EmployeeId = 1
+        END
+
+WHILE LOOP -
+    In SQL server WHILE loop or a CURSOR to iterate over a set of rows returned by a query or to
+    perform iterative task.
+
+    DECLARE @counter INT = 1;
+    WHILE @counter <= 10
+        BEGIN
+            PRINT 'counter is - '+ CONVERT(VARCHAR(10), @counter);
+            SET @counter += 1
+        END
+
+CURSOR -
+
+    DECLARE @id INT;
+    DECLARE @name NVARCHAR(10);
+
+    DECLARE employee_cursor CURSOR FOR
+    SELECT id, name FROM [test_table_1];
+
+    OPEN employee_cursor;
+
+    FETCH NEXT FROM employee_cursor INTO @id, @name;
+
+    WHILE @@FETCH_STATUS = 0
+    BEGIN
+        PRINT 'entry is ' + CONVERT(NVARCHAR(10), @id) + @name;
+        FETCH NEXT FROM employee_cursor INTO @id, @name;
+    END;
+
+    CLOSE employee_cursor;
+    DEALLOCATE employee_cursor;
+
+UPDATE TABLE STATEMENT -
+
+    UPDATE [test_table_1]
+    SET name  = 'name1'
+    WHERE id = 1;
+
+IN OR NOT IN OPERATOR -
+
+    SELECT * FROM [test_table_1] WHERE id IN (SELECT id FROM [test_table_2])
+
+WITH KEYWORD -
+    In SQL Server, the WITH keyword is used to define a COMMON TABLE EXPRESSION(CTE).
+    A CTE is a temporary result set that can be referenced within a query. It allows you to create
+    named temporary results sets that can be used to simplify complex queries, improve readability
+    and avoid code duplication.
+
+    Example 1-
+        WITH AverageCte AS(
+            SELECT AVG([Initiative]) AS AvgSal FROM [In_Inititative])
+        )
+        SELECT * FROM [In_Initiative] WHERE [Inititative] >= (SELECT AvgSal FROM AverageCte);
+
+    Example 2-
+        WITH CTE_TEMP AS (
+            SELECT item, location FROM stg_intro_program GROUP BY item, location HAVING COUNT(1) > 1
+        )
+        UPDATE stg_intro_program SET isValid = -1 WHERE item IN (SELECT ITEM FROM CTE_TEMP AS TEMP)
+        AND location IN (SELECT location FROM CTE_TEMP AS TEMP);
+
+    Example 3-
+        WITH CTE_TEMP AS (
+            SELECT item, location FROM stg_intro_program GROUP BY item, location HAVING COUNT(1) >1
+        )
+        INSERT INTO Error_information(record_id, table_name, error_description)
+        SELECT record_id, 'stg_intro_program', 'Item missing' FROM stg_intro_program AS stg,
+        CTE_TEMP as temp WHERE stg.item = tem.item AND stg.location = temp.location;
+
+GROUP BY AND HAVING CLAUSE -
+    The GROUP BY and HAVING clauses in SQL Server are used together to group the rows that have
+    same values in specified columns into summary rows and then filter those groups based on
+    aggregate conditions.
+
+    Example -
+        SELECT [PlanningItem], AVG(CONVERT(FLOAT, [BV_AMT])) FROM [In_UnitPrice]
+        GROUP BY [PlanningItem] HAVING AVG(CONVERT(FLOAT, [BV_AMT])) >= 3270;
+
+DENSE_RANK() FUNCTION -
+    The DENSE_RANK function in SQL Server is a windows function that calculates the rank of the
+    row within a partition of a result set, without any gaps in the ranking. It assigns the same
+    rank to rows with the same values, and the next rank after that is incremented by one. without
+    leaving any gaps in the ranking.
+
+    SYNTAX -
+    DENSE_RANK() OVER (
+        [PARTITION BY partition_expression, ....]
+        ORDER BY order_expression [ASC|DESC]
+    )
+
+    PARTITION BY - Option clause that divides the result set into partitions to which the function
+    is applied separately. If not specified, the function operates on the entire result set.
+
+    Example 1- WITHOUT PARTITION CLAUSE
+
+        SELECT [InputFileName], [InTableName], DENSE_RANK() OVER (ORDER BY [InputFileName] DESC) AS RANK
+        FROM [Control_Purge_hanging_member];
+
+    Example 2 - WITH PARTITION CLAUSE
+
+        Let's consider an example where we want rank of the student on base of scores in each
+        department. Lets take a table student having StudentId, Name, Score Department
+
+        SELECT StudentId, Name, Score, Department, DENSE_RANK() OVER (
+            PARTITION BY Department ORDER BY SCORE DESC
+        )
+        FROM Student;
+
+How to find the third highest amount from a table.
+
+    SELECT DISTINCT [BV_AMT] FROM (
+    SELECT [BV_AMT], DENSE_RANK() OVER(
+        ORDER BY CONVERT(FLOAT, [BV_AMT]) DESC
+    ) AS st_rank FROM [In_UnitPrice]) ranked_data WHERE st_rank = 3;
+
+DATEADD FUNCTION -
+
+    IN SQL Server the DATEADD function is used to add or subtract a specified time interval to a
+    given date or time value. It returns a new datetime value after the specified interval has been
+    added or subtracted.
+
+    SYNTAX -
+    DATEADD(datepart, number, date)
+
+    Here,
+    datepart - Specifies the unit of time to add or subtract (day, month, year, hour, minute)
+    number - Specifies the number of intervals to add or subtract. It can be positive or negative
+             integer.
+    date - The date or datetime value to which the interval is added or subtracted.
+
+    Example -
+        SELECT DATEADD(day, 7, '2024-02-04');
+        In place of hardcoded date we can give column name also.
+
+        SELECT CONVERT(DATE, DATEADD(day, 7, [Date]), 20) FROM [Stg_TNA];
+
+PARTITION BY -
+    In SQL Server PARTITION BY clause is used in conjunction with windows functions to divide the
+    result set into partitions or groups based on the values of one or more columns. Windows function
+    are applied separately to each partition, allowing you to perform calculations and aggregations
+    within each group.
+
+    Example -
+    Suppose we have a table named Sales with columns ProductId, Category, SalesDate and Amount.
+    We want to calculate the total sales amount for each category and for each year separately.
+
+    SELECT ProductId, Category, YEAR(SalesDate) AS SalesYear, SUM(Amount) OVER (PARTITION BY
+    Category, YEAR(SalesDate)) AS TotalSalesAmount FROM Sales;
+
+    SELECT [ROOT], [LOC_L1], YEAR([Date]), SUM([RecordId]) OVER (
+    PARTITION BY [LOC_L1], YEAR([Date])
+    ) AS TotalSumAmount FROM [Stg_TNA];
+
+What is the difference between PARTITION BY AND GROUP BY IN SQL SERVER?
+
+    PARTITION BY and GROUP BY  both are used for data aggregation.
+    In PARTITION BY result rows set does not reduced, but in GROUP BY result rows set will reduced.
+
+WINDOWS FUNCTION IN SQL SERVER -
+    In SQL Server, a window function (also known as an analytic function or a windowed function) is
+    a type of function that performs calculations across a set of rows related to the current row,
+    without reducing the the result set. Windows function are applied in conjunction with the
+    OVER clause and are used to perform complex analytical tasks, such as calculating running
+    total, ranking, moving average and more.
+
+    1. Aggregate Functions:
+        SUM(), MAX(), MIN(), AVG(), COUNT()
+
+    2. Ranking Function:
+        ROW_NUMBER(), RANK(), DENSE_RANK(), NITLE()
+
+    3. Window Aggregate Functions:
+        SUM() OVER(), AVG() OVER(), MIN() OVER(), MAX() OVER(), COUNT() OVER()
+
+    4. Window Ranking Functions:
+        ROW_NUMBER() OVER(), RANK() OVER(), DENSE_RANK() OVER(), NITLE() OVER()
+
+    5. Other Window Functions:
+        LEAD(), LAG(), FIRST_VALUE(), LAST_VALUE()
+
+What is the difference among ROW_NUMBER(), RANK() AND DENSE_RANK() IN THE SQL Server.
+
+    ROW_NUMBER() - Assigns a unique sequential integer to each row in the result set based on the
+        specified order.
+        It does not handle ties. If multiple rows have the same values that determine the order, each
+        row will receive a different row number.
+        The row numbers generated by ROW_NUMBER() ARE SEQUENTIAL WITHOUT ANY GAPS.
+
+        SELECT [Date], [ROOT], ROW_NUMBER() OVER (
+        ORDER BY [ROOT] DESC
+        ) AS ROW_NUMBERS FROM [Stg_TNA];
+
+    RANK() - Assigns a unique rank to each distinct row value within the result set based on the
+        specified order.
+        It handles ties by assigning the same rank to row with the same value that determine the
+        order. The next rank is then incremented by the number of ties rows.
+        For Example, If five rows tie for the first place, then the next rank will be 6 not the 2.
+        RANK() may result in gaps in the ranks if tied rows are present.
+
+        SELECT [Date], [ROOT], RANK() OVER (
+        ORDER BY [ROOT] DESC
+        ) AS RANK FROM [Stg_TNA];
+
+    DENSE_RANK() - Assigns a unique rank to each distinct row value within the result set based on
+        the specified order.
+        It also handles ties by assigning the same rank to rows with the same values that determine
+        the order, but the next rank is not incremented by the number of tied rows.
+        For Example, If five rows tie for the first place, the next rank will still be 2 not 6.
+        DENSE_RANK() does not result in gaps in the ranks.
+
+        SELECT [Date], [ROOT], DENSE_RANK() OVER (
+            ORDER BY [ROOT] DESC
+        ) AS RANK FROM [Stg_TNA];
+
+
+
+
+
+
 
 
 

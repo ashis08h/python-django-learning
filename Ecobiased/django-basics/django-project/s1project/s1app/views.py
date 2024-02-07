@@ -1,6 +1,7 @@
 from django.shortcuts import render
-from .models import Book, Author, Employee, Manager
+from .models import Book, Author, Employee, Manager, Post
 from django.views import View
+from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
 from django.db.models import Q
 from .serializers import AuthorSerializer
@@ -60,7 +61,20 @@ class AuthorView(View):
         authors = Author.objects.all()
         serialize_author = AuthorSerializer(authors, many=True)
         print("serializers", serialize_author.data)
-        return HttpResponse('Get list of all the authors in the serialized way..')
+        return HttpResponse('Get list of all the authors in the serialized way.')
 
+
+class PostListView(ListView):
+
+    model = Post
+    template_name = 'post.html'
+    context_object_name = 'posts'
+
+
+class PostDetailView(DetailView):
+
+    model = Post
+    template_name = 'post_details.html'
+    context_object_name = 'post'
 
 

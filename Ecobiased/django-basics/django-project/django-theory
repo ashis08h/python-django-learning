@@ -2,14 +2,14 @@
 
     First of all request comes in manage.py then it will go to settings.py file where all the
     setting, configuration, middleware, db connections will be there after that it will go to urls.py
-    after that it will go to respective views method or class there after it will go to models.py and
+    after then it will go to respective views method or class there after it will go to models.py and
     last it will goes to template.
 
 2) What is the difference between a project and an app in django?
 
     A project is an entire application whereas an app is a module inside that project.
     An app is used for a specific task and the project is a collection of apps.
-    for example a payment module is an app inside a e commerce project.
+    for example a payment module is an app inside an e-commerce project.
 
     A single project may have multiple apps inside that.
     A single app may have present inside multiple projects.
@@ -26,7 +26,7 @@
 
 3) Explain the directory structure in django project.
 
-    When we create a project in django it creates a project name directory inside
+    When we create a project in django it creates a project name directory, inside
     that it creates manage.py file and one more directory with name of project only.
 
     inside that inner project name directory it creates __init__.py, settings.py, urls.py, wsgi.py
@@ -45,9 +45,9 @@
         helps us to create applications inside project, migrate the db, create superuser and some
         other things also.
 
-    __init__.py - It tells us the current directory is a package.
+    __init__.py - It tells us that the current directory is a package.
 
-    settings.py - It is a congiguration or we can say settings file which consists all the
+    settings.py - It is a configuration file or we can say settings file which consists all the
         configurational settings, db connections, middleware etc
 
     urls.py - It contains all the urls which is used in our projects.
@@ -78,7 +78,7 @@
         code when we wanted to do some changes in default django-admin ui.
     apps.py - It consists applications configuration.
     migrations - It consists all the migrations file created when we migrate our db.
-    models.py - It consists all the models structure which is used in tha project.
+    models.py - It consists all the models structure which is used in that application.
     tests.py - It is used when we perform unit testing.
     views.py - In this file we write our all the business logics.
 
@@ -97,7 +97,7 @@
     In django we use migrations to reflect the models changes like adding a model, deleting a
     model, update a model etc to the database schema.
 
-    Instead of executing raw database query we change the models and then we run
+    Instead of executing the raw database query we change the models and then we run
     a) python manage.py makemigrations
     b) python manage.py migrate
 
@@ -126,7 +126,7 @@
     This token kindly takes place when someone tries to inject some malicious website links
     or any javascript code.
     CSRF token is a unique secret key which is generated in server side and pass to client side.
-    when user will do a request first server will verfy the csrf token then it will allows client
+    when user will raise a request first server will verify the csrf token then it will allows client
     request to perform.
 
 9) What is queryset in django?
@@ -158,12 +158,12 @@
 
 11) How static files define in django?
 
-    Websites generally need to serve additional files such as images, javascripts, css collectively
+    Websites generally need to serve additional files such as images, javascript, css collectively
     it called static files. We store static files under static folder in project app dir.
     django provide django.contrib.staticfiles to manage static files.
     we can configure static dir in below steps
 
-    a) In settings.py in installed_app list ensure that django.contrib.statifiles are there.
+    a) In settings.py in installed_app list ensure that django.contrib.staticfiles are there.
     b) In settings.py file create a variable STATIC_URL = '/static/'
     c) In template we can load static and use
         {% load static %}
@@ -185,7 +185,7 @@
     panel first need to register that model in to admin.py. When we deal with larger number of models
     then admin panel will be very much useful to interact via GUI.
 
-    django-admin - It is a command line utility which perform administrative task.
+    django-admin - It is a command line utility which helps us to communicate with the django project.
     django-admin --version - Version of django.
     django-admin startproject <project_name> - Create project.
     django-admin startapp <app_name> - create app.
@@ -305,7 +305,7 @@
     Enabling session in django -
 
     1) Include session middleware in to middleware list which is there in settings.py file
-        django.contrib.session.middlewareSessionMiddleware
+        django.contrib.session.middleware.SessionMiddleware
 
     2) Include django.contrib.sessions app into install app list in settings.py file.
 
@@ -339,7 +339,7 @@
         django.db.models.pre_init
         django.db.models.post_init
 
-        Send before and after models's __init__() method is getting called.
+        Send before and after model's __init__() method is getting called.
 
     2)
         django.db.models.signals.pre_save
@@ -366,10 +366,10 @@
 
 27) What are django exceptions?
 
-    django exceptions is an abnormal event which happen because of program failure. To catch
-    those exceptions in python we use try catch block.
-    In django there are few builtin exceptions classes already defined which we can use few of them are
-    below -
+    django exceptions is an abnormal event which happens because of program failure. To catch
+    those exceptions in python we use try except block.
+    In django there are few builtin exceptions classes already defined which we can be use.
+    few of them are below -
 
     1) Django Exceptions class -
         ObjectDoesNotExist - When object is not present.
@@ -447,7 +447,7 @@
 
 31) Explain django Field class and its type?
 
-    In Django Field is a fundamental part of the model system. It represent the various types of
+    In Django Field class is a fundamental part of the model system. It represent the various types of
     fields that can be used to define the structure of database tables.
 
     1) CharField
@@ -534,7 +534,7 @@ Ans - To Involve combination of restore and backup we can restore the database.
         python manage.py loaddata backup.json
 
 39) How to rollback a migrations in django?
-Ans - python manage.py migrate your_app 002_previous_migrations
+Ans - python manage.py migrate <your_app> 002_previous_migrations
 
 40) What are the built-in modules present in django?
 Ans - Django consists multiple built-in modules which provides many functions to use it for developing
@@ -649,6 +649,15 @@ Django rest framework
 
             objects = MyModelManager()
     signals
+
+45) Command to activate virtualenv
+
+    pip install virtualenv
+    virtualenv myenv
+
+    myenv\Scripts\activate - Windows
+    source myenv/Scripts/activate - Linux
+
 
 
 

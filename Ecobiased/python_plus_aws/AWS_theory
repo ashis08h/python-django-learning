@@ -1,48 +1,33 @@
 1) What is AWS - Traditional vs cloud computing.
-    Before when we wanted to launch a website we need to do few things before website development.
-    First we need to purchase a server and keep into some garage, Server needs cool place so need to keep
-    AC also. Our server should run 24 hours daily so need to hire a person for maintenance. Roughly we need
-    almost 1lakh rupees to do above things before we develop my website.
+    Before when we wanted to launch a website we need to do few things before website development.First we need to purchase a server and keep into some garage, Server needs cool place so need to keep AC also. Our server should run 24 hours daily so need to hire a person for maintenance. Roughly we need almost 1lakh rupees to do above things before we develop my website.
+    
     After above things still we have two major problem with this.
-    a) Suppose we assume that 10 thousand person will come to my website at starting so we have purchased
-        big server to maintain it but only 10 people are hitting my website so company will go in loss.
-    b) Suppose we assume that 10 thousand person will come to my website at starting so we have purchase
-        a server to maintain it, but 10 lakh users are hitting my website daily so our website will crash.
-    Now AWS came and he is saying that you develop your application and all the maintenance work i will
-    handle for you. I will give you guarantee that your server will run 24 hours daily. Whenever you need
-    more number of servers i will provide and whenever you need less number of server i can remove some
-    server for you and i will take money for that much of hours or min or sec at which your server will run.
+    a) Suppose we assume that 10 thousand person will come to my website at starting so we have purchased big server to maintain it but only 10 people are hitting my website so company will go in loss.
+    
+    b) Suppose we assume that 10 thousand person will come to my website at starting so we have purchase a server to maintain it, but 10 lakh users are hitting my website daily so our website will crash.
+
+    Now AWS came and he is saying that you develop your application and all the maintenance work i will handle for you. I will give you guarantee that your server will run 24 hours daily. Whenever you need more number of servers i will provide and whenever you need less number of server i can remove some server for you and i will take money for that much of hours or min or sec at which your server will run.
     This is called cloud computing benefit.
 
 2) Cloud services
     There are three types of cloud services
     1) IaaS (Infrastructure as a service)
-        Whenever all the hardware will be belongs to service provider and on that they will create a
-        OS and provide that OS to us. We can decide what are the software platform we will install as
-        per our requirements. This type of service is called Iaas (Infrastructure as as service).
+        Whenever all the hardware will be belongs to service provider and on that they will create a OS and provide that OS to us. We can decide what are the software platform we will install as per our requirements. This type of service is called Iaas (Infrastructure as as service).
         EC2 is an Iaas.
 
     2) PaaS (Platform as a service)
-        In PaaS we use all the services of IaaS ie on the top OS service provider will install
-        some services and configure it also then we can sell those things to users with some more money
-        than IaaS. In this service user will only manage their application and there data that's it.
-        RDS is a service in AWS which based on PaaS.
+        In PaaS we use all the services of IaaS ie on the top OS service provider will install some services and configure it also then we can sell those things to users with some more money than IaaS. In this service user will only manage their application and there data that's it. RDS is a service in AWS which based on PaaS.
 
     3) Saas (Software as a service)
-        In SaaS Everything will be managed by service provider only. In this service the user data will
-        be there with service provider only. Few companies do not use this service because of data issue.
-        We use google email this is an example to SaaS where we do not configure or install it on the
-        server.
+        In SaaS Everything will be managed by service provider only. In this service the user data will be there with service provider only. Few companies do not use this service because of data issue. We use google email this is an example to SaaS where we do not configure or install it on the server.
 
 3) Types of cloud.
     There are three types of cloud.
     1) Public cloud
-        It is available publicly in the world for everyone. Anyone can use this cloud from anywhere
-        and they can create their own resources their.
+        It is available publicly in the world for everyone. Anyone can use this cloud from anywhere and they can create their own resources their.
 
     2) Private cloud
-        It is not available publicly for everyone in the world. We can use this cloud in company network.
-        We can use public cloud and customize things and can make it as private cloud.
+        It is not available publicly for everyone in the world. We can use this cloud in company network. We can use public cloud and customize things and can make it as private cloud.
 
     3) Hybrid cloud
         It is a combination of public cloud as well as private cloud.
@@ -61,20 +46,15 @@
 
     Region -
 
-    Why AWS need multiple availability zones in the world why can't just make one availability zone
-    in America or India and handle all the data from there?
+    Why AWS need multiple regions in the world why can't just make one region in America or India and handle all the data from there?
 
-    1) It depends on the number of audience present from which part of world. If we keep our server
-        near by the maximum audience place then it is easy to serve.
+    1) It depends on the number of audience present from which part of world. If we keep our server near by the maximum audience place then it is easy to serve.
 
     2) Fore some government website government does not allow to place their data outside of the country.
 
-    3) Disaster recovery - In case of any desaster such as flood, fire generally we keep a replica of
-        one region into another region.
-        All the region are connected through private network ocean wire. The speed of data transfer
-        in it is 100 zb/sec.
+    3) Disaster recovery - In case of any desaster such as flood, fire generally AWS keep a replica of one region into another region. All the region are connected through a private network ocean wire. The speed of data transfer in it is 100 zb/sec.
 
-    4) Cost effectivity - For example the cose of electricity is not same in USA as well as India.
+    4) Cost effectivity - For example the cose of electricity is not same in USA as well as in India.
 
     In AWS all the regions will have their name and code.
     It is not mandatory that all the services of AWS will be present in all the regions.
@@ -83,21 +63,18 @@
     Availability Zones -
 
     Why not we keep our data center at one region only why we have created availability zone?
-    Actually if we put data center in one region rather than availability zone then there will be few
-    drawbacks
+    Actually if we put data center in one region rather than availability zone then there will be few drawbacks
     1) What will happened if current cut shut down suddenly.
     2) What will happened if some terrorism happened.
+
     These are the scenario they would have consider for designing aws global infrastructure.
     Each availability zone will connect with different power house and with different network.
     Just like each region will have their unique code similarly each availability zone will have unique
     code.
 
     Local zones -
-    When we wanted to keep my server inside a particular city in india, This time local zones will come
-    into the picture.
-    AWS say that if we keep our server inside local zones then in local zones it will give single digit
-    latency to load the page. For now it is not necessary that all the services of AWS will be available
-    to each local zones.
+    When we wanted to keep my server inside a particular city in india, This time local zones will come into the picture.
+    AWS say that if we keep our server inside local zones then in local zones it will give single digit latency to load the page. For now it is not necessary that all the services of AWS will be available to each local zones.
 
 6) What is EC2 ?
     EC2 stands for Elastic compute cloud.
@@ -113,18 +90,13 @@
     3) How much RAM we need for my virtual machine.
     4) We can select speed of upload and download of data.
     5) Firewall rules we can add under security groups, means which all traffic it allow.
-    6) We can put bootstrap script while creating an instance. Which means whenever an instance will
-       create first of all this script will run. For example Allocate IP to that instance, Add to
-       DNS, Register in Iframe these kind of work we can add into bootstrap script or we can launch
-       our whole application.
+    6) We can put bootstrap script while creating an instance. Which means whenever an instance will create first of all this script will run. For example Allocate IP to that instance, Add to DNS, Register in Iframe these kind of work we can add into bootstrap script or we can launch our whole application.
     7) How much storage we need for our server.
 
-    While creating Instance we need to create key-pair.
-    public key will goes to instance and private key we can store to access the instance after creation.
+    While creating Instance we need to create key-pair. public key will goes to instance and private key we can store to access the instance after creation.
 
 8) What is Inbound Rules and Outbound rules?
-    Inbound means when we send request to server then what are the ports or ip address from where
-    server can accept request that comes under inbound rules.
+    Inbound means when we send request to server then what are the ports or ip address from where server can accept request that comes under inbound rules.
     Outbound means where my server will communicate where he will give response.
 
 9) How to access the ec2 instance?
@@ -1024,3 +996,101 @@
     c) Choose a network and attach.
 
     Same way we can detach and delete the network also.
+
+IAM
+
+65) What is IAM?
+    IAM Stands for Identity access and management. It is a global service in AWS that means if you create a user in IAM then it will be available in all the regions not like the ec2 instance.
+
+66) Why we need IAM?
+    Suppose I am managing the infrastructure of AWS inside a company then the employee of that company will ask me to create and give them ec2 instance or some employee will ask to create s3 bucket and share with us etc.
+    Only me can not perform all the task so I need to build a team. One team member i can assign work to validate and create an instance if someone demand for ec2 instance, One team member i can assign some work related to s3 bucket. One team member i can assign work related to AWS Lambda work.
+    So Before assigning work to the team member i need to validate few things like 
+    a) Those team member has company email id or not.    
+    b) The member which is responsibe for EC2 work should not have access for s3 bucket.
+    c) The member which is responsible for S3 work should not have access for EC2  instance.
+    So these types of things we can do in IAM service.
+
+67) How to create users in IAM?
+    a) In the IAM dashboard inside access management part will get users clik there.
+    b) click on create user in th list of users.
+    c) It will ask user details like user name fill those details.
+    d) Check the checkbox to provde user access to the AWS management console it is optional
+    e) We can choose create IAM user and select auto generated password or custom passwor.
+    f) We can check or uncheck whether user can change password after user login.
+    g) Need to add permissions.
+    h) We can add tags and then click on create user.
+    i) It will give you a URL to login, We can email the users also with their details.
+    j) In the URL which we get after successfully create user we will get Account Id.
+    k) Since we have not provided any permissions to that user so afte login they
+    will see only API Error in EC2 instance dashboard and one message also you are not authorized to perform this action.
+
+    How to add a Policy to an existing user?
+        a) Go to user list page and click on a particuar user to which you wanted to add
+        policy.
+        b) In the policy tab click on add permission and select attach policy directly.
+        c) Search EC2 policy name such as AmazonEC2FullAccessMode, we can checked the
+        checkbox and click on next. (CloudWatch, EC2, EC2 Auto scaling, ELB, ELB v2, IAM(Limited write))
+        d) We can add policy in two ways first one by UI which we have done in the above
+        steps. Second one will be from policy json.
+    
+68) How to create groups in AWS?
+    Suppose now in your company number of users are increased from 2 to 5000 then it is difficult to create each user and attach policy to them instead of that we will create  groups such as developer, tester, production_group etc and we can assign some policy to that group only one time later we need to just add users to that group automatically those policies got applied to those users.
+
+    Steps to create a group in IAM.
+        a) Go to IAM dashboard and inside Access management click on user groups then click on create group.
+
+        b) Enter group name we can select users and permissions and click on create group.
+
+    Steps to create a user and add into a particuar group.
+        a) Go to IAM dashboard and inside Access management  click on user then 
+        click on create usera and fill the username, password then in next page choose 
+        add user to group instead of directly from policy option and select groups then 
+        b) Click on next and click on create user.
+    
+    We can attach multiple groups to a user.
+    
+    We can chose permission from existing user's permission also.
+    
+    When we create a user with some other user and that other user if it is a part of some group then that the new user will also become part of that same group.
+
+69) How to secure account password?
+    Password policy.
+
+        Steps to secure the password.
+
+        a) In the IAM dashboard inside Access management part we will get Account settings.
+
+        b) Click on the account settings.
+        
+        c) Click on edit and can manage custom password policy such has maximum password length, can have upper case, can have lower case, We can expire the password after every 30 days or some value between 1 days to 3 years, prevent same password reuse, allow user to change his password.
+
+70) MFA for root user.
+    
+    MFA stands for multifactor authentication.
+
+    How to enable Multifactor authentication for the root user?
+        a) Go to profile icon in the navbar and click on the security credentials
+        b) Go to Multi-factor authentication (MFA) and click on Assign MFA Device
+        c) fill the device name details and choose authenticator app and click next.
+        d) Click on show QR Code and in my mobile i have installed google authenticator.
+        e) Scan the QR code from the mobile phone and then enter two MFA code 
+        f) Click on Add MFA that's it.
+    
+    How to disable the multifactor authentication.
+
+        Again go to same page security credentials and inside multi-factor authentication, select that device and click on remove to remove that.
+
+    How to enable multifactor authentication on the IAM users.
+        a) Click on a user from IAM users list
+        b) In the security credentials tab click on assign MFA device.
+        c) Repeat same steps then.
+    
+71) We can use selenium to automate the instance creation or anything in the AWS then
+    why we use AWS CLI for that?
+
+        If we use selenium then if AWS will change the UI a littlebit also then your selenium will fail or it will not give actual result what we need for that reason we use AWS cli instead of selenium.
+
+
+
+

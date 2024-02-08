@@ -1,10 +1,12 @@
 from django.shortcuts import render
-from .models import Book, Author, Employee, Manager, Post
+from .models import Book, Author, Employee, Manager, Post, SaraswatiVidyaMandir, Man
 from django.views import View
 from django.views.generic import ListView, DetailView
 from django.http import HttpResponse
 from django.db.models import Q
 from .serializers import AuthorSerializer
+from django.db.models.signals import post_save, pre_init
+from django.dispatch import receiver
 
 # Create your views here.
 
@@ -76,5 +78,37 @@ class PostDetailView(DetailView):
     model = Post
     template_name = 'post_details.html'
     context_object_name = 'post'
+
+
+class SaraswatiView(View):
+
+    def get(self, request):
+        saraswati = SaraswatiVidyaMandir.objects.select_related('school').get(id=1)
+        print("school", saraswati.school)
+        mans = Man.objects.prefetch_related('person')
+        print('mans', mans)
+        for man in mans:
+            print('persons', man.person.all())
+        return HttpResponse("Get Saraswati school list")
+
+
+@receiver(pre_init, sender=Author)
+def access_modal(sender, *args, **kwargs):
+    print("I am accessing model")
+    print("sender", sender)
+    print("args", args)
+    for key, value in kwargs.items():
+        print("key", key, "value", value)
+
+
+@receiver(post_save, sender=Author)
+def send_email(sender, instance, created, **kwargs):
+    print("I am sending email")
+    print("sender", sender)
+    print("instance", instance)
+    print("created", created)
+    for key, value in kwargs.items():
+        print(f"{key}:{value}")
+
 
 

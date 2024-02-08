@@ -1,3 +1,4 @@
+{% load static %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -11,5 +12,7 @@
   {{post.title}}
 {% endfor %}
 {% endif %}
+{{my_custom_processor}}
+<img src="{% static '/images/pic1.png' %}" alt="not image">
 </body>
 </html>

@@ -1,0 +1,18 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>I am from post list page.</p>
+{% if posts %}
+{% for post in posts %}
+  {{post.title}}
+{% endfor %}
+{% endif %}
+{{my_custom_processor}}
+<img src="{% static '/images/pic1.png' %}" alt="not image">
+</body>
+</html>

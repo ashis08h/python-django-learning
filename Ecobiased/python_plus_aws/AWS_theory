@@ -96,7 +96,7 @@
     While creating Instance we need to create key-pair. public key will goes to instance and private key we can store to access the instance after creation.
 
 8) What is Inbound Rules and Outbound rules?
-    Inbound means when we send request to server then what are the ports or ip address from where server can accept request that comes under inbound rules.
+    Inbound means when we send request to server then what are the ports or ip address from where   server can accept request that comes under inbound rules.
     Outbound means where my server will communicate where he will give response.
 
 9) How to access the ec2 instance?
@@ -128,10 +128,8 @@
         go to ec2 instance connect tab and click on connect.
         In this way we did not need any tool to connect our instance we can connect in the browser only.
 
-10) Default availability zone under mumbai region is ap-south-1a so how aws manage the load
-    between all the availability zones?
-    Basically for different user if we create server in same availability zone name then there
-    is no guarantee that both are in same availability zone.
+10) Default availability zone under mumbai region is ap-south-1a so how aws manage the load between all the availability zones?
+    Basically for different user if we create server in same availability zone name then there is no guarantee that both are in same availability zone.
     AWS point different availability zones having same name for different users.
 
 11) Install NGINX in EC2 Instance and deploy sample application in Ec2.
@@ -159,6 +157,7 @@
     Need to go to advance option in storage configuration part select yes or no there.
     By default it wil be yes. That means if we delete an instance ebs will also get deleted.
 
+
 13) How to configure user-data or bootstrap script for an ec2 instance?
     While creating an instance in advance option there is a text area where we need to write shell
     script for adding bootstrap script.
@@ -166,7 +165,7 @@
 
     sample shell script
 
-    #/bin/bash
+    #!/bin/bash
 
     apt-get update
     apt-get install nginx -y
@@ -255,12 +254,8 @@
 
 21) What is Spot instance?
     In this instance we need to do bid, whenever someone will come who are ready to pay more than you
-    AWS will give instance to that person. There is no reliability here. You will get a certain amount
-    of time after that that instance will be terminated by AWS from your account.
-    Here discount may be up to 90% also.
-    It is useful when we have some work which requires more computing but for less time suppose for
-    1 hour or 2 hours. And we can run those jobs at any time whenever instance will come we can start
-    job.
+    AWS will give instance to that person. There is no reliability here. You will get a certain amount of time after that that instance will be terminated by AWS from your account. Here discount may be up to 90% also.
+    It is useful when we have some work which requires more computing but for less time suppose for 1 hour or 2 hours. And we can run those jobs at any time whenever instance will come we can start job.
 
 22) What is Dedicated hosts?
     A dedicated hosts is a physical EC2 server dedicated for your use only. More costly it is.
@@ -270,9 +265,7 @@
     Security purpose.
 
 23) what is Saving plans?
-    Here we have commitment that in 1 hour how much amount we can pay to AWS.
-    Then AWS will assign you instance as he wants according to your budget.
-    up to 72% discount.
+    Here we have commitment that in 1 hour how much amount we can pay to AWS. Then AWS will assign you instance as he wants according to your budget. up to 72% discount.
 
 24) How to create and access windows instance?
     We can create a windows machine in same way as linux just need to chose windows operating system.
@@ -296,27 +289,24 @@
     curl 169.254.169.254/latest/meta-data/ami-id
     we can get dynamic data also with same way.
 
-26) when we stop an instance and again start an instance public ip address will change how to keep
-    same ip address then after re run the instance.
+26) when we stop an instance and again start an instance public ip address will
+    change how to keep same ip address then after re run the instance.
 
-    There is a concept of elastic ip or we can say static ip in Ec2 instance where we can reserve the
-    ip address.
+    There is a concept of elastic ip or we can say static ip in Ec2 instance where we can reserve the ip address.
 
     Steps to reserve an elastic IP address.
     1) In EC2 dashboard inside Network & Security section click on Elastic IP.
     2) Click on Allocate Elastic Ip Address.
     3) Allocate
 
-    So with above steps an Ip will generate, Now we need to allocate that generated IP address to
-    EC2 instance.
+    So with above steps an Ip will generate, Now we need to allocate that generated IP address to EC2 instance.
 
     steps to associate new generated IP Address to an instance.
     1) In elastic Ip list click on action and select Associate Elastic Ip Address.
     2) Choose an instance on which you wanted to associate.
     3) Click Associate to associate it.
 
-    Up to know we can reserve by default 5 elastic ip address. We can increase the quota also by writing
-    email to AWS.
+    Up to know we can reserve by default 5 elastic ip address. We can increase the quota also by writing email to AWS.
 
     How AWS charge for elastic Ip address.
     If you create an elastic ip address and if that ip address attached to an instance and that instance
@@ -349,16 +339,10 @@
     We can increase the size of EBS volume run time only.
 
 29) What is instance store root device type in AMI?
-    In instance store root device type we create our EBS volume in same place where our ec2 instance
-    will be there. The benefit of this will be there will be less latency of read/write data from EBS.
-    The negative things is if we delete an instance then EBS will also be deleted.
-    If we stop and start the machine also data will loss.
+    In instance store root device type we create our EBS volume in same place where our ec2 instance will be there. The benefit of this will be there will be less latency of read/write data from EBS. The negative things is if we delete an instance then EBS will also be deleted. If we stop and start the machine also data will loss.
     So when speed matter that place we use instance-store root type device.
 
-    when AWS will terminate any instance because of some problem facing, then first it will give
-    notification to the user who are using that instance then AWS will stop the instance then if user will
-    start that instance again then it will start somewhere else. and if Instance-store are attached to
-    this instance then there will be data loss if AWS will stop the instance.
+    when AWS will terminate any instance because of some problem facing, then first it will give notification to the user who are using that instance then AWS will stop the instance then if user will start that instance again then it will start somewhere else. and if Instance-store are attached to this instance then there will be data loss if AWS will stop the instance.
 
     Whenever we create an EBS then AWS will create a replica of that EBS in same Availability zone.
 
@@ -367,8 +351,7 @@
 
     1) In EC2 dashboard in Elastic block storage click on volumes.
     2) Click on create volume.
-    3) We can choose volume type, size, Availability zones, we can encrypt also then we can click on
-        create.
+    3) We can choose volume type, size, Availability zones, we can encrypt also then we can click on create.
 
     While creating instance in network settings in subnet option we can choose availability zones
     where we wanted to create instance.
@@ -380,8 +363,7 @@
 
     1) Select an EBS volume and click on action.
     2) Choose attach volume then we will get dropdown to select instance.
-    3) In dropdown only those instance will come which is created in same availability zone where
-        EBS created.
+    3) In dropdown only those instance will come which is created in same availability zone where EBS created.
     4) Click on attach.
 
     same way in action we can detach volume also.
@@ -414,9 +396,7 @@
     8) Command to unmount a dir
         umount /test/
 
-    After unmount EBS will be there but in unmounted state this is as same as when we have a pendrive
-    attached with a laptop and then we have clicked on eject option but not yet removed.
-    When we detach the EBS then it will remove with that system.
+    After unmount EBS will be there but in unmounted state this is as same as when we have a pendrive attached with a laptop and then we have clicked on eject option but not yet removed. When we detach the EBS then it will remove with that system.
 
     command to check if an ebs has already some data
     sudo file -s /dev/xvdf
@@ -439,11 +419,9 @@
     resize2fs /dev/xvdf where xvdf is device name.
 
 32) How to resize the root EBS volume?
-    When we execute command resize2fs /dev/xvda1 - it will give you The filesystem is already
-    2068731 (4k) blocks long.  Nothing to do!
+    When we execute command resize2fs /dev/xvda1 - it will give you The filesystem is already 2068731 (4k) blocks long.  Nothing to do!
 
-    For resizing the root storage first we need to grow part the partition which is present in that
-    storage.
+    For resizing the root storage first we need to grow part the partition which is present in that storage.
 
     sudo growpart /dev/xvda 1 where 1 is the 1st part of xvda storage.
     With above command we have increase the partition size but still we need to increase the file system
@@ -492,28 +470,17 @@
     Note - When ever you need to perform high speed data transfer we need to choose IO1 or IO2.
            GP2, GP3 are the balanced EBS volume between speed and price.
            By default GP2 (general purpose SSD) will be selected while creating EBS.
-           Max value of IOPS will be minimum in COLD HDD SC1 then Throughput optimized HDD st1
-           then GP2, GP3, IO1, IO2.
-           Magnetic is cheapest one.
+           Max value of IOPS will be minimum in COLD HDD SC1 then Throughput optimized HDD st1 then GP2, GP3, IO1, IO2. Magnetic is cheapest one.
            We can not take COLD HDD and Throughput optimized HDD as a root volume of an instance.
 
 35) What is snapshot in AWS?
-    We can take snapshot of EBS volumes in AWS. snapshot is like point of time means if we have taken
-    a snapshot of my EBS at 6:04:23 pm then after this instant of time it will not store anything.
-    We take this snapshot usually for backup purpose. We can come revert also to that snapshot if we
-    want. If by mistake we run rm command or rmdir command at those types of situation we can use
-    snapshot. AWS will store the snapshot in s3 bucket.
-    EBS volume is availability zone specific.
+    We can take snapshot of EBS volumes in AWS. snapshot is like point of time means if we have taken a snapshot of my EBS at 6:04:23 pm then after this instant of time it will not store anything. We take this snapshot usually for backup purpose. We can come revert also to that snapshot if we want. If by mistake we run rm command or rmdir command at those types of situation we can use snapshot. AWS will store the snapshot in s3 bucket. EBS volume is availability zone specific.
     snapshot is region specific.
 
     How we can move EBS data from one availability zone to another availability zone?
-    We create snapshot of an EBS volume of one availability zone and then move that snapshot to another
-    availability zone and then we can create another EBS from that snapshot.
+    We create snapshot of an EBS volume of one availability zone and then move that snapshot to another availability zone and then we can create another EBS from that snapshot.
 
-    AWS store data into snapshot into incremental ways. for example suppose we have created a snapshot
-    of 50 GB then we can created a snapshot then again if we added 10 GB more then if we create snapshot
-    then it will not create snapshot of whole 60 GB it will create snapshot of only 10 GB.
-    So in this way we can reduse the storage cost.
+    AWS store data into snapshot into incremental ways. for example suppose we have created a snapshot of 50 GB then we can created a snapshot then again if we added 10 GB more then if we create snapshot then it will not create snapshot of whole 60 GB it will create snapshot of only 10 GB. So in this way we can reduse the storage cost.
 
     If we delete a snapshot then AWS will transfer the data to just next incremental snapshot blindly.
 
@@ -533,10 +500,8 @@
     Steps to create EBS volume from a snapshot
     1) Select a snapshot and click on action.
     2) click on create volume from snapshot.
-        Here we can create volume from a snapshot with either equal storage or greater than the main
-        EBS volume. We can change the instance type, Availability zones.
-    When we create a volume from second snapshot then AWS will aggregate all the previous snapshot and
-    populate all the data into new EBS.
+        Here we can create volume from a snapshot with either equal storage or greater than the main EBS volume. We can change the type, Availability zones.
+    When we create a volume from second snapshot then AWS will aggregate all the previous snapshot and populate all the data into new EBS.
 
 36) How to schedule snapshot creating daily or weekly at a time?
     Whenever we create an EBS volume with some name it will create a tag.
@@ -577,29 +542,22 @@
 38) How to copy a snapshot from one region to another region?
     1) Select a snapshot and click on copy snapshot.
     2) Choose a destination region and click on copy snapshot.
-    3) While copy a snapshot you can encrypt your snapshot also and the EBS volume which you will create
-        from an encrypted snapshot will also be encrypted.
+    3) While copy a snapshot you can encrypt your snapshot also and the EBS volume which you will create from an encrypted snapshot will also be encrypted.
 
     EBS volume is a SAN (Storage area network)
 
 39) Encrypt the EBS volume.
-    When we encrypt an EBS volume It will stored in SAN in encrypted format and data will transfer
-    from EBS to EC2 instance in encrypted format only.
+    When we encrypt an EBS volume It will stored in SAN in encrypted format and data will transfer from EBS to EC2 instance in encrypted format only.
 
-    When you will go to create snapshot from an encrypted EBS volume by default that snapshot will be
-    encrypted only.
+    When you will go to create snapshot from an encrypted EBS volume by default that snapshot will be encrypted only.
 
-    When we will create a volume from an encrypted snapshot the volume will also be encrypted.
-    While creating volume from snapshot we will not be able to un encrypt it.
-    When we will create a volume from an unencrypted snapshot the volume will also be unencrypted but
-    we can check the checkbox to encrypt it during creation of Volume.
+    When we will create a volume from an encrypted snapshot the volume will also be encrypted. While creating volume from snapshot we will not be able to un encrypt it.
+    When we will create a volume from an unencrypted snapshot the volume will also be unencrypted but we can check the checkbox to encrypt it during creation of Volume.
 
-    According to AWS if an EBS volume is encrypted there will not be any latency while reading or
-    writing the data into AWS.
+    According to AWS if an EBS volume is encrypted there will not be any latency while reading or writing the data into AWS.
 
     How to enable a by default encrypted checkbox?
-        When we enable the the by default encrypted checkbox then whenever we create an EBS volume by
-        default encrypt checkbox will be checked.
+        When we enable the by default encrypted checkbox then whenever we create an EBS volume by default encrypt checkbox will be checked.
 
         Steps to enable default encrypted checkbox.
             1) Go to EC2 Dashboard.
@@ -608,19 +566,11 @@
             4) Enable the checkbox and click on update EBS encryption.
 
 40) What is Tag in AWS?
-    In AWS Tag is a key value pair that you can assign to aws resources, including Amazon Elastic
-    Block Storage volumes. Tags are the meta data that provide the additional information about
-    your resources and help you to organize, categorize and manage them more effectively. Each tag
-    consists of a key and a corresponding value.
+    In AWS Tag is a key value pair that you can assign to aws resources, including Amazon Elastic Block Storage volumes. Tags are the meta data that provide the additional information about your resources and help you to organize, categorize and manage them more effectively. Each tag consists of a key and a corresponding value.
 
 41) AWS AMI (Amazon Machine Image)
     AMI stands for Amazon Machine Image.
-    Suppose we wanted to install an OS to my system then we need to bring a pen-drive having bootable
-    os file. So we can install os to many system with help of that pen-drive.
-    So AMI is just like that pen-drive where we can configure an operating system and we can
-    configure some other things also like we can install and setup nginx, we can deploy our applications
-    also there. After that whenever we create an instance with that AMI by default those configurations,
-    setup and our applications will be deployed there.
+    Suppose we wanted to install an OS to my system then we need to bring a pen-drive having bootable os file. So we can install os to many system with help of that pen-drive. So AMI is just like that pen-drive where we can configure an operating system and we can configure some other things also like we can install and setup nginx, we can deploy our applications also there. After that whenever we create an instance with that AMI by default those configurations, setup and our applications will be deployed there.
 
     Steps to create AMI of an instance.
         step 1
@@ -628,21 +578,18 @@
             2) we can create AMI by clicking on action and click on AMI and template and click on create
                 AMI.
         step2
-            1) Since Instance is EBS volume instance so create a snapshot of the root volume then from
-                that snapshot we can create Image while clinking on action.
+            1) Since Instance is EBS volume instance so create a snapshot of the root volume then from that snapshot we can create Image while clinking on action.
 
         Steps to create an instance from an AMI.
             1) Select an AMI and click on launch instance from AMI button.
-            2) Or we can create instance by normal way by selecting the custom AMI which will be there
-                in My AMIs tab.
+            2) Or we can create instance by normal way by selecting the custom AMI which will be there in My AMIs tab.
 
         Whenever we create an AMI AWS will create a snapshot behind the screen.
 
 42) How to share an AMI to other users?
 
     1) Select that AMI click on action and then edit AMI permissions.
-    2) Fill the shared accounts with the usernames. We can make the AMI public also so anyone
-        can use that.
+    2) Fill the shared accounts with the usernames. We can make the AMI public also so anyone can use that.
 
     We can copy an AMI from one region to another region also by clicking on action button.
 
@@ -650,10 +597,7 @@
     1) First need to de register the AMI then from snapshot we can delete the snapshot.
 
 43) AWS Load Balancer.
-    Basically when more users came to our server then our server will start giving response slow.
-    At one time will come that our server will become chock. To prevent with this issue we bring a concept
-    of load balancer. Now we will not hit the public IP of instance directly, We will hit the IP
-    of the load balancer then load balancer will hit the public IP of instance.
+    Basically when more users came to our server then our server will start giving response slow. At one time will come that our server will become chock. To prevent with this issue we bring a concept of load balancer. Now we will not hit the public IP of instance directly, We will hit the IP of the load balancer then load balancer will hit the public IP of instance.
     
     By default AWS load balancer will use round robin algorithm where 1st request to 1st server 2nd request to 2nd server and so on.
 
@@ -675,7 +619,7 @@
     d) Fill the load balancer name, scheme(internet-facing or internal) Internal means 
         the load balancer can not access the public ip when we have server also in our 
         company private network then we can use internal scheme else internet-facing.
-        need to select mappings means which availability zones,  configure security groups, configure listner and routing means on 80 port of load balancer if any request comes we will transfer to 80 port of out instances, configure health checks means if we have any instance stopped load balancer will not send request to that instance. for this we need to create a page were 200 status should return if everything is alright.
+        need to select mappings means which availability zones,  configure security groups, configure listner and routing means on 80 port of load balancer if any request comes we will transfer to 80 port of ouR instances, configure health checks means if we have any instance stopped load balancer will not send request to that instance. for this we need to create a page were 200 status should return if everything is alright.
     e) Choose what are the instances we need to send requests.
     f) Click on create load balancer.
 
@@ -687,6 +631,7 @@
     Interval - 30 sec - time interval between each failed requests.
     Unhealthy threshold - When some instance got damaged then up to what number load balancer will test after that it will not start sending requests on that instance.
     healthy threshold - when we have repair our instance then up to what number load balancer will test then it will start sending the requests to that particular instance.  
+
 
 44) How to access a load balancer?
 
@@ -784,9 +729,9 @@
 
 52) How to get client id when someone hit load balancer ip?
     When user hit the ip of an instance directly then in nginx logs client ip address 
-    will come but when some user will hit dns of load balancer then in the logs of nginx instead of client ip address ip of load balancer will be stored.
+    will come but when some user will hit dns of load balancer then in the logs of nginx instead of client ip address, ip of load balancer will be stored.
 
-    To fix this issue we need to change in nginx configuration. Belo code we need to add in nginx conf.
+    To fix this issue we need to change in nginx configuration. Below code we need to add in nginx conf.
 
     log_format main 'new log -> $remote_addr - $remote_user [$time_local] "$request" '
                         '$status $body_bytes_sent "$http_referer" '
@@ -795,6 +740,8 @@
     access_log /var/log/nginx/access.log main;
     
     command to open nginx conf file
+
+    sudo nano /etc/nginx/nginx.conf
 
     after above changes need to reload the nginx service
 
@@ -808,9 +755,9 @@
 
     steps to restrict the client ip to be stored in the nginx
     
-    a) Select the nginx fron list of nginx.
+    a) Select the nginx from list of nginx.
     b) click on action and click on edit load balancer attribute.
-    c) select remove option of "x-forwarded-for header" by default it will be append.
+    c) select remove option of "x-forwarded-for header". by default it will be append.
     d) click on save changes button.
 
     We can do multiple things in load balancer attribute settings.
@@ -822,7 +769,7 @@
 53) What is group level stickness?
     By default in load balancer group level stickness is off. suppose if we have two instances attached to the load balancer then In off condition when user will send request to load balancer then the lod balancer will send the request either on server 1 or server 2. so in case of off condition load balancer will balance the request perfectly.
 
-    When we on the group-level stickness then if any server by chance become damaged or stopped the the load balancer will start sending the request to another server then when that server will on after that also load balancer will stick to same server on which they were sending the request. we can change the group-level settings on or off in edit rule settings. we can specifies the timeout also that after some hours again it will start sending the request on the other server.
+    When we on the group-level stickness then if any server by chance become damaged or stopped the the load balancer will start sending the request to another server then when that server will be on after that also load balancer will stick to same server on which they were sending the request. we can change the group-level settings on or off in edit rule settings. we can specifies the timeout also that after some hours again it will start sending the request on the other server.
 
     Steps to change stickness of a target groups.
 
@@ -844,7 +791,7 @@
 
 54) What is cross zone load balancing?
 
-    By default cross zone load balancing is enabled.
+    By default cross zone load balancing is enabled in appliation load balancer.
     In case of cross zone load balancing enable 
     if we have total 10 instance 2 in availability zone a and 8 in availability zone b
     then if we have 100 requests then 10 10 requests will go on each instances.
@@ -901,10 +848,10 @@
     When we delete an auto scaling group then all the instances related to those scaling group will automatically delete.
 
 57) What is the role of health check timing while creating auto scaling group?
-    When we create an instance then just after create instance bootstrap sript will strt running so it will take time so we enter some deconds in health check timing to tell auto scaling group that after 300 or any number seconds you use that instance.
+    When we create an instance then just after create instance bootstrap sript will start running so it will take time so we enter some seconds in health check timing to tell auto scaling group that after 300 or any number seconds you use that instance.
 
     If we select 2 desired limit then two instance will create after that if we edit the auto scaling group and change to then it will automatially terminate one instance.
-    nd auto scaling group is smart enough that it will create instance in all the selected availability zones while creating launch template or auto scaling group.
+    and auto scaling group is smart enough that it will create instance in all the selected availability zones while creating launch template or auto scaling group.
 
 58) How to do auto scaling in AWS?
     Means when number of user increase number of servers increase and vice-versa.
@@ -934,7 +881,7 @@
     d) stress -c 5
 
 60) What is default cooling time period?
-    This is the time when one instance is added the after what time next instance will add or delete. This option will be available in aut scaling group.
+    This is the time when one instance is added the after what time next instance will add or delete. This option will be available in auto scaling group.
 
 61) What is auto scaling with load balancer?
     We can add auto scaling by selecting load balancer option also.
@@ -966,7 +913,7 @@
 
         Benefit of this is the communication between the instances will be very much faster.
 
-        There is a drawback of this if that rcks got destroyed some how then our application will be stoped completely if our all the instances present inside one racks.
+        There is a drawback of this if that racks got destroyed some how then our application will be stoped completely if our all the instances present inside one racks.
 
 63) How to terminate an instance if we enable the terminate protection while creating an instance?
 
@@ -1016,14 +963,16 @@ IAM
     b) click on create user in th list of users.
     c) It will ask user details like user name fill those details.
     d) Check the checkbox to provde user access to the AWS management console it is optional
-    e) We can choose create IAM user and select auto generated password or custom passwor.
+    e) We can choose create IAM user and select auto generated password or custom password.
     f) We can check or uncheck whether user can change password after user login.
     g) Need to add permissions.
     h) We can add tags and then click on create user.
     i) It will give you a URL to login, We can email the users also with their details.
     j) In the URL which we get after successfully create user we will get Account Id.
-    k) Since we have not provided any permissions to that user so afte login they
+    k) Since we have not provided any permissions to that user so after login they
     will see only API Error in EC2 instance dashboard and one message also you are not authorized to perform this action.
+
+<up to here>
 
     How to add a Policy to an existing user?
         a) Go to user list page and click on a particuar user to which you wanted to add

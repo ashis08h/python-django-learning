@@ -105,3 +105,18 @@ dropna - To drop with missing values.
 
 In the interpolate method by default it is linear but we can use multiple things like quadratic,
 polynomial, cubic etc.
+
+What is split apply and combine in pandas?
+In pandas we have groupby function which is used to split the dataframe as pr some column same as
+groupby in sql then we have some aggregation functions such as max(), mean() which is used to apply
+on the groupby objects. combine this whole process is known as split apply and combine.
+
+What is pivot in pandas?
+Pivot in pandas allows you to reshape or transform the dataframe.
+
+What is pivot table in pandas?
+Pivot table in pandas is used to summarize and aggregate data inside dataframe.
+Similar to pivot table melt is used to transform or reshape the dataframe.
+
+
+

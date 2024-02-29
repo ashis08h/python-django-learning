@@ -70,7 +70,7 @@ JOINS:
         Returns the rows when there is a match in both the tables based on the join conditions.
 
         SELECT si.[Item], si.[Location], mi.[fcast_item] from [Stg_ItemLocAttr] si
-        RIGHT JOIN [Master_Item_Latest] mi
+        INNER JOIN [Master_Item_Latest] mi
         ON si.[Item] = mi.[fcast_item];
 
     FULL OUTER JOIN -

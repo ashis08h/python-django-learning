@@ -1,4 +1,4 @@
-class Myclass:
+class MyClass:
 
     def __init__(self, name, age):
         self.name = name
@@ -9,5 +9,5 @@ class Myclass:
         return a+b
 
 
-mc = Myclass('Ashish', 29)
-print(Myclass.add_number(3, 4))
+mc = MyClass('Ashish', 23)
+print(MyClass.add_number(3, 4))

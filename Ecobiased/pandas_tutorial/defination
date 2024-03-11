@@ -80,7 +80,7 @@ What is data science?
 What is data munging or data wrangling?
     Process of cleaning messy data is called data munging or data wrangling.
 
-What is dtaframe in pandas?
+What is dataframe in pandas?
     Dataframe is a main object in pandas. It is used to represent data with rows and columns
     (tabular or excel spreadsheet like data.)
 
@@ -107,7 +107,7 @@ In the interpolate method by default it is linear but we can use multiple things
 polynomial, cubic etc.
 
 What is split apply and combine in pandas?
-In pandas we have groupby function which is used to split the dataframe as pr some column same as
+In pandas we have groupby function which is used to split the dataframe as per some column same as
 groupby in sql then we have some aggregation functions such as max(), mean() which is used to apply
 on the groupby objects. combine this whole process is known as split apply and combine.
 

@@ -33,7 +33,7 @@ or methods outside of a class.
 
 3) Protected -
 when we declare a variable with single underscore are protected in nature. we can access these
-variables outside of a class. generally we use protected variable for code convention purpose.
+variables outside of a class. generally we use protected variable for coding convention purpose.
 
 Class method are a special type of method in python. We use class method to change the value of a
 class variable which is declared globally in to that class. Generally we declare class methods with
@@ -105,7 +105,7 @@ When we derive a class from single parent class it is known as single inheritanc
 this is basic inheritance.
 
 Multiple Inheritance
-When we derived a class with multiple parent class it is called multilevel inheritance
+When we derived a class with multiple parent class it is called multiple inheritance
 
 Multilevel Inheritance
 When we derive a class from a parent class and one more class is derived from that child
@@ -141,7 +141,7 @@ This is also known as method overriding.
 
 Oops -
 Before we were using procedural programing language where we used to write logic inside methods.
-then we have shifted to oops where we write our logics in method =s but we keep related methods
+then we have shifted to oops where we write our logics in methods but we keep related methods
 and properties together inside a class. and we access the methods and the properties with help of
 objects. Oops also maps our variables with real world concepts.
 
@@ -210,7 +210,7 @@ Once immutable object is created it's value or contents can not be changed.
 
 Example - Numbers, Strings, Tuple, Frozenset
 Mutable -Mutable refers to an object whose state can be modified after it is created. means we can
-add, remove element of a immutable objects.
+add, remove element of a mutable objects.
 
 Example - Lists, Dictionary, Sets, Bytearrays
 
@@ -260,7 +260,7 @@ We use unittest.TestCases class which contains test methods inside that.
 
 Test methods are the individual test case of a feature.
 
-Assertion - Assertion is used to pass an test case. we have some builtin assertion in unittest
+Assertion - Assertion is used to pass a test case. we have some builtin assertion in unittest
 AssertTrue, AssertFalse, AssertEqual etc.
 
 Test discovery -

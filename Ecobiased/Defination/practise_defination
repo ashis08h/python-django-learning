@@ -101,7 +101,7 @@ their own methods and properties.
 There are 5 types of inheritance in python
 
 Single inheritance
-When we derive a class from single parent class it is known as single inheritance
+When we derive a class from single a parent class it is known as single inheritance
 this is basic inheritance.
 
 Multiple Inheritance
@@ -115,7 +115,7 @@ Hierarichal inheritance
 when we derive multiple child class from a single parent class it is known as hierarichal inheritance
 
 hybrid inheritance
-when we use more that one type of inheritance it is known as hybrid inheritance.
+when we use more that one type of inheritance together it is known as hybrid inheritance.
 
 class variable are a variable which is declared inside a class but outside of any methods present
 in that class.

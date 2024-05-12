@@ -1111,7 +1111,18 @@ steps -
     Let us take a scenario that we do not need aws cli in an instance all the time.
     suppose we need aws cli just to enable or disable those things only at the starting which can not done by the UI in these types to situation we will not install aws cli directly in the aws header one square shape ion will be there after search placeholder. when we click on that that will give a terminal from that terminal we can run aws cli comand without installing aws cli. from which user you will be currently login with same user it will start that terminal.
 
-    with help of cloudshell if anyone creates a file than in that region only that file will be there if we chnge the region then in the cloudshell home dir that file will not come.
+    with help of cloudshell if anyone creates a file than in that region only that file will be there if we change the region then in the cloudshell home dir that file will not come.
 
+    How to check the activity of a user?
+    Step - 
+    a) Select a user and click on that.
+    b) go to access advisor tab there we can see all the activity.
+
+    samething we can do for groups also.
+
+76) What is credential report?
+    In the IAM dashboard inside access report pat we will get credential report.
+    We can download that file.
+    In that file there will be some details of all the users we have.
 
 

@@ -1,0 +1,16 @@
+my_tuple1 = (1, 2, 3)
+my_tuple2 = tuple([1, 2, 3])
+my_tuple3 = (1,)
+my_tuple4 = 1, 2, 3
+my_tuple5 = ()
+
+print(my_tuple1)
+print(type(my_tuple1))
+print(my_tuple2)
+print(type(my_tuple2))
+print(my_tuple3)
+print(type(my_tuple3))
+print(my_tuple4)
+print(type(my_tuple4))
+print(my_tuple5)
+print(type(my_tuple5))

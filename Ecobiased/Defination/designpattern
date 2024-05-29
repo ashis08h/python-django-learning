@@ -1,18 +1,18 @@
 Python like other programing language has various design patterns which solve common problems in
 software development.
 
-1) Singleton Pattern
-2) Factory Method pattern
-3) Abstract Factory pattern
-4) Builder pattern
-5) Prototype pattern
-6) Adapter pattern
-7) Decorator pattern
-8) Observer pattern
-9) Command pattern
-10) Strategy pattern
-11) State pattern
-12) Template method pattern
+1) Singleton design Pattern
+2) Factory Method design pattern
+3) Abstract Factory design pattern
+4) Builder design pattern
+5) Prototype design pattern
+6) Adapter design pattern
+7) Decorator design pattern
+8) Observer design pattern
+9) Command design pattern
+10) Strategy design pattern
+11) State design pattern
+12) Template method design pattern
 
 
 1) Singleton pattern -
@@ -24,7 +24,7 @@ software development.
     Explanation -
 
     Since we need to restrict the class to generate object multiple times.
-    As we know that everytime when we generate object constructor is getting called everytime,
+    As we know that everytime when we generate object, constructor is getting called everytime,
     so if we restrict to call the constructor then our job will done. so first thing we will make
     our constructor as private after making private, no one can create object outside of that class.
 
@@ -61,7 +61,7 @@ software development.
     basically we create a class which has all the responsibility that of which child class we need to
     create objects.
 
-    The super class will be either interface or a abstract class.
+    The super class will be either interface or an abstract class.
 
     Basically in factory design pattern we create a class and in that class we will create objects
     and return objects of another class as per parameter.

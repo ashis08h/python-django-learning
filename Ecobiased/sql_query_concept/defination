@@ -317,7 +317,7 @@ WITH KEYWORD -
         )
         INSERT INTO Error_information(record_id, table_name, error_description)
         SELECT record_id, 'stg_intro_program', 'Item missing' FROM stg_intro_program AS stg,
-        CTE_TEMP as temp WHERE stg.item = tem.item AND stg.location = temp.location;
+        CTE_TEMP as temp WHERE stg.item = temp.item AND stg.location = temp.location;
 
 GROUP BY AND HAVING CLAUSE -
     The GROUP BY and HAVING clauses in SQL Server are used together to group the rows that have
@@ -340,7 +340,7 @@ DENSE_RANK() FUNCTION -
         ORDER BY order_expression [ASC|DESC]
     )
 
-    PARTITION BY - Option clause that divides the result set into partitions to which the function
+    PARTITION BY - Optional clause that divides the result set into partitions to which the function
     is applied separately. If not specified, the function operates on the entire result set.
 
     Example 1- WITHOUT PARTITION CLAUSE

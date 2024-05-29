@@ -1125,4 +1125,116 @@ steps -
     We can download that file.
     In that file there will be some details of all the users we have.
 
+77) What is the full form of S3?
+    Simple storage system.
+    we can store upto infinite data into s3.
 
+    We can store data into google drive so google drive is also a type of storage service but s3 is giving more features than google drive.
+
+78) As developer what is the use case of s3?
+    As a developer we can ask a user to upload a data then we can store that data into the server, but it is not relieble whenever server will crash data will also lost.
+    so we store data into a relieble place that is s3 bucket of AWS.
+
+    If we work on a video streaming application then we can store the videos on the S3 so we can easily retrieve data from s3.
+
+    As a devops person we can store the build of an application.
+    we can enable the versoning of a data.
+
+    We can use AWS S3 bucket as a storage as well as backup.
+
+    In S3 there are multile tier for example we have a hotel management application or a hospital management then we can store all older the bill generated and prescription generated.
+    Now the data which we do not need frequently those things we can store in those tier which will take less amount and to fetch it takes more time and the data which we need to fetch regularly those data we can store in such a tier which takes less time to fetch and aws will charge more to this tier.
+
+    we can host a static website also to s3 aws which does not contains any api any server things simple html, css javascript website.
+
+79) How S3 will charge?
+    Suppose we have store 1 GB data in the s3 storage then AWS will charge amount for 1 GB data as well as how much data it is transferred outside how much request comes to download those data AWS will charge for these things also.
+
+    while using the s3 first we need to create a folder that is called bucket. we can create bucket in a particular AWS region.
+
+    while creating bucket in s3 we need to give such a bucket name which is not present into s3 inside all the region.
+
+    Whenever we create snapshot or ami aws will store that into s3 bucket.
+
+80) How to create a bucket in the AWS?
+    1) Go to s3 dashboard and click on buckets.
+    2) Click on the create bucket 
+    3) fill bucket name, select versoning enable or disable, object ownership and click on create button.
+
+81) How to create an object of aws?
+    1) choose a bucket in s3.
+    2) click on upload button to upload the files and folder.
+    3) create object means upload files or folder inside the bucket.
+
+82) How to access a file from s3?
+    1) Select a file in the bucket.
+    2) Click on open button then it will open into new tab.
+
+83) Rules to create bucket name?
+    1) Bucket name should not contain capital letters.
+    2) Bucket name should not contain any special character.
+    3) Bucket name length should contain between 3 and 63 chars.
+    4) Bucket name should not contain any ip address.
+    5) First char of a bucket name only starts with small letter or number.
+
+84) How to access an object publically?
+    Whenever we create a bucket and upload an object then it will not acessible publically. so we need to create a policy.
+
+    steps to create a policy
+    1) Select a bucket and go to permission tab.
+    2) Either you can enter the policy into given input place or you can Click on policy generator.
+    3) choose policy type (Ex - s3 bucket policy), Effect (allow or deny), 
+    enter value in the principal (whome you wanted to give permission * for all.)
+    choose actions, fill Amazon resource name.
+    4) Click on generate policy.
+    5) Add /* to give access of all the objects inside a bucket.
+    6) Neet to uncheck the checkbox for block all public access.
+
+85) What are the properties of an object?
+    ARN - Amazon resource name 
+    We use ARN when we wanted to make the object publically.
+
+    Use of tag in the object of a bucket.
+    When we wanted to configure some lifecycle such as we wanted to keep an object in the bucket upto 7 days after that automatially it should delete then we can use the tag such as we can configure above rule for a particular tag such as temp or anything.
+    Whenever we upload an object inside bucket there is a metadata of each object.
+    There are two types of metadata 
+    a) System defined. - inbuilt metadata
+    b) User defined. - user will add their custom metadata
+
+    In the bucket there is no such a concept to create a folder airflow just give the UI in such a way that it looks like we work inside a folder.
+
+    Example 1 - 
+    cources/abc.jpg
+    here prefix is cources and file name is abc.jpg
+
+    Example 2 - 
+    cources/ashish/abc.jpg
+    here prefix is cources/ashish and file name is abc.jpg
+
+    Maximum size of an object which we can upload to a bucket is 5 TB.
+    When we upload bigger objects into the bucket we need to enable multi part.
+
+86) What is versioning - prevent an object from deletion?
+    Suppose we have a uploaded a file into s3 bucket after 5 days we update some thing into that file and reuploaded that with a same name then that file will be replaced actually 2nd time then if we need the first file then it is not possible to get that because of this only we enable versioning.
+
+    We can enable versioning on the level of bucket level not the object level.
+
+    steps to enable versioning.
+    1) Go inside any bucket.
+    2) Go to properties tab.
+    3) Click on the edit versioning.
+    4) Select enable then click on the save changes button.
+
+    If we enable the versioning to a bucket then AWS will charge more.
+
+    If we create more version to an object then AWS will assign the same key to all the file versioning, in this case versioning ID will come into play.
+
+    If we delete a file after enabling the versioning then it will not delete permanently we can retrieve that file after deleting the delete marker.
+    In this way we can prevent a file which got deleted accidently by mistake.
+
+    How We can permanently delete a file ?
+    1) On the show versioning in the object list inside a bucket.
+    2) Select a file and delete that permanently.
+
+    When we suspended the versioning then whatever file we have created before 
+    those file's versioning will be still there. from new one objects versioning will not be created. we can not disable the versioning only we can suspend it. 

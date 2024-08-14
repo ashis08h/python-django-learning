@@ -38,6 +38,7 @@
             settings.py
             urls.py
             wsgi.py
+            asgi.py
 
     Above are the directory structure when we create a project it comes.
 
@@ -48,12 +49,16 @@
     __init__.py - It tells us that the current directory is a package.
 
     settings.py - It is a configuration file or we can say settings file which consists all the
-        configurational settings, db connections, middleware etc
+        configuration settings, db connections, middleware etc
 
     urls.py - It contains all the urls which is used in our projects.
 
     wsgi.py - It is an entry point for our application which is used by the web server to serve our
         project.
+
+    asgi.py - It stands for Asynchronous server gateway interface
+    It allows the asynchronous communication between web server and web application. Making it suitable
+    to handle both type of request synchronous as well as asynchronous.
 
 4) Explain the directory structure of django apps?
 

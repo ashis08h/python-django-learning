@@ -101,7 +101,7 @@ their own methods and properties.
 There are 5 types of inheritance in python
 
 Single inheritance
-When we derive a class from single a parent class it is known as single inheritance
+When we derive a class from a single parent class it is known as single inheritance
 this is basic inheritance.
 
 Multiple Inheritance
@@ -175,7 +175,7 @@ from package_name import module_name
 Package1
     __init__.py
     module1
-    module1
+    module2
     supackage
         __init__.py
         submodule1
@@ -324,7 +324,114 @@ What is the difference between NAN and None in python?
     in various situations, such as the default return value for functions that do not 
     explicitly return a value.
     
+which one is faster between list and tuple and why?
+Ans -
+In Python, tuples are generally faster than lists. This is because tuples are immutable, meaning
+their elements cannot be changed after creation, which allows for various optimizations that improve
+performance.
+Lists, on the other hand are mutable and can be modified (elements can be added, removed, or changed),
+which adds overhead for memory management and element manipulation.
+
+Here's a more detailed comparison:
+
+Memory Usage: Tuples use less memory than lists, making them more memory-efficient.
+Iteration: Iterating over a tuple is faster than iterating over a list.
+Immutability: Tuples are immutable, which allows for certain optimizations and safer use as keys in
+dictionaries or elements in sets.
+Operations: Lists are more versatile due to their mutability, allowing for a wider range of operations
+like appending, inserting, and removing elements.
+
+What is multiprocessing and how it different between multi threading?
+Ans -
+In Python involves using multiple process to execute code, allowing tasks to run in parallel on multiple
+CPU cores. This approach is particularly benefical for cpu-bound tasks as it can significantly reduce exec-
+tion time.
+
+Difference between multiprocessing and multithreading
+
+1) Concurrency model -
+    Multprocessing involves multiple process, each with its own memory space. This avoids the global
+    interpretor lock(GIL) limitation allowing true parallelism.
+    Multithreading involves multiple threads within the same process sharing the same memory space. due to
+    GIL in cpython, threads can not execute bytecode simultaneously, limiting parallelism.
+
+2) Memory sharing -
+    Multprocessing do not share memory. communication between process needs interprocess communication(IPC)
+    mechanism like pipes or queue.
+    Multithreading share the same memory space making communication between threads easier but increasing
+    the risk of race conditions.
+
+3) Performance -
+    Multiprocessing is better for cpu-bound tasks because it can utilize multiple CPU cores.
+    Multithreading more suited for I/O-bound tasks, whereas the primary constraint is waiting for
+    external resources rather than CPU processing power.
+
+4) Fault Isolation -
+    Multiprocessing A crash in one process does not effect other process.
+    Multithreading A crash in one thread can potentially bring down the entire process.
+
+What is strip method in python?
+Strip method in python used to remove leading and trailing whitespace from a string.
+we can remove other things also from a string. whatever value we pass inside parenthesis of strip method
+it will remove that.
+
+we have lstrip and rstrip methods which remove leading and trailing whitespace from a text.
 
 
+what is assert keyword in python?
+what is procedure in python.
+how to print "Hi" in python
+how to insert null values in postgres
+
+What is assert keyword in python?
+The assert keyword in python used as a debugging aid that tests a condition as an internal
+self check in a program. The assert keyword allows you to write assertions in your code. Assertions
+are statements that you believe are always true at that point in your program.
+If an assertions fails, python will raise an assertionError exception.
+
+Example
+x = 5
+y = 10
+assert x < y, "x should be less than y"
+
+what is context in python?
+context in python is refers an environment where python execute code. python handle this
+scenario with help of with statement and context manager.
+Basically context manager is an object which provide two dunder methods __enter__ and __exit__
+for entering and exiting to the context.
+
+when we deal with file system in those scenario when we open a file and if we forget to
+close it then there is a chance to data leak so context will help here to close the file.
+
+how to work with multiple database in django?
+
+how to check password of a user in django?
+if user is not None:
+    password = 'input_password'
+    if user.check_password(password):
+        print("Password is correct.")
+    else:
+        print("Password is incorrect.")
+how to prevent a specific value in django model
+in django how we can return a pdf to browser
 
 
+num1 = 123
+digit_sum = sum(map(int, str(num1)))
+print(digit_sum)
+
+how to create a custom context manager
+l1=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+
+
+l1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
+dict1 = {x**2 if x%2 == 0 else x**3: x for x in l1 }
+print(dict1)
+
+
+x = 5
+y = 5
+how we can say that both are same object in python
+
+In Python, you can check if two variables point to the same object using the is operator. The is operator checks whether two variables refer to the same object in memory.
+x is y checks if both x and y refer to the same object in memory.

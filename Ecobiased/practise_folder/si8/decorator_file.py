@@ -86,3 +86,24 @@ def sub_number(a, b):
 
 
 print(sub_number(4, 2))
+
+def add_sum2(func):
+    def wrapper():
+        result = func()
+        return result + '#'
+    return wrapper
+
+
+def add_symbol(func):
+    def wrapper():
+        result = func()
+        return result + '!'
+    return wrapper
+
+@add_sum2
+@add_symbol
+def hello_text():
+   return "Ashish kumar"
+
+
+print(hello_text())

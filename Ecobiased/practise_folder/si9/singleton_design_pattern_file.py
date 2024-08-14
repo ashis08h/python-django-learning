@@ -31,16 +31,16 @@ class Singleton1:
         return cls.__instance
 
 
-s1 = Singleton1()
-s2 = Singleton1()
+s11 = Singleton1().create_instance()
+s12 = Singleton1().create_instance()
 
-print(s1.create_instance() is s2.create_instance())
+print(s11 is s12)
 
 
 class Singleton2:
 
-    __lock = threading.Lock()
     __instance = None
+    __lock = threading.Lock()
 
     def __new__(cls):
         with cls.__lock:
@@ -49,15 +49,18 @@ class Singleton2:
         return cls.__instance
 
 
-s1 = Singleton2()
-s2 = Singleton2()
-print(s1 is s2)
+s21 = Singleton2()
+s22 = Singleton2()
+print(s21 is s22)
 
 
-class Singleton3():
+class Singleton3:
 
     __instance = None
     __lock = threading.Lock()
+
+    def __init__(self):
+        pass
 
     @classmethod
     def create_instance(cls):
@@ -67,6 +70,6 @@ class Singleton3():
         return cls.__instance
 
 
-s1 = Singleton3()
-s2 = Singleton3()
-print(s1.create_instance() is s2.create_instance())
+s31 = Singleton3().create_instance()
+s32 = Singleton3().create_instance()
+print(s31 is s32)

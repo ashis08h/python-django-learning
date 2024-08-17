@@ -7,6 +7,8 @@ from django.shortcuts import render
 from django.db.models import Q
 from django.db.models.signals import post_save, pre_init
 from django.dispatch import receiver
+from .serializers import AuthorSerializer
+from django.views.generic import ListView
 # Create your views here.
 
 class BookView(View):
@@ -62,6 +64,42 @@ class SessionView(View):
         return HttpResponse("I am from Session View.")
 
 
-def send_email(sender, instance, created, **kwars):
-    
+@receiver(post_save, sender=Author)
+def send_email(sender, instance, created, **kwargs):
+    print("I am from send email")
+    print("sender", sender)
+    print("instance", instance)
+    print("created", created)
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+
+@receiver(pre_init, sender=Author)
+def access_model(sender, *args, **kwargs):
+    print("I am from access model.")
+    print("sender", sender)
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+
+class AuthorView(View):
+    def post(self, request):
+        author = Author()
+        author.name = 'CustomAuthor'
+        author.save()
+        return HttpResponse('Author created successfully.')
+
+    def get(self, request):
+        authors = Author.objects.all()
+        authorserializer = AuthorSerializer(authors, many=True)
+        print("serializer", authorserializer.data)
+        return render(request, 'author.html', context={'authors': authorserializer.data})
+
+
+class PostListView(ListView):
+
+    model = Post
+    template_name = 'post.html'
+    context_object_name = 'posts'
+
 

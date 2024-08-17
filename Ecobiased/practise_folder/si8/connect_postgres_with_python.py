@@ -8,7 +8,7 @@ db_port = 'db_port'
 
 connection = psycopg2.connect(dbname=dbname, host=dbhost, user=dbuser, password=db_password, port=db_port)
 
-cursor = connection.cusrsor()
+cursor = connection.cursor()
 
 query = 'SELECT * FROM Table_name;'
 

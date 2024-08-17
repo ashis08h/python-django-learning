@@ -16,3 +16,17 @@ print(p1.age)
 p2 = Person.from_str('Ashish_23')
 print(p2.name)
 print(p2.age)
+
+
+class a:
+    pass
+
+class b(a):
+    pass
+
+class c(a):
+    pass
+
+
+class d(b,c):
+    pass

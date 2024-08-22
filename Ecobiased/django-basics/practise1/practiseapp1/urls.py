@@ -10,5 +10,5 @@ urlpatterns = [
     path('session', SessionView.as_view(), name='session_view'),
     path('author', AuthorView.as_view(), name="auther_view"),
     path('posts', PostListView.as_view(), name='post_view'),
-    path('post/<int:pk>', PostDetailView.as_view(), name='post_delete_view')
+    path('post/<int:pk>', PostDetailView.as_view(), name='post_delete_view'),
 ]

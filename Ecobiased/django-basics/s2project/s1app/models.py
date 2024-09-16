@@ -1,4 +1,5 @@
 from django.db import models
+from django.core.exceptions import ValidationError
 
 
 class Author(models.Model):
@@ -56,6 +57,50 @@ class Man(models.Model):
 class Woman(models.Model):
     name = models.CharField(max_length=250)
     person = models.OneToOneField(Person, on_delete=models.CASCADE)
+
+# approach 1
+# class Product(models.Model):
+#     name = models.CharField(max_length=200)
+#     description = models.TextField()
+
+
+    # def clean(self):
+    #     # call the parent class clean to maintain built-in validation.
+    #     super().clean()
+    #     print("come here")
+    #     if self.name == 'ForbiddenName':
+    #         print("come here 2")
+    #         raise ValidationError({"name": "The name \"forbidden\" is not allowed."})
+
+# approach 2
+def validate_not_forbidden_name(value):
+    if value == 'test':
+        raise ValidationError('The name test is not allowed.')
+
+class Product(models.Model):
+    name = models.CharField(max_length=200, validators=[validate_not_forbidden_name])
+    description = models.TextField()
+
+    def __str__(self):
+        return self.name
+
+# approach 3
+
+# class Product(models.Model):
+#     name = models.CharField(max_length=200)
+#     description = models.TextField()
+#
+#     def clean_name(self):
+#         if self.name == 'test':
+#             raise ValidationError("The name test is not allowed.")
+#
+#     def __str__(self):
+#         return self.name
+
+
+
+
+
 
 
 

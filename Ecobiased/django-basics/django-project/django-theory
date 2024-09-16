@@ -663,6 +663,39 @@ Django rest framework
     myenv\Scripts\activate - Windows
     source myenv/Scripts/activate - Linux
 
+46) How to deal with multiple databases in a django project.
+
+    In settings.py file need to add all the database connections.
+    to migrate the database we need to use python manage.py migrate --database <dbname>
+
+    how to store data into one of the databases?
+    obj = Post(name = 'ashish')
+    obj.save(using='<keyname_added_in_the_settings>')
+
+    How to get data fro database?
+    Post.object.all().using('new')
+
+47) How to prevent any specific value to be store in django model?
+
+    there are multiple way to do that here we will discuss two ways to do that.
+
+    1) With help of clean method.
+    2) with help of validators.
+
+48) How to hashed a plain password in django?
+    Django.contrib.auth.hashers provide the make_password method
+    hashed_password = make_password(plain_password)
+
+49) How to compare the password of user object password in django?
+    there are two ways to do that.
+    a) using authenticate method
+        from django.contrib.auth import authenticate
+        user = authenticate(user = 'username', password = 'password')
+        the value of user will be either None or user object.
+
+    b) using check_password method.
+        User object provides check_password method to validate the password.
+
 
 
 

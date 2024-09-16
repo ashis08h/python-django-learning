@@ -1,12 +1,16 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Book, Post, School, SaraswatiVidyaMandir, Person, Employee,\
-                     Manager, Man, Woman, Author
+                     Manager, Man, Woman, Author, Product
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Q
 from django.db.models.signals import post_save, pre_init
 from django.dispatch import receiver
+from .serializers import AuthorSerializer
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
 # Create your views here.
 
 class BookView(View):
@@ -62,6 +66,84 @@ class SessionView(View):
         return HttpResponse("I am from Session View.")
 
 
-def send_email(sender, instance, created, **kwars):
-    
+@receiver(post_save, sender=Author)
+def send_email(sender, instance, created, **kwargs):
+    print("I am from send email")
+    print("sender", sender)
+    print("instance", instance)
+    print("created", created)
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+
+@receiver(pre_init, sender=Author)
+def access_model(sender, *args, **kwargs):
+    print("I am from access model.")
+    print("sender", sender)
+    for key, value in kwargs.items():
+        print(f"{key}: {value}")
+
+
+class AuthorView(View):
+    def post(self, request):
+        author = Author()
+        author.name = 'CustomAuthor'
+        author.save()
+        return HttpResponse('Author created successfully.')
+
+    def get(self, request):
+        authors = Author.objects.all()
+        authorserializer = AuthorSerializer(authors, many=True)
+        print("serializer", authorserializer.data)
+        return render(request, 'author.html', context={'authors': authorserializer.data})
+
+
+class PostListView(ListView):
+
+    model = Post
+    template_name = 'post.html'
+    context_object_name = 'posts'
+
+
+class PostDetailView(DetailView):
+
+    model = Post
+    template_name = 'post_detail.html'
+    context_object_name = 'post'
+
+
+class TestMultipleDbView(View):
+
+    def get(self, request):
+        post = Post.objects.all().using('new')
+        print('post', post)
+        return HttpResponse("I am from multipledbclass.")
+
+
+class ProductView(View):
+
+    def get(self, request):
+        plain_password = "Ashish"
+        hashed_password = make_password(plain_password)
+        print("hashed_password", hashed_password)
+        try:
+            user = User.objects.get(username = 'ashish')
+            is_correct_password = user.check_password('ashish1')
+            print("is_correct_password", is_correct_password)
+        except:
+            user = None
+        print(user)
+        return render(request, 'product.html')
+
+    def post(self, request):
+        name = request.POST.get('name')
+        desc = request.POST.get('description')
+        product = Product()
+        product.name = name
+        product.description = desc
+        product.full_clean()
+        product.save()
+        return HttpResponse("sucessfully submitted the records.")
+
+
 

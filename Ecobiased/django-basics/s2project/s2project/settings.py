@@ -48,6 +48,9 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    's1app.middleware.CustomMiddleware',
+    's1app.middleware.BlockIpMiddleware',
+    's1app.middleware.AddContextMiddleware'
 ]
 
 ROOT_URLCONF = 's2project.urls'
@@ -63,6 +66,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                's1app.context_processor.custom_template'
             ],
         },
     },
@@ -78,7 +82,11 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
         'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    },
+    'new': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite4',
+        }
 }
 
 
@@ -123,5 +131,4 @@ STATIC_URL = '/static/'
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
 SESSSION_ENGINE = 'django.contrib.sessions.backends.file'
-print("base_dir", BASE_DIR)
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'

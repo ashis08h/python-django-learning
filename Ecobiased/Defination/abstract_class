@@ -1,6 +1,0 @@
-Abstract class in python is a special type of class which can not be instantiated just use as
-a blueprint to some base classes. we can make a class as abstract with help of ABC class from abc module.
-
-Abstract methods will be a part of abstract class those methods will not have implementations in abstract
-class, there implementation will be there in base class. We can make a method as abstract with help of
-abstractmethod decorator.

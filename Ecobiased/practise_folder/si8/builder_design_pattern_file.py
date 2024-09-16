@@ -27,9 +27,9 @@ class BuilderClass:
 
 
 bc = BuilderClass('brand1')
-bc.add_cpu('cpu1').build()
+bc = bc.add_cpu('cpu1').build()
 print(bc)
 
 bc1 = BuilderClass('brand2')
-bc1.add_cpu('cpu2').build()
+bc1 = bc1.add_cpu('cpu2').build()
 print(bc1)

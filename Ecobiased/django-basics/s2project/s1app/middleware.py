@@ -55,12 +55,12 @@ class AddContextMiddleware:
         response = self.get_response(request)
         if hasattr(response, 'context_data'):
             print("come here in tem2")
-            response.context_data['common_variable'] = 'This is common data.'
+            #response.context_data['common_variable'] = 'This is common data.'
         return response
 
     def process_template_response(self, request, response):
         print("come here in tem1")
         if hasattr(response, 'context_data'):
             print("come here in tem2")
-            response.context_data['common_variable'] = 'This is common data.'
+            #response.context_data['common_variable'] = 'This is common data.'
         return response

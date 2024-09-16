@@ -696,6 +696,197 @@ Django rest framework
     b) using check_password method.
         User object provides check_password method to validate the password.
 
+50) What is celery in django?
+    celery is a powerful tool for handling asynchronous tasks in django, offering features like
+    tasks queues, periodic tasks, and distributed task execution. It's ideal for scenarios where
+    you need to run background process and scale your application. However for simple, time-based
+    tasks at the system level, cron job might be more appropriate due to their simplicity and ease of
+    setup.
+
+    A celery is an asynchronous task queue/job queue used for real-time operation in django application.
+    It allows to execute tasks outside of your main application, which is particularly useful for tasks
+    that are time consuming or require expensive processing.
+
+    Celery is ideal for -
+    a) Asynchronous task execution.
+        Running tasks in the background without blocking the main application.
+        For example - sending email, processing data etc.
+
+    b) Scheduling periodic task.
+        Scheduling tasks to run at specific intervals, similar to cron jobs.
+
+    c) Distributed task queue.
+        Distributing tasks across multiple workers, enabling parallel processing and improving scalability.
+
+    Why use celery in django?
+        a) Improved performance - offload heavy or long-running tasks to the background, improving
+            the performance of your web application.
+
+        b) Scalability - Distribute tasks across multiple workers, allowing your application to scale
+            as workload increases.
+
+        c) Reliability - Celery provide mechanism to retries failed tasks, ensuring that important
+            tasks are eventually completed.
+
+    Installation steps -
+
+        1) Install celery and a message broker (Redis or Rabbit MQ).
+            pip install celery
+            pip install redis
+
+        2) Set up redis or Rabbit MQ.
+            redis-server
+
+        3) Configure Celery in django
+            In your django project, create a file celery.py in the same directory
+            where settings.py file is placed
+
+        4) Update you __init__.py file in the same directory as celery.py file is placed, to ensure
+            that celery.py is loaded when django starts.
+
+        5) Configure celery settings in django.
+
+        6) Create and register a task.
+            In django app, create a 'tasks.py' file. Define a task inside it. use @shared_task decorator
+            to register the task so celery can discover that task and run it.
+
+        7) Run celery worker in your project directory
+            celery -A myproject worker -1 info
+
+        8) Executing tasks
+            You can execute tasks from anywhere in the django project. use .delay() to call tasks
+            asynchronously.
+
+    Celery vs cron job
+
+        Celery and cron jobs both handle task scheduling, but they serve different purposes and have
+        distinct characteristics.
+
+        Asynchronous tasks -
+        Celery - Yes, handles tasks in the background.
+        Cron Jobs - No, run tasks at scheduled times only.
+
+        Task management -
+        Celery - Manages and track tasks, retries on failure.
+        Cron Jobs - No task management or retries.
+
+        Scalability -
+        Celery - Scalable with distributed task queues and workers.
+        Cron Jobs - No inherently scalable, limited to server capacity.
+
+        Use cases -
+        Celery - Suitable for web applications requiring background processing and tasks queues.
+        Cron Jobs - Best for simple repetitive system-level tasks.
+
+        Complexity -
+        Celery - Higher complexity, requires setup of broker and worker.
+        Cron Jobs - Simple, requires only cron configuration.
+
+        Error Handling -
+        Celery - Built-in error handling and retries mechanism
+        Cron Jobs - No built-in error handling.
+
+        Integration -
+        Celery - Integrated tightly with django.
+        Cron Jobs - Independent of django, runs at OS level.
+
+        To schedule a task periodically in the celery you need to start celery beat
+        celery -A myproject beat -l info
+
+        To scale the number of workers manually need to run below command
+        celery -A myproject worker -l info --concurrency=4
+
+51) What is cron job in django?
+    To configure cron job in django project, you can use several approaches. The most common way is
+    to use a package like django-crontab or django-celery-beat(if you are already using celery).
+
+    Using django-crontab
+    crontab allows you to easily add list, and remove cron jobs directly from django project.
+
+    1) Install django-crontab
+        pip install django-crontab
+
+    2) Add django-crontab to install apps in the settings.py file.
+
+    3) Define the cron job in settings.
+
+    4) Create the cron job function.
+
+    5) Manage the cron job.
+        Add cron jobs
+            python manage.py crontab add
+
+        View list of cron jobs.
+            python manage.py crontab show
+
+        Remove cron jobs.
+            python manage.py crontab remove
+
+    Advantages and use cases
+        Advantage:
+            Easy Integration - Django-crontab is easy to integrate with existing django project.
+            Simplicity - It simplifies scheduling tasks without needing to manage additional tools like
+                celery.
+            Direct Execution -
+                you can execute any django management command or a specific function as cron job.
+
+        Use cases:
+            Running periodic maintenance tasks, such as database cleanup.
+            Sending out daily reports or summary.
+            Syncing data between systems at regular intervals.
+
+52) What is django rest framework(DRF)?
+    Django rest framework is a powerful and flexible toolkit for building web apis in django. It provides
+    a comprehensive set of features to handle everything from basic CRUD operations to more advanced
+    features like authentication, serialization, and permissions.
+
+    1) Installation
+        pip install djangorestframework
+
+    2) Add rest_framework in the installed_apps
+
+    We can configure throttling also in the settings file of django.
+    Throttling can be configured to limit the number of requests a user can make in a given time frame.
+
+    API Documentation -
+    DRF provides a browsable API by default, but you can also generate documentation using packges
+    like 'drf-yasg' or 'django-rest-swagger'.
+
+    pip install drf-yasg
+
+    Summary of features we can do in django rest framework -
+    a) Serialization - convert data between python objects and JSON.
+    b) Views - Handle HTTP request with various class-based-views.
+    c) Authentication and Permissions - Secure your APIS with authentication and custom permission.
+    d) Viewsets and router - Simplify your URL routing with viewsets.
+    e) Pagination - Manage large datasets with paginated results.
+    f) Filtering, ordering and searching - Allowing dynamic queries in your APIs
+    g) Throttling - Control the rate of requests to your APIs.
+    h) API Documentation - Generate and display API documentation.
+
+53) What is Router in the DRF(Django rest framework) and how it is different from normal django url path?
+    In django REST Framework (DRF), a router is a component that automatically maps URLs to viewsets.
+    Router provide a convenient ad consistent way to define the URL patterns for you API. They differ from
+    the traditional django 'urlpatterns' in that they are specifically designed to work with viewsets
+    and simplify the creation of RESTful APIs.
+
+    Viewsets - A viewsets is a class that combines the logic for multiple views like(list, create, retrieve
+    , update, and delete) into a single class. This makes it easier to manage and maintain API Views.
+
+    Routers - A router is responsible for automatically generating the URL patterns that correspond
+     to the methods in a viewset. It understands the standard action like 'list', 'create', 'retrieve',
+     'update', and 'destroy', and maps them to appropriate HTTP methods('GET', 'POST', 'PUT', 'DELETE')
+     and urls.
+
+     Benefits of using Routers -
+     a) Reduced Boilerplate - Routers reduce the amount of code you need to write by automatically
+        generating the standard RESTful routes.
+     b) Consistency -
+     c) DRY Principle -
+     d) Automatic URL Generation -
+
+
+
 
 
 

@@ -1,0 +1,37 @@
+Topics we will discuss here.
+1) What is procedural programing language.
+2) What is Object orientation programing language.
+3) What is Class.
+4) What is Object.
+5) Features of oops
+    a) Inheritance
+    b) Polymorphism
+    c) Encapsulation
+6) What is Access Modifiers or Access specifiers.
+7) What is Constructor
+8) What is Abstract class and abstract methods
+9) What is Class method
+10) What is Self keyword
+11) What is Static method
+12) What is Super keyword
+
+1) What is procedural programing language.
+2) What is Object orientation programing language.
+
+
+Before we were using procedural programing language where we used to write logic inside methods.
+then we have shifted to oops where we write our logics in methods but we keep related methods
+and properties together inside a class. and we access the methods and the properties with help of
+objects. Oops also maps our variables with real world concepts.
+
+3) What is Class.
+4) What is Object.
+
+class is a blueprint of an object which will have all the properties and methods.
+where properties are the data and methods are the action to be performed.
+
+object is an instance of a class which will have their own properties and methods.
+what are the methods which is defined inside a class their objects can use those methods.
+
+For example Person is a class it has their properties like name, age, dob and some methods like
+CanTalk(), CanWalk(), CanBreathe()

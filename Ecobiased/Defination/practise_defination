@@ -309,7 +309,7 @@ In python how many way we can declare tuple?
     my_list = [[1,2,3],['a', 'b', 'c']]
     single_list = [23]
 
-What is the difference between NAN and None in python?
+1) What is the difference between NAN and None in python?
 
     NaN - It stands for Not a number. It is typically associated with numeric data
     type especially in the context of floating-point arithmetic.
@@ -324,12 +324,12 @@ What is the difference between NAN and None in python?
     in various situations, such as the default return value for functions that do not 
     explicitly return a value.
     
-which one is faster between list and tuple and why?
+2) which one is faster between list and tuple and why?
 Ans -
 In Python, tuples are generally faster than lists. This is because tuples are immutable, meaning
 their elements cannot be changed after creation, which allows for various optimizations that improve
 performance.
-Lists, on the other hand are mutable and can be modified (elements can be added, removed, or changed),
+Lists, on the other hand lists are mutable and can be modified (elements can be added, removed, or changed),
 which adds overhead for memory management and element manipulation.
 
 Here's a more detailed comparison:
@@ -341,22 +341,23 @@ dictionaries or elements in sets.
 Operations: Lists are more versatile due to their mutability, allowing for a wider range of operations
 like appending, inserting, and removing elements.
 
-What is multiprocessing and how it different between multi threading?
+3) What is multiprocessing and how it different from multi threading?
 Ans -
 In Python involves using multiple process to execute code, allowing tasks to run in parallel on multiple
 CPU cores. This approach is particularly benefical for cpu-bound tasks as it can significantly reduce exec-
 tion time.
 
+
 Difference between multiprocessing and multithreading
 
 1) Concurrency model -
-    Multprocessing involves multiple process, each with its own memory space. This avoids the global
+    Multiprocessing involves multiple process, each with its own memory space. This avoids the global
     interpretor lock(GIL) limitation allowing true parallelism.
     Multithreading involves multiple threads within the same process sharing the same memory space. due to
     GIL in cpython, threads can not execute bytecode simultaneously, limiting parallelism.
 
 2) Memory sharing -
-    Multprocessing do not share memory. communication between process needs interprocess communication(IPC)
+    Multiprocessing do not share memory. communication between process needs interprocess communication(IPC)
     mechanism like pipes or queue.
     Multithreading share the same memory space making communication between threads easier but increasing
     the risk of race conditions.

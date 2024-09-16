@@ -1,43 +1,46 @@
 # example of single inheritance
 
-class Employee:
+class Person:
 
     def __init__(self, name):
-        print("call constructor now.")
+        print("call constructor now")
         self.name = name
 
     def show(self):
         return f"My name is {self.name}."
 
 
-class Manager(Employee):
+class Employee(Person):
 
-    def get_saralry(self, salary):
-        return f"My salary is {salary}"
+    def __init__(self, name):
+        super().__init__(name)
 
-
-print("start here")
-m = Manager('Ashish')
-print(m.show())
-print(m.get_saralry(2300))
+    def get_salary(self, salary):
+        return f"My name is {self.name} and my salary is {salary}"
 
 
-# example of multiple inheritance.
+p = Employee('Ashish')
+print(p.show())
+print(p.get_salary(34))
+
+
+# example of multiple inheritance
+
 class Employee1:
     def __init__(self):
-        print("I am from employee1.")
+        print("I am from Employee1")
 
 
 class Employee2:
     def __init__(self):
-        print("I am from employee2.")
+        print("I am from Employee2")
 
 
-class EmployeeMain(Employee2, Employee1):
+class MainEmployee(Employee1, Employee2):
     pass
 
 
-em = EmployeeMain()
+me = MainEmployee()
 
 
 class A:

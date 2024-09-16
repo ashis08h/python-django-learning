@@ -1,2 +1,0 @@
-Class method is a type of method which is used to change the value of a class variable which is
-declare globally. generally we declare class method with the help of @classmethod variable.

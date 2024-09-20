@@ -1,16 +1,23 @@
 from django.shortcuts import render
 from django.views import View
 from .models import Book, Post, School, SaraswatiVidyaMandir, Person, Employee,\
-                     Manager, Man, Woman, Author, Product
+                     Manager, Man, Woman, Author, Product, NoteBook
 from django.http import HttpResponse
 from django.shortcuts import render
 from django.db.models import Q
 from django.db.models.signals import post_save, pre_init
 from django.dispatch import receiver
-from .serializers import AuthorSerializer
+from .serializers import AuthorSerializer, NoteBookSerializer
 from django.views.generic import ListView, DetailView
 from django.contrib.auth.hashers import make_password
 from django.contrib.auth.models import User
+from .tasks import add
+from rest_framework import generics, viewsets
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsAdminOrReadOnly
+from rest_framework import filters
+
+
 # Create your views here.
 
 class BookView(View):
@@ -133,6 +140,8 @@ class ProductView(View):
         except:
             user = None
         print(user)
+        result = add.delay(2, 4)
+        print("result_id", result.id)
         return render(request, 'product.html')
 
     def post(self, request):
@@ -144,6 +153,34 @@ class ProductView(View):
         product.full_clean()
         product.save()
         return HttpResponse("sucessfully submitted the records.")
+
+class NoteBookListCreateView(generics.ListCreateAPIView):
+    queryset = NoteBook.objects.all()
+    serializer_class = NoteBookSerializer
+    # adding permission_class then we need to register authentication in settings.py file.
+    permission_classes = [IsAuthenticated]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'author']
+    ordering_fields = ['published_date']
+
+
+class NoteBookDetailView(generics.RetrieveUpdateDestroyAPIView):
+    queryset = NoteBook.objects.all()
+    serializer_class = NoteBookSerializer
+    permission_classes = [IsAdminOrReadOnly]
+
+
+
+class NoteBookViewSet(viewsets.ModelViewSet):
+    """
+    We need to use viewsets for more complex apis.
+    """
+    queryset = NoteBook.objects.all()
+    serializer_class = NoteBookSerializer
+
+
+
+
 
 
 

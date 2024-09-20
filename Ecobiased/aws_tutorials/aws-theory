@@ -1,0 +1,216 @@
+1) What is an IDE?
+    - A software app that provides a set of tools for software development
+        a) A code editor
+        b) Debugger
+        c) compiler
+        d) And other features that facilitate the development process.
+
+2) What is Local IDEs?
+    a) Installed on a local machine.
+    b) Requires manual steps and configuration.
+    c) Limited to local system resource
+    d) Hardware and OS dependent.
+
+3) what is Cloud-based IDEs?
+    a) Accessible from any device with internet.
+    b) Scales and project needs(CPU, Memory, Storage).
+    c) Collaborative features for real-time editing and sharing.
+    d) Pre-configured with essential tools
+    e) Integrated with AWS services for seamless deployment.
+
+4) How to configure aws cli be using IAM user access key?
+    1) Need to create a user in IAM with policies AdministratorAccess, AWSCloud9User,
+        AWSLakeFormationDataAdmin
+
+    2) After creating user need to create access key and store it in some notepad file
+        AWS Access key and AWS secret key.
+
+    3) These are the steps we need to follow after that in the windows terminal-
+        $ aws configure
+        AWS Access Key ID [None]: AKIA5PEH5RQXD5R2KVD6
+        AWS Secret Access Key [None]: tpd48HWGet1C38CxeIbeynn45k3cxpharlZBlub2/K7MDENG/bPxRfiCYEXAMPLEKEY
+        Default region name [None]: us-east-1
+        Default output format [None]: json
+
+5) What is IAM?
+    IAM - AWS Identity and Access Management
+    whatever service we interact in the AWS, we are interacting with API. AWS has API for that.
+    IAM basically provide the user, groups, role to an application to interact with AWS services
+    through API. In IAM we can assign policies to a particular user to restrict or get access of a
+    particular services of AWS.
+    In shot form IAM authenticate a request(access/deny) in AWS.
+
+    We can access AWS with three ways. -
+    1) Using console
+    2) Using cli
+    3) Using API
+
+6) How many types of user we have in AWS?
+    There are two types of users in AWS
+    1) Root user - which we create with help of email address during creating AWS account in the
+        console. It is Full unrestricted
+
+    2) IAM user - which we create in IAM services that can have friendly name like John + AWS Account
+        ID or Alias. In this user We can add or remove IAM Policies as per requirements.
+        Always advisable to use IAM users not root users after creating account, because in IAM user
+        we can add policies to restrict unnecessary interacting with any services, but Root user
+        can access all the services without any restrictions.
+
+7) What is groups in IAM?
+    The best way to assign a permission to a user through groups. We can create a groups having
+    required permissions, later we can add assign users to a particular groups which requires same
+    number of policies.
+
+8) What is EC2 host and EC2 instance in AWS?
+    EC2 is a regional service, for creating a EC2 instance we need to select a region.
+    EC2 host are managed by AWS, and on top over virtual server we manage EC2 instance.
+    Basically On the virtual server EC2 is an instance of a virtual server which have a certain
+    number of cpu, ram and memory. Apart from this EC2 instance has an operating system such as
+    windows, linux, mac os, etc on the top it we install our application and run whatever we need.
+    we have full scope whatever we want to run on our virtual server.
+
+    A selection of instance types come with varying combinations of CPU, memory, storage and networking.
+
+9) What is AMI?
+    AMI stands for Amazon machine image. An AMI defines the configuration of the instance.
+    You can customize your instance and create a custom AMI.
+
+10) What is EBS snapshot?
+    A snapshot is a point-in-time backup of an instance.
+
+11) What are the Benefits of Amazon EC2?
+    Below are the following benefits of Amazon EC2 -
+    1) Elastic computing - Easily launch hundreds to thousands of EC2 instances within minutes.
+    2) Complete control - you control the EC2 instances with full root/administrative access.
+    3) Flexible - Choice of instance types, operating systems, and software packages.
+    4) Reliable - EC2 offers very high levels of availability and instances can be rapidly commissioned
+        and replaced.
+    5) Secure - Fully integrated with amazon VPC and security features.
+    6) Inexpensive - Low cost, pay for what you use.
+
+12) How to launch Amazon EC2 Instance in a public Subnet?
+    Region -> VPC(Virtual private cloud) -> Availability zones -> (Public subnet)-> EC2 instance
+
+    For an instance the data stored in EBC volume(Virtual hard disk) Elastic blob storage.
+
+    We assign security groups also to control inbound and outbound traffic come or hit the EC2 instance,
+    which behave like firewall to the instance.
+
+    The Internet gateway enables the access form/to the internet.
+
+13) What is key value pair in AWS EC2 instance?
+    Key value pair in EC2 instance used to generate a public and secret key which is used to login
+    into EC2 instance.
+
+14) What are the EC2 instance connectivity options?
+    a) SSH/Putty
+        - supports for all the operating systems.
+        - accessed by Terminal/CLI.
+        - SSH daemon.
+        - Uses instance key pair.
+        - Port 22 must be open.
+        - Anyone with key pair can access the instance.
+
+    b) RDP
+        - Supports for windows only.
+        - Accessed by desktop/visual
+        - Remote desktop service
+        - Require RDP client
+        - Port 3389 must be open
+        - Need username and password to login
+
+    c) EC2 instance connect
+        - supports for all operating systems.
+        - accessed by Terminal/CLI/Browser.
+        - SSH daemon.
+        - Temporary key pair.
+        - Port 22 must be open.
+        - IAM access control via policy.
+
+    d) Session Manager
+        - Supports for all operating systems.
+        - accessed by terminal/CLI.
+        - SSM agent.
+        - IAM access control.
+        - No port must be open.
+        - IAM access control via policy.
+
+15) How to RDP to windows machine?
+    - Before RDP we need to add RDP in inbound security deposits.
+
+16) How to connect other services from EC2 instance?
+    There are several scenario where we connect other services to my EC2 instance such as
+    storing data of my instance into database or some file storage.
+
+    There are multiple ways to connect other services from EC2 instance -
+    1) Using Access keys
+        In this Access keys are associated with IAM user account and the account will have their
+        policies. So the access key will be stored into the file system of instance and then
+        instance will check if the user associated with that access key has permission to access
+        other services or not such as s3 bucket, If that user has access then it will connect.
+        This way is not very much secure because we are storing access key in the file system of
+        instance. If any attackers attack to instances they can easily hack other services data also
+        which is attached to that instance.
+
+    2) Instance Profile -
+        With help of IAM Role we connect the EC2 instance with other services.
+        In this way we do not store any credentials into instance file system.
+        This is pretty much secure way.
+
+17) How to get the list of file storage directory or file list in the s3 bucket?
+    aws s3 ls
+    command to create a new bucket in s3
+    aws s3 mb s3://mytestbucket34q3r3f4d
+
+    when we connect with s3 using access key then after configure if we go to aws directory
+    cd ~/.aws then in the credentials file we can see the access key and secret key in plain text
+    which is un secure.
+
+    rm -rf * to delete everything in a current dir.
+
+18) How to connect EC2 with S3 bucket more secure way than access key?
+
+    Since to connect EC2 with other services with help of access key is not secure we can go by
+    role method.
+    a) Create a role in IAM.
+    b) Assign particular permissions as per requirement for example S3ReadOnlyAccess.
+    c) Select the instance and assign role to that instance.
+    Note - While creating Role we need to select EC2 in the use case dropdown.
+
+    command to remove a bucket in the s3
+    aws s3 rb s3://mytestbucket34q3r3f4d --force
+
+19) What is VPC (Virtual private cloud)?
+    A VPC is a logically isolated portion of AWS cloud within a region.
+    Region - > VPC -> Availability Zones - Public subnet -> EC2 instance
+
+    Subnets are created within Availability zones.
+    An Internet gateway which is used to connect internet is attached to a VPC. 1 gateway per VPC.
+    When we send signal outside to internet we call it Egress traffic.
+    When we take signal inside from internet we call it ingress traffic.
+
+    we can create multiple VPC inside an availability zone by default there are 5 VPC which we
+    can create inside an availability zone but we can request to increase it.
+
+    Each VPC has different block of IP address we call it CIDR IP Address where CIDR stands for
+    Classless Inter domain routing.
+
+    Each subnet has a block of IP Addresses from CIDR block.
+
+20) What are the VPC components?
+
+    Virtual Private Cloud (VPC) - A logically isolated virtual network in the AWS cloud.
+    Subnet - A segment of VPC's IP address range where you can place groups of isolated resources.
+    Internet Gateway/Engress- Only Internet Gateway - The amazon VPC side of a connection to
+        the public Internet of IPV4/IPV6.
+    Router - Router interconnect subnets and direct traffic between internet gateways, virtual private
+        gateways, NAT Gateways and Subnets.
+    Peering Connection - Direct private connection between two VPCs.
+    VPC Endpoints - Private connection to public AWS services.
+    NAT Instance - Enables Internet access for EC2 instances in private subnets managed by you.
+    NAT Gateway - Enables Internet access for EC2 instances in private subnets managed by AWS.
+    Virtual Private Gateway - The amazon VPC side of a virtual private network (VPN) connection.
+    Customer Gateway - Customer side of a VPN connection.
+    AWS Direct connect - High speed, high bandwidth, private network, connection from customer to AWS.
+    Security group - Instance-level firewall.
+    Network ACL - Subnet-level firewall.

@@ -214,3 +214,206 @@
     AWS Direct connect - High speed, high bandwidth, private network, connection from customer to AWS.
     Security group - Instance-level firewall.
     Network ACL - Subnet-level firewall.
+
+21) Explain S3 bucket in detail.
+
+    A bucket is a container for objects, where we store onjects.
+    In S3 bucket we store files such as word, JPEG, pdf, mp4 as object.
+    We can store millions of objects inside a bucket.
+    S3 bucket is highly scalable.
+
+    We can access our objects based on URLs
+    https://bucket.s3.aws-region.amazonaws.com/key
+    where bucket would be the name of bucket
+    aws-region would be the name of the region where we create bucket
+    key is actually the name of file in s3 bucket.
+    In S3 bucket we store object in form of key value pair where key is the name of file and
+    value is the value of that file itself.
+
+    Rest API
+    Rest - stands for representational state transfer
+    API - stands for Application Programing Interface.
+
+22) Key points on Amazon Simple Storage Service(S3).
+
+    a) You can store any type of file in S3.
+    b) Files can be anywhere from 0 bytes to 5 TB individually.
+    c) There is unlimited storage available.
+    d) S3 is a universal namespace so bucket name should be unique globally.
+    e) However, you create your buckets within a REGION.
+    f) It is a best practise to create buckets in a regions that are physically closest to
+        to your users to reduce latency.
+    g) There is no hierarchy for objects within a bucket.
+    h) Delivers strong read-after-write consistency.
+    i) Folders can be created within folders.
+    j) Buckets cannot be created within other buckets.
+    k) An objects consists of:
+        - Key(Name of the object)
+        - Version ID
+        - Value
+        - Metadata
+        - Subresources
+        - Access control information
+    AWS S3 is a public service. It is not placed under any VPC and it is always get accessed though
+    the internet.
+
+21) How to access s3 bucket from VPC?
+    There are two way to do that
+    a) Using Internet gateway - Since AWS S3 is a public service which required Internet so in the
+        VPC we can attach internet gateway and then we can connect with S3.
+
+    b) Using S3 Gateway Endpoint we can access the S3 bucket without internet access using private
+        connection.
+
+22) What is a S3 bucket?
+    S3 bucket is a container which holds multiple objects. Objects are nothing but the files which
+    we can store there. Bucket can we created inside a region. Your data will be stored under that
+    particular region where you have created it, unless you request to copy data from one region
+    to another.
+
+    command to get list of object inside a bucket -
+        aws s3 ls s3://test-bucket-30121995 where test-bucket-30121995 is name of bucket.
+
+    command to get list of bucket in the s3 bucket -
+        aws s3 ls
+
+    command to copy a file from one place to another place -
+        aws s3 cp abc.txt s3://<bucket_name>
+
+23) What is SDK?
+    SDK stands for software development kit. It is a set of preconfigured tools and libraries which
+    you can easily use it in the development.
+
+    Boto3 is a also a SDK for AWS which allow us to write python code that interacts with
+    AWS services.
+    Boto3 is just like an intermediator between developers and the AWS services which helps
+    to interact with AWS services API Including S3, EC2, DynamoDB, CloudWatch.
+    Basically we use Boto3 SDK to automate AWS services.
+
+24) How to interact with AWS Boto3 SDK?
+
+    We can interact with AWS services with Boto3 by following ways -
+
+    Resource -
+        Resource is a high level object oriented API
+        Represents with AWS Service objects (S3 bucket, ec2 instance)
+        Allows action directly on objects
+        Use When you prefer a more pythonic and concise interface
+
+        Example -
+        import boto3
+
+        instance_id = 'your-instance-id'
+        ec2 = boto3.resource('ec2')
+        instance = ec2.Instance(instance_id)
+        instance.start()
+
+    Client -
+        We use client when you need fine-grained control and access to all available operations.
+        It is a lower level, service oriented API.
+        Provides access to all AWS service actions.
+
+        Example -
+        import boto3
+
+        instance_id = 'your-instance-id'
+        client = boto3.client('ec2')
+        response = client.describe_instances(InstanceIds=[instance_id])
+
+        tags = response['Reservations'][0]['Instances'][0]['Tags']
+
+        for tag in tags:
+        print(f"{tag['key']}: {tag['value']}")
+
+25) What is CRUD?
+    CRUD is an acronym which stands for create read update and delete.
+    For basic operations that can be performed on data in a database or a data service like S3.
+
+    # create a bucket -
+    s3.create_bucket(
+        Bucket='dct-crud-1',
+        CreateBucketConfiguration={
+            'LocationConstraint': 'us-west-2'
+        }
+    )
+
+    # read a bucket -
+    obj = s3.Object('dct-crud-1', 'file_1.txt')
+    body = obj.get()['Body'].read()
+
+    # Update a bucket -
+    s3.Object('dct-crud-1', 'file_1.txt').put(
+        Body=open('file_2.txt', 'rb')
+    )
+
+    # Delete a bucket -
+    bucket = s3.Bucket('dct-crud-1')
+    bucket.delete()
+
+    Note - Bucket name does not consists under score, we can use hyphens.
+        We can not delete a bucket which is not empty, so first we need to delete all the files inside
+        a bucket then we can delete the bucket.
+
+26) Explain EC2 basics and Boto3.
+
+    EC2(Elastic compute cloud)
+        EC2 is a core component of the AWS platform.
+        It has resizable, scalable, compute capacity in the cloud.
+        It Simplifies the set up and scaling of virtual servers.
+        It works in conjunction with Amazon VPC to provide security and robust networking functionality.
+
+    Using Boto3 with EC2
+        With help of EC2 we automates and streamline tasks operations.
+        You can launch and manage EC2 instances using python code.
+        There are two way to do above things using Resources and client
+            With help of above two ways we can do below things -
+                create one or more new instances.
+                Flexible because of many parameters.
+        we have below important methods -
+            run_instances() Client Method.
+            create_instances() Resource Method.
+
+27) Explain create_instances method of boto3.
+    new_instance = ec2.create_instances(
+        ImageId='ami-0889a44b331db0194',
+        InstanceType='t2-micro',
+        MinCount=1,
+        MaxCount=2,
+        Placement={
+            'AvailabilityZone': 'us-east-1'
+        },
+        SecurityGroupsIds=[
+            'sg-076869e06e0541d6b',
+        ],
+        KeyName='DCT-3',
+        SubnetId='subnet-08a488423a06d2980',
+        UserData="#!/bin/bash\necho 'Hello World!' > /home/ec2-user/hello.txt\n",
+        TagSpecifications=[
+            {
+                'ResourceType': 'instance',
+                'Tags': [
+                    {
+                        'Key': 'Name',
+                        'Value': 'My Linux Instance'
+                    }
+                ]
+            }
+        ]
+    )
+
+    Note -
+        If you don't specify a subnet ID, a default subnet from default VPC will be chosen.
+
+        If you don't specify a private IPV4 address, AWS will choose one from the IPV4 range from
+        of your subnet.
+
+        If you don't specify a security group ID, AWS uses the default security group.
+
+        You can create a launch template, which is a resource that contains the parameter to
+        launch an instance.
+
+        An Instance is ready fo you to use when it's in the running state.
+
+28) How to manage an instance?
+
+    We can manage 

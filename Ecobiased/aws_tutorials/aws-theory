@@ -416,4 +416,128 @@
 
 28) How to manage an instance?
 
-    We can manage 
+    We can manage instances using resource by reference the instance by passing the instance ID
+    we Call operations on an instance using an action -
+
+    - attach_volume
+    - create tags
+    - delete tags
+    - monitor
+    - reboot
+    - reload
+    - start
+    - stop
+    - terminate
+
+    # Example to stop an instance
+    ec2.Instance(instance_id).stop()
+
+    # Example to start an instance
+    ec2.Instance(instance_id).start()
+
+    # Terminate an instance
+    ec2.Instance('i-09ecbf06fc2fa097e').terminate()
+
+29) What is VPC?
+    VPC stands for Virtual Private Cloud.
+    It is a scalable and highly configurable AWS service that provides networking functionality.
+    It is a customizable logically isolated section of the AWS cloud.
+    Including selection of your own IP address range, creation of subnets, and configuration of
+    route tables and network gateways into which you can launch AWS resources.
+
+    Boto3
+        VPC and EC2 Relation - logical grouping from an API design perspective.
+
+30) Explain VPC Creation and Management.
+    You can create multiple VPCs
+        Helpful for managing separate environments.
+    creating and tagging a VPC.
+        create_vpc(CidrBlock='10.0.0.0/16')
+        create_tags(**kwargs)
+
+    Methods used with VPCs include
+        create tags, create subnet, create internet gateway, create route table, create vpc,
+        create route
+
+31) What is Amazon RDS services?
+    RDS - RDS allows you to run isolated database environments in the cloud.
+    It supports MySQL, PostgreSQL, MicrosoftSQL, MariaDB, Amazon Aurora
+    RDS is a managed service that takes care of tedious database administration task such as
+        - Backups
+        - Software Patching
+        - Monitoring
+        - Scaling
+    It provides multiple layers of security, including:
+        - Network Isolation
+        - Encryption at rest and transit
+        - Fine-grained access control using(IAM)
+    Use case -
+        E-commerce platforms
+        Customer relationship management apps (CRM)
+
+32) What is RDS: Amazon Aurora Serverless?
+    It is an on-demand version of Amazon Aurora with auto-scaling capabilities.
+    Which is managed via RDS that handles provisioning, patching, backup, restore, and other tasks
+    in the background.
+
+    It removes complexity of provisioning and managing database capacity.
+    It seamlessly scale and compute memory capacity.
+    It is Highly available. Built on distributed, fault-tolerant, self-healing aurora storage
+    with 6 way replication to protect against data loss.
+
+    It is cost effective - pay only for the resources you consume.
+    Aurora serverless only works with Mysql and PostreSQL
+    The required computing capacity is configured via Aurora capacity units (ACUs), which are combination
+    of virtual CPUs and memory.
+    1 ACU has approximately 2 GiB of memory.
+
+    Use case -
+    iRobot
+
+    There are two version of aurora serverless
+    Aurora serverless V1 and Aurora serverless V2
+
+    Aurora serverless V1 -
+    - Suitable for apps without frequent traffic
+    - Can cut capacity to zero ACUs during idle periods
+    - Scale up latency (cold start) - that takes few seconds or minutes to start.
+    - Scales by doubling ACUs (1, 2, 4, 8, 16, ...256)
+    - Best for test and dev environment.
+    - It has console query editor.
+    - Its cost about $0.06 an hour per ACU.
+
+    Aurora Serverless v2 -
+    - Supports all features of aurora.
+    - Suitable for production environments.
+    - Instant scaling to hundreds of thousands of transactions per second.
+    - Scales in increments of 0.5 ACUs.
+    - Cannot cut capacity to zero.
+    - Does not support the query editor.
+    - About $0.2 an hour per ACU.
+
+    Boto3
+    - RDS Client
+    - create_db_cluster()
+    - describe_db_clusters()
+    - modify_db_cluster()
+    - delete_db_cluster()
+
+    Sample code -
+    response = rds.create_db_cluster(
+        Engine='aurora-mysql',
+        EngineVersion='5.7.mysql_aurora.2.08.3',
+        DBClusterIdentifier=db_cluster_id,
+        MasterUsername=username,
+        MasterUserPassword=password,
+        DatabaseName='rds-hol-db',
+        DBSubnetGroupName=db_subnet_group,
+        EngineMode='serverless',
+        EnableHttpEndpoint=True,
+        ScalingConfiguration={
+            'MinCapacity': 1 # Minimum ACU
+            'MaxCapacity': 8, # Maximum ACU
+            'AutoPause': True,
+            'SecondsUntilAutoPause': 300
+        }
+    )
+

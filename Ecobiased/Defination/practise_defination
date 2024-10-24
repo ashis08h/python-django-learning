@@ -56,6 +56,10 @@ We can use class method as an alternative constructor in python.
 For example we are creating objects from two places and from both the places if we get argument
 in different formats then we use the class methods as an alternative constructor.
 
+Decorator in python are a special function that modifies or extents the behaviour of another methods
+without changing the code. Decorator allow for adding functionality to an existing function in clean, readable and
+reusable way.
+
 Decorator in a python are a special type of function which takes a function as an argument and
 change the original method and return the another method. We declare decorator with @ symbol.
 
@@ -247,7 +251,7 @@ destination may be same.
 Because of GIL limitation multiprocess are more useful for cpu bound task.
 GIL - Global interpreter lock.
 
-Pickling & Un pickling - Picking and unpickling both are used to serialize and de serialize the python
+Pickling & Un pickling - Pickling and unpickling both are used to serialize and de serialize the python
 object into byte stream data and vice versa.
 
 Pickling - In python we use pickle.dump to serialize the object into byte stream data
@@ -436,3 +440,48 @@ how we can say that both are same object in python
 
 In Python, you can check if two variables point to the same object using the is operator. The is operator checks whether two variables refer to the same object in memory.
 x is y checks if both x and y refer to the same object in memory.
+
+Map method -
+Definition -
+
+The map() function in python applies a given function to all items in an iterable(like list or tuple)
+and returns a map object(which is an iterator). It processes each item of iterable using the function provided.
+
+Syntax -
+map(function, iterable)
+
+function - A function that applies to each element of iterable.
+iterable - An iterable like list or tuple.
+
+Filter method -
+Definition -
+
+The filter() method in python constructs an iterator from elements of an iterable for which a function
+returns True. In other words, It filters out the elements that do not meet the condition provided by function.
+
+syntax -
+filter(function, iterable)
+
+function - A function that test each element of the iterable; returns True to keep the element or False to
+    discard it.
+
+iterable - An iterable like a list, tuple etc.
+
+The key difference between filter and map are:
+map() method applies a function to all elements in an iterable and transform them while filter() method
+selects some elements based on a condition.
+
+map() requires a function that returns a new value for each element whereas filter() requires a function
+that returns a boolean(True/False) to determine whether to keep or discard each element.
+
+
+what is the difference between jwt and oauth2 authentication
+how to declare async task in python
+reverse a number 4567
+how to write unittest in using external url request
+how to configure ec2 instance in aws by python
+what are the types of authentications used in python.
+how to handle any forgeries happened in your scrips
+how we improve the performance of our code.
+which one is more good in terms of performances raw sql query or orm?
+

@@ -540,4 +540,38 @@
             'SecondsUntilAutoPause': 300
         }
     )
+    We can work on RDS via client only we do not have resource to work with RDS.
+
+33) What is ACU?
+    ACU stands for Aurora capacity units, which is the unit of measure for Aurora serverless v2.
+
+34) What is Amazon lambda functions?
+    It is a serverless compute service that automatically runs your code in response to events
+    and manages underlying compute resources fo you.
+    It also helps to scales in response to each trigger, It is highly available infrastructure and
+    the best part is users need to only pay for the compute time and number of requests that you
+    consumes.
+
+35) What are the supported languages for Amazon Lambda function?
+    Ruby, C#, Java, Go, Python, Node
+
+36) Explain a common use case of lambda function in your projects.
+
+    1) In my project I used to get bunch of jpeg files. I used to transform those files and upload to s3
+    bucket. Since those files are more in size so I have written a lambda function which is used
+    to compress those files and move to another path.
+
+    2) In one of my project I used to store the logs. To make it more readable I have written a lambda
+    function which is used to filter those logs as per dates and store with help of pandas library.
+
+37) Why Lambda is important?
+    - More efficient code execution.
+    - Lambda's serverless nature lets developers focus more on their code and less on infrastructure
+        management.
+    - Quicker deployment times.
+
+38) Why Python?
+    - Readability
+    - Extensive library such as pandas, pillow
+    - Python simplicity + power of lambda give us robust, scalable serverless applications
 

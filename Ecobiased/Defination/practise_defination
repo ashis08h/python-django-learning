@@ -474,6 +474,23 @@ selects some elements based on a condition.
 map() requires a function that returns a new value for each element whereas filter() requires a function
 that returns a boolean(True/False) to determine whether to keep or discard each element.
 
+What is the difference between index method and find method of string in python?
+both index method and find method are used to search a substring inside a string in python the basic difference
+between both are find method returns -1 if it does not find the match but index method return ValueError
+when it does not find the match.
+
+What is the difference between positional argument and keyword argument?
+
+positional argument -
+definition - Positional argument are passed to a function in a specific order, based on their position.
+order matters - the function expects argument in a certain order, and they are assigned to the corresponding
+parameters based on their position.
+
+Keyword argument -
+definition - Keyword argument are passed to a function with parameter name specified explicitly.
+Order doesn't matter - Since you are using parameter name, the order in which you pass them doesn't matter.
+
+
 
 what is the difference between jwt and oauth2 authentication
 how to declare async task in python

@@ -32,3 +32,6 @@ for iter in range(length_of_list):
             a_list[num], a_list[num + 1] = a_list[num + 1], a_list[num]
 
 print(a_list)
+
+
+

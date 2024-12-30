@@ -1,0 +1,9 @@
+JDK - It stands for Java development kit. To install java we need to install JDK. It is a software
+developing environment used to developing java applications. JDK includes the JRE which stands for
+Java runtime environment which get all the requirements to run the applications.
+
+Using JDK and JRE we create java program then with help of javac we compiled the java program
+after that with help of java we execute the compiled java program.
+
+JVM (Java virtual machine) where java program runs.
+JRE present inside JDK.

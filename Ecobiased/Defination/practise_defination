@@ -382,11 +382,18 @@ it will remove that.
 
 we have lstrip and rstrip methods which remove leading and trailing whitespace from a text.
 
+what is procedure in python?
 
-what is assert keyword in python?
-what is procedure in python.
-how to print "Hi" in python
-how to insert null values in postgres
+In python procedure refers to a function that performs any specific task and does not return
+any value explicitly or returns None value.
+A procedure's main purpose is to execute statements, print output or make modifications without
+necessarily producing a return value.
+
+A procedure in python is essentially a function that
+a) Has name.
+b) Takes zero or more input parameters.
+c) Execute a sequence of statements.
+d) Does not return a value explicitly (or return None)
 
 What is assert keyword in python?
 The assert keyword in python used as a debugging aid that tests a condition as an internal
@@ -417,21 +424,8 @@ if user is not None:
         print("Password is correct.")
     else:
         print("Password is incorrect.")
-how to prevent a specific value in django model
+
 in django how we can return a pdf to browser
-
-
-num1 = 123
-digit_sum = sum(map(int, str(num1)))
-print(digit_sum)
-
-how to create a custom context manager
-l1=[1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-
-
-l1 = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10]
-dict1 = {x**2 if x%2 == 0 else x**3: x for x in l1 }
-print(dict1)
 
 
 x = 5
@@ -492,13 +486,288 @@ Order doesn't matter - Since you are using parameter name, the order in which yo
 
 
 
-what is the difference between jwt and oauth2 authentication
-how to declare async task in python
-reverse a number 4567
-how to write unittest in using external url request
-how to configure ec2 instance in aws by python
-what are the types of authentications used in python.
-how to handle any forgeries happened in your scrips
-how we improve the performance of our code.
+what is the difference between jwt and oauth2 authentication?
+
+JWT(Json Web Token) and OAuth2(Open Authorization 2.0) are both popular protocols used for securing
+APIs, but they serve different purposes and are used in distinct ways.
+
+JWT(Json Web Token) -
+JWT is a token based authentication mechanism that uses tokens to verify a user's identity.
+The token contains a payload(usually user information and permission), is signed with a secret,
+and can be verified without needing to access the original data source again. JWT are stateless,
+,meaning no session data is stored on the server.
+
+Structure -
+JWTs consist of three parts: Header, Payload, and signature.
+header.payload.signature
+
+Token Creation - Encodes user data and an expiration time, then sign it with secret key.
+Token Verification - Decodes the JWT and verifies the signature; if valid, processes the user's
+request.
+
+Oauth2 -
+Oauth2 is an authorization protocol that grants limited access to a  user's resources on a third
+party service without sharing the credentials. Oauth2 involves multiple roles: client(the app
+requesting access), resource owner(the user), authorization server(the service providing tokens)
+and resource server(API server with protected resources).
+
+Use Case -
+Oauth2 is widely used when third-party applications need access to user data on behalf of the user,
+such as logging in with google or accessing a github account.
+
+key differences -
+
+Jwt -
+Purpose - Primarily used for authentication.
+Token Type - Self contained token with user info.
+Usage Context - Stateless, suited for single app sessions.
+Complexity - Simple.
+Example Use Case - Authenticating API Users in a single app.
+
+Oauth2 -
+Purpose - Primarily used for authorization.
+Token Type - Access token, often with refresh tokens.
+Usage Context - Used for third party, multi-app scenarios.
+Complexity - More complex, with multiple grant types.
+Example Use Case - Logging in with Google/Facebook.
+
+
+how to declare async task in python?
+Asynchronous task in python allow you to run code that doesn't block other parts of our program,
+which can be especially useful for I/O bound tasks like network requests, file I/O or database
+operations. with the asyncio library, python provides built in support for asynchronous programing.
+
+Key concepts in Asynchronous programming
+1) Coroutines -
+    Functions defined with async def, which allow you to write asynchronous code.
+2) Awaiting -
+    The await keyword pauses the coroutine until the awaited task completes, allowing
+    other task to run meantime.
+3) Event Loop -
+    The core of asyncio, which runs asynchronous tasks and coroutines.
+4) Tasks -
+    Used to schedule coroutines concurrently on the event loop.
+    
+
+how to write unittest in using external url request?
+
+When writing unittest for methods that requests to external urls, you typically don't
+want actually make the network requests instead, you can use mocking to simulate the behaviour of
+the external services. This way you can test how your code handle the response without relying
+on the external service itself.
+
+Python's unittest.mock library provides the patch function, which lets you replace parts of your
+system under test and control their behaviour during the test.
+
+
+what are the types of authentications used in python?
+In python, we have several types of authentication methods are used to secure applications, access
+API, and interact with database or other external systems.
+
+1. Basic Authentication -
+    Basic authentication sends the username and password in an HTTP header encoded as Base64
+    string.
+
+    import requests
+
+    url = 'https://api.example.com/protected'
+    response = requests.get(url, auth=("username", "password"))
+
+    print(response.status_code)
+    print(response.json())
+
+2. Token Based Authentication (Bearer token) -
+    In token-based authentication, a client authenticates once(using username and password)
+    and receives a token in return. This token is then used for all subsequent requests.
+    JWT(JSON WEB TOKEN) is a popular choice for token-based authentication.
+
+    import requests
+
+    url = 'https://api.example.com/protected'
+    headers = {'Authorization', "Bearer your_access_token"}
+    response = requests.get(url, headers=headers)
+
+    print(response.status_code)
+    print(response.json())
+
+3. Oauth2 Authentication -
+Oauth2 is commonly used when application want to access the user data from third-party services.
+Oauth2 requires client Id, client secret and redirect URI, and can involve complex flows such
+as Authorization code Flow and Implicit flow.
+
+4. Multi Factor Authentication -
+MFA requires more than one form of verification(like a password and a one-time code) to enhance
+security. Typically, one time code are sent via SMS, email or an authenticator app. Implementing
+MFA often involves integrating with services of libraries that support it.
+
+
+how to handle any forgeries happened in your scripts?
+
+Handling forgeries in python scripts involves identifying and mitigating unauthorized modifications
+or malicious activities.
+
+Key techniques for handling forgeries -
+
+a) Input Validation -
+    Validate all inputs to prevent malicious data injection.
+
+b) Use Cryptographic signature -
+    Secure sensitive data and ensure its integrity using cryptographic hashes or digital signature
+    ex - JWT
+
+c) Logging and monitoring -
+    Record event and monitor logs for unusual activity to detect forgeries early.
+
+d) Secure and secrets and credentials -
+    Avoid hardcoding sensitive information (ex - API Keys) in the scripts. Use environemt
+    variables or secure storage.
+
+e) Error Handling -
+    Gracefully handle errors and avoid exposing sensitive information.
+
+f) Access control -
+    Limit access to scripts or resources based on roles and permissions.
+
+how we improve the performance of our code?
+
+a) Optimize algorithm
+b) Use builtin function and libraries
+c) Leverage list comprehensions
+d) Avoid unnecessary loops
+e) Multi threading and multi processing
+f) caching with function.lru_cache
+g) Avoid global variables
+
 which one is more good in terms of performances raw sql query or orm?
 
+The choice between using raw SQL queries or Django ORM depends on the specific use case,
+performance requirements, and developer experience.
+
+Django ORM -
+The django Object-relational mapping (ORM) provides an abstraction layer that allows you to
+interact with database using python objects instead of writing raw SQL.
+
+Advantages of Django ORM -
+a) Ease of use -
+    Queries are written in python, making them easy to read and write.
+    Abstracts complex sql syntax and database specific details.
+
+b) Security -
+    Prevents SQL injection attacks by automatically escaping inputs.
+
+c) Maintainability -
+    Easier to maintain as the queries integrate seamlessly with django models.
+
+d) Database Agnosticism -
+    Makes it easier to switch between databases without changing the queries.
+
+Performance -
+    For simple to moderate complex queries Django ORM PERFORMS WELL.
+    It might not be optimal for very complex queries, (eg - multiple joins, aggregations)
+    due to the abstraction overhead.
+
+Advantage of raw SQL -
+a) Fine-Grained Control -
+    Provides complete control over the query's execution and optimization.
+    Useful for complex queries where ORM abstractions may introduce inefficiencies.
+
+b) Bettor performance -
+    Raw SQL an be more efficient as you can optimize queries specially for the database
+    and avoid ORM overhead.
+
+c) Access to advanced features -
+    Allows the use of database-specific features like CTEs (Common table expressions), windows
+    functions, or custom optimizations.
+
+how is garbage collector works in python?
+
+The garbage collector in python is responsible for automatically managing memory by reclaiming
+unused or unreachable objects, preventing memory leaks. python's garbage collection is part of
+memory management system and works in conjunction with reference counting and a cyclic garbage
+collector.
+
+a) Reference counting -
+    Python keeps track of how many references point to an object.
+    An object is deallocated when its reference count drops to zero.
+
+b) Cyclic garbage collector -
+    Reference counting fails with cyclic references (eg., objects referencing to each other)
+    python cyclic garbage collector detects and removes such cycles.
+
+What is sorting and what are the types of sorting we have?
+
+Sorting is a process of arranging elements in a collection(such as a list or an array) in a
+particular order, either in ascending or descending order. Sorting is widely used in various
+applications to organize data for easier searching, analysis, or presentation.
+
+Types of sorting algorithm -
+1) Built-in sorting function in python -
+    sorted() - returns a new sorted list without modifying the original.
+    list.sort() - Modifies the list in place and does not return any new list.
+    Both use timsort, which is a hybrid sorting algorithm derived from merge sort and insertion
+    sort.
+
+Common sorting algorithm -
+1) Bubble Sort - Repeatedly swaps adjacent elements if they are in the wrong order.
+    Easy to understand, but inefficient for large datasets.
+
+2) Selection Sort - Selects the smallest elements from unsorted part and places it at the correct
+    position. Simple but slower compared to others.
+
+3) Insertion Sort - Builds the sorted list one item at a time by inserting elements at the correct
+    position. Efficient for small or nearly sorted datasets.
+
+4) Merge Sort - Divides the list into halves, sort each half and merge them.
+    stable and efficient for large datasets, but require extra memory.
+
+5) Quick Sort - picks a pivot and partitions the array into elements less than and greater than
+    the pivot, then short them recursively. Highly efficient, but performance depends on pivot
+    selection.
+
+6) Timsort (Used by python sorted() and list.sort())
+    Hybrid sorting algorithm combining merge sort and insertion sort
+    Optimized for real-world data and efficient on nearly sorted data.
+
+how to configure ec2 instance in aws by python
+
+
+
+what is difference between iterators and generators?
+
+The basic difference between iterators and generators are
+we use iterators when we need full control over how values are generated and iterated.
+we use generators for simpler, more efficient approach when working with large or infinite
+sequences.
+
+Iterators -
+An iterator is an object that implements two methods -
+__iter__() - Returns the iterator objects itself.
+__next__() - Return the next value from the sequence. Raise a StopIteration exception when no
+more item are available.
+It is reusable.
+More complex.
+Manage state explicitly (using instance variable.)
+
+Generators -
+A generator is a simpler way to create iterators using function instead of a class.
+A generator function uses the yield keyword to produce values one at a time.
+
+It automatically saves the state of the function between yield calls.
+No need to implement __iter__() and __next__() explicitly.
+
+Generators are lazy , meaning they produce items one at a time do not store the entire sequence
+in the memory.
+Suitable for large numbers of sequence.
+Can not be reused after iteration.
+
+What is the difference between a function and a method in the programing language?
+
+Function -
+A function is a block of reusable code that is not tied to any object.
+It can be defined using def keyword and called directly.
+Functions are part of the global scope or a module and can be used independently.
+
+Methods -
+A method is a similar of function but is associated with an object(or class).
+It is called on an object and can access the data(attributes) of that object.
+Methods are defined inside a class.

@@ -2,8 +2,8 @@ COALESCE - COALESCE is used to handle NULL values column by replacing with some 
     select fcast_item, COALESCE(disc_dt, 'N/A') as disc_dt, src_sys from In_Bundles;
 
 SUM, AVG, MAX, MIN - In sql server SUM, AVG, MAX, MIN are the aggregate functions used to perform
-calculations on a set of values within a specified column of tables. These functions are often used in
-combination with the GROUP BY clause to calculate aggregate values of groups of rows.
+calculations on a set of values within a specified column of tables. These functions are often
+used in combination with the GROUP BY clause to calculate aggregate values of groups of rows.
 
 SUM:
     select SUM([exch_rate_loc_to_usd]) from [In_CurrencyConversionNew];
@@ -105,10 +105,10 @@ MERGE STATEMENT -
     ON target.id = source.id
     WHEN MATCHED THEN
     UPDATE SET target.name = source.name
-    WHEN NOT MATCHED BY target
+    WHEN NOT MATCHED BY target THEN
     INSERT (id, name)
     VALUES (source.id, source.name)
-    WHEN NOT MATCHED BY source
+    WHEN NOT MATCHED BY source THEN
     DELETE;
 
     Note:

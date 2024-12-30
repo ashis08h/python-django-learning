@@ -120,4 +120,36 @@ Similar to pivot table melt is used to transform or reshape the dataframe.
 
 What is stack in python?
 
+What is data analysis?
+It is a process of deriving an insight from a dataset.
+Basically in the real world data is very messy such as it has some typo, whitespace, may be
+splitted into two columns or vice versa, So in this process we actually mold the dataset or we
+can say shape the dataset in such a format on which we need it.
+
+What is pandas?
+Pandas is a powerful library of data analysis which built on the top of python programing
+language. It is a robust toolkit for analyzing, filtering, manipulating, aggregating, merging,
+pivoting and cleaning data.
+
+What is series?
+A python series is a one dimensional labelled array.
+A series combines the best features of a list and a dictionary.
+A series maintains a single collection of ordered values(ie a single column of data).
+We can assign each value an identifier, which does not have to be unique.
+When ever we do not tell pandas that specifically about the identifier of each values, pandas
+automatically assign numeric values we called it index. It assign the values in the same order
+as it is mentioned in the source list.
+
+What is the difference between methods and the attributes?
+Method is like a set of commands which we wanted to execute on the system.
+attributes are like of properties of an objects ie attributes tells the information about the
+objects.
+for example we can tell a person to walk, talk, sleep these sets of commands are like of functions
+of a person and name of that person, age, dob are like of attributes of that person which are like
+some information about person.
+An attributes does not require a parenthesis but a method require a parenthesis.
+
+What are parameters and arguments?
+A parameter is the name for an expected input to a function/method/class instantiation.
+An argument is the concrete value we provide for a parameter during invocation.
 

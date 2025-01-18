@@ -153,3 +153,168 @@ What are parameters and arguments?
 A parameter is the name for an expected input to a function/method/class instantiation.
 An argument is the concrete value we provide for a parameter during invocation.
 
+A csv is a plain text file that uses line breaks to separate rows and comma to separate row values.
+pandas ship with many different read_ functions for different types of files.
+The read_csv function accepts many different parameters. The first one specifies the file name/path.
+The read_csv function will import the dataset as dataframe, a 2 dimensional table.
+The usecols parameter accepts a list of the columns to import.
+The squeeze method converts a DataFrame to a Series. The squeeze method will only work with
+those dataframes having one column, with more than one column it will not work.
+
+head method in pandas gives rows from the top of the series. By default it gives first 5 rows
+if we do not pass any argument inside head method.
+
+tail method in pandas gives rows from the bottom of the series. similar to head method
+tail method gives bottom 5 rows by default.
+
+Passing series to python's built-in functions
+The len function returns the length of the series.
+The type function returns the type of an object.
+The list function converts the series to a list.
+The dict function converts the series to a dictionary.
+The sorted function converts the series to a sorted list.
+The max function returns the largest value in the series.
+The min function returns the smallest value in the series.
+
+In Keyword in series -
+The in keyword checks if a value exists within an object.
+The in keyword will look for a value in the series's index.
+Use the index and values attributes to access "nested" object within the series.
+Combine the in keyword with values to search within the series's value.
+
+The sort_values method -
+The sort_values method sorts a series value in order.
+By default, pandas applies an ascending sort(smallest to largest).
+Customize the sort order with the ascending parameter.
+
+The sort_index method -
+The sort_index method sort a series by its index.
+The sort index method also accepts an ascending parameter to set sort order.
+
+iloc -
+Use the iloc accessor to extract a series value by its index position.
+iloc is short for "index location".
+python's list slicing syntaxes(slices, slices from start, slices to end, etc..) are supported
+with series objects.
+
+loc -
+Use the loc accessor to extract a series value by its index label.
+Pass a list to extract multiple values by index label.
+If one index label/position in the list does not exist, pandas will raise an error.
+
+get method -
+The get method extracts a series value by index label. It is an alternative option to square
+brackets.
+The get method's second argument sets the fallback value to return if the label/position does not
+exist.
+
+overwrite a series value -
+Use the iloc/loc accessor to target an index/label/position, then use an equal sign to provide
+new value.
+
+A copy is a duplicate/replica of an object.
+Changes to a copy do not modify the original object.
+
+A view is a different way of looking at the same data.
+Changes to a view do modify the original object.
+
+The copy method creates a copy of a pandas object.
+
+The math methods on series objects.
+The count method returns the number of values in the series. It excludes missing values;
+the size attribute includes missing values.
+
+The sum method adds together the series's values.
+The product method multiplies together the series's values.
+The mean method calculates the average of series's values.
+The std method calculates the standard deviation of the series's values.
+The max method returns the largest values in the series.
+The min method returns the smallest values in the series.
+The median method returns the median of the series(the value in the meddle).
+The mode method returns the mode of the series(The most frequent value).
+The describe method returns a summary with various mathematical calculations.
+
+The basic difference between size attribute and count method is
+count method excludes the missing value whereas size attribute includes the missing value.
+
+Broadcasting -
+Broadcasting describes the process of applying an arithmetic operation to an array(i.e., a series)
+We can combine mathematical operators with a Series to apply the mathematical operation to every
+value.
+There are also methods to accomplish the same results(add, sub, mul, div, etc).
+
+The value_counts method returns the number of times each unique value occurs in the series.
+The normalize parameter returns the relative frequencies/percentages of the values instead of the
+counts.
+
+The apply method accepts a function. It invokes that function on every series value.
+
+The map method "maps" or connects each Series values to another value.
+We can pass the method a dictionary or a series. Both types connects keys to values.
+The map method uses our argument to connect or bridge together the value.
+Only one condition is there to use map method between two dataset is value of 1st dataset should
+be the key or index of another dataset.
+
+In a series whenever we have at least one missing value the existing non missing numeric value
+pandas will show in floating point values, this is default behaviour of pandas.
+
+Dataframes -
+A dataframe is a 2 dimensional table consisting of rows and columns.
+Pandas uses a NaN designation for cells that have a missing value. It is short for "Not a Number".
+Most operations on NaN value will produce NaN values.
+Like with a series, pandas assigns an index position/label to each Dataframe row.
+The dataframe and series have common and exclusive methods/attributes.
+The hasnans attribute exists only an series. The columns attribute exists only on a dataframe.
+Some methods/attributes will return different types of data.
+The info method returns a summary of the pandas object.
+
+df.values - returns the list of list all the values.
+df.index returns the index of the dataframe.
+df.shape returns the dimension of dataframe.
+
+The sum method adds adds a series values.
+On a dataframe the sum method defaults to adding the values by traversing the index (row value).
+The axis parameter customizes the direction that we add across. pass "columns" or 1 to add
+"across" the columns.
+
+Select a single column from a dataframe
+
+We can use attribute syntax(df.column_name) to select a column from a dataframe. The syntax
+will not work if the column name has space.
+
+We can also use square bracket syntax(df["column name"]) which will work for any column name.
+Pandas extracts a column from dataframe as a series.
+The series is a view, so changes to the series will effect the dataframe.
+pandas will display a warning if you mutate the series. Use the copy method to create a duplicate.
+
+Select multiple columns from a dataframe
+Use square brackets with a list of names to extract multiple dataframe columns.
+Pandas stores the result in a new dataframe(a copy)
+
+Add new column to dataframe -
+Use square bracket extraction syntax with an equal sign to add a new series to a dataframe.
+The insert method allow us to insert an element at a specific column index.
+On right-hand-side, we can reference an existing DataFrame column and perform a broadcasting
+operation on it to create the new series.
+
+The value_counts method counts the number of times that each unique value occurs in a series.
+
+Drop rows with missing values
+Pandas uses NaN designation for cells that have a missing value.
+The dropna method deletes rows with missing values. Its default behaviour is to remove a row
+if it has any missing values.
+Pass the how parameter an argument of "all" to delete rows where all values are NaN.
+The subset parameters customizes/limits the columns that pandas will use to drop
+rows with missing values.
+
+The fillna method replaces missing NaN values with its argument.
+The fillna method is available on both DataFrames and series.
+An extracted series is a view on the original DataFrame, but the fillna method returns a copy.
+
+The astype method converts a series's values to a specified type.
+pass in the specified type as either a string or the core python data type.
+pandas cannot convert NaN values to numeric types, so we need to eliminate/replace them
+before we perform the conversion.
+The dtypes attribute returns a series with the dataframe's columns and their type.
+
+The cate

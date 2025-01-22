@@ -317,4 +317,26 @@ pandas cannot convert NaN values to numeric types, so we need to eliminate/repla
 before we perform the conversion.
 The dtypes attribute returns a series with the dataframe's columns and their type.
 
-The cate
+The category type is ideal for columns with a limited number of unique values.
+The nunique method will return a series with the number of unique values in each column.
+With categories, pandas does not create a separate value in memory for each "cell". Rather, the
+cells point to a single copy for each unique value.
+
+sort_values method sort a dataframe by the values in one or more columns. The default sort
+is in ascending one(alphabetical for strings).
+The first parameter(by) excepts the column(s) to sort by.
+If sorting by a single column, pass a string with its name.
+The ascending parameter customizes the sort order.
+The na_position parameter customizes where pandas places NaN values.
+
+To sort by multiple columns, pass the by parameter a list of column names. pandas will sort
+in the specified column order(first to last).
+Pass the ascending parameter a boolean to sort all columns in a consistent order(all ascending
+or all descending).
+Pass ascending a list to customize the sort order per column. The ascending list length must
+match the by list.
+
+The sort_index method sorts the dataframe by its index positions/labels.
+
+The rank method assigns a numeric ranking to each Series value.
+Pandas will assign the same rank to equal values and create a "gap" in the dataset for the ranks.

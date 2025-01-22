@@ -465,8 +465,185 @@ What is the difference among ROW_NUMBER(), RANK() AND DENSE_RANK() IN THE SQL Se
         ) AS RANK FROM [Stg_TNA];
 
 
+What is Indexing in SQL?
+Indexing in the SQL is a database optimization technique that improves the speed of the data
+retrieval operations on a table. It creates a data structure (similar to lookup table) that the
+databases uses to quickly locate rows without scanning the entire table.
+
+Why Use Indexing in SQL?
+1) Improves query performance.
+    Indexes significantly reduce the time taken to execute queries, especially for large tables.
+
+2) Efficient Sorting and filtering.
+    Indexes help with Order by, group by, and where clauses.
+
+3) Quick Lookup for primary and foreign keys.
+    Ensure fast access for key constraint.
+
+4) Reduce full table scans.
+    Without an index, the database may need to scan the entire table to find rows, which is
+    inefficient for large datasets.
+
+How does indexing work?
+Indexing creates a separate data structure (like tree or hash) that holds the values of the
+indexed column(s) and pointers to the corresponding rows in the table.
+
+When you query a table with an indexed column, the database use the index to a quickly
+find the matching rows, instead of scanning the entire table.
+
+Types of index -
+1) Clustered index -
+    Organizes the table's data rows in the order of index.
+    Only one clustered index is allowed per table because it changes the physical order of the data.
+
+    syntax - CREATE CLUSTERED INDEX idx_Department ON Employees (Deepartment);
+    Where idx_Department is the name of index.
+        Employees is table name on which we wanted to add index.
+        Deepartment is the column name to which we wanted to create index.
+
+2) Non Clustered index -
+    Creates a separate data structure to store the indexed column and a pointer to the actual data.
+    A table can have multiple non-clustered index.
+
+    syntax - CREATE NONCLUSTERED INDEX idx_Department ON Employees (Deepartment);
+    Where idx_Department is the name of index.
+        Employees is table name on which we wanted to add index.
+        Deepartment is the column name to which we wanted to create index.
+
+3) Unique index -
+    Ensures that all values in the indexed column are unique.
+
+4) Composite index -
+    An index on multiple columns.
+
+5) Full text index -
+    Used for text-based searches.
+
+Dropping an index -
+DROP INDEX idx_Department ON Employees;
+
+Advantages of Indexing -
+1) Faster Query execution -
+    Reduces query execution time for select statements.
+2) Efficient data access -
+    Speeds up filtering, sorting, and joins.
+3) Uniqueness enforcement -
+    Ensures unique values for key constraints.
+
+Disadvantages of indexing -
+1) Slower write Operations -
+    INSERT, UPDATE, and DELETE operations take longer because the index also needs to be updated.
+
+2) Storage Overhead -
+    Indexes require additional disk space.
+
+3) Maintenance -
+    Indexes must be maintained as data is modified.
+
+What are views in SQL?
+A View in SQL is a virtual table that is created by a select query. It does not store data
+physically; instead, it retrieves data from the underlying table(s) whenever it is queried.
+Think of view as a saved query that can be treated like a table.
+
+Why use Views in SQL?
+1) Simplify complex query -
+    Abstract complex JOIN, GROUP BY, or filtering logic into a single object that can be reused.
+
+2) Improve security -
+    Restrict user access to specific columns or row by creating views that expose only the
+    required data.
+
+3) Enhance readability -
+    Simplify queries by hiding table relationships and calculations.
+
+4) Maintain Consistency -
+    Ensure consistent query results when the same logic is needed across multiple parts of an
+    application.
+
+5) Provide virtual aggregations -
+    Aggregate or summarize data without physically storing the result.
+
+Syntax to create view -
+
+CREATE VIEW view_name AS
+select column1, column2, ...
+FROM table_name WHERE condition;
+
+1) Create a simple view -
+
+CREATE VIEW EmployeeDepartments AS
+SELECT Name, Department from Employee_test_table;
+
+SELECT * FROM EmployeeDepartments;
+
+2) View with filtering -
+
+CREATE VIEW HighSalaryEmployee AS
+SELECT Name, Department, Salary from Employee_test_table
+where Salary > 60000;
+
+SELECT * FROM HighSalaryEmployee;
+
+3) View with Aggregation -
+
+CREATE VIEW DepartmentSalary AS
+SELECT Department, AVG(CAST(Salary AS INT)) AS AVGSAL
+FROM Employee_test_table GROUP BY Department;
+
+SELECT * FROM DepartmentSalary;
+
+4) View with joins -
+
+Suppose we have another table -
+
+CREATE TABLE Departments_test_table (
+    Department NVARCHAR(50) NOT NULL,
+    Location NVARCHAR(50) NOT NULL
+);
+
+EXEC sp_help Departments_test_table; - This is the command to check table structure.
+
+CREATE VIEW EmployeeDetail AS
+SELECT e.Name, e.Department, d.Location
+FROM Employee_test_table e JOIN Departments_test_table d
+ON e.Department = d.Department;
 
 
+How to update views?
+
+Modify a view
+Use CREATE OR REPLACE syntax to update a view.
+
+CREATE OR REPLACE VIEW HighSalaryEmployees AS
+SELECT Name, Department, Salary FROM Employee_test_table
+WHERE Salary >= 65000;
+
+Advantages of views -
+1) Data security -
+    Hide sensitive data(e.g- salaries) by exposing only necessary columns.
+
+2) Simplifies repeated queries -
+    Save complex queries as views for reuse.
+
+3) Logical data independence -
+    Applications can query the view even if the underlying table structure changes.
+
+4) Faster query writing -
+    Write shorter, simpler queries by using views.
+
+Disadvantage of views -
+
+1) Performance overhead -
+    Views do not store data, the query runs every time the view is accessed, potentially
+    slowing performance.
+
+2) Complex Maintenance -
+    If underlying table changes(e.g- column name renamed or remove) views may break.
+
+3) Read only -
+    By default views are read only. However, with INSTEAD OF triggers, they can be made updatable.
+
+    
 
 
 

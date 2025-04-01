@@ -29,7 +29,8 @@
     When we create a project in django it creates a project name directory, inside
     that it creates manage.py file and one more directory with name of project only.
 
-    inside that inner project name directory it creates __init__.py, settings.py, urls.py, wsgi.py
+    inside that inner project name directory it creates __init__.py, settings.py, urls.py, wsgi.py,
+    asgi.py
 
     project_name/
         manage.py
@@ -242,7 +243,7 @@
     with or without dictionary.
 
     syntax is
-    render(request, index.html, contex = some_dict, content_type = None, status = None, using = None)
+    render(request, index.html, context = some_dict, content_type = None, status = None, using = None)
 
 19) Explain Q objects in django ORM?
 
@@ -253,7 +254,7 @@
 
     The manage.py file automatically get created when we create a project. It is a command line utility
     which helps developer to interact with the django project in various way. It is similar to
-    django-admin. When request come first it come to manage.py file then it want to settings.py file
+    django-admin. When request come first it come to manage.py file then it went to settings.py file
     after that urls.py then views.py then models.py then templates.
 
 21) What is the use of "include" functions in the urls.py file in django?

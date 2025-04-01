@@ -643,7 +643,7 @@ Disadvantage of views -
 3) Read only -
     By default views are read only. However, with INSTEAD OF triggers, they can be made updatable.
 
-    
+
 
 
 

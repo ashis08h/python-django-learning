@@ -1,4 +1,4 @@
-# example of method overloading or compile time polymorphism.
+# example of compile time polymorphism or method overloading.
 
 class Calculator:
 
@@ -11,14 +11,13 @@ class Calculator:
         return self.a + self.b + self.c
 
 
-c1 = Calculator(2, 3)
+c1 = Calculator(1, 2)
+c2 = Calculator(1, 2, 3)
 print(c1.add_number())
-
-c2 = Calculator(3, 4, 5)
 print(c2.add_number())
 
 
-# example of method overriding or run time polymorphism.
+# example of method overriding, run time polymorphism.
 
 
 class Shape:
@@ -40,7 +39,7 @@ class Circle(Shape):
         return 3.14 * super().area()
 
 
-s = Shape(2, 3)
+s = Shape(2, 4)
 print(s.area())
 
 c = Circle(5)

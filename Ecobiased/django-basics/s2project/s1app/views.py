@@ -154,6 +154,7 @@ class ProductView(View):
         product.save()
         return HttpResponse("sucessfully submitted the records.")
 
+
 class NoteBookListCreateView(generics.ListCreateAPIView):
     queryset = NoteBook.objects.all()
     serializer_class = NoteBookSerializer
@@ -168,7 +169,6 @@ class NoteBookDetailView(generics.RetrieveUpdateDestroyAPIView):
     queryset = NoteBook.objects.all()
     serializer_class = NoteBookSerializer
     permission_classes = [IsAdminOrReadOnly]
-
 
 
 class NoteBookViewSet(viewsets.ModelViewSet):

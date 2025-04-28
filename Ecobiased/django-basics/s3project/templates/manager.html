@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <h1>I am from manager file.</h1>
+  <p>{{managers}}</p>
+  <p>
+      {% for manager in managers %}
+        {{manager.company}}
+      {% endfor %}
+  </p>
+</body>
+</html>

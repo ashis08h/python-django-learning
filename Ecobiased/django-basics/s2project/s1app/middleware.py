@@ -13,10 +13,10 @@ class CustomMiddleware:
         self.get_response = get_response
 
     def __call__(self, request):
-        print("in call method.")
+        #print("in call method.")
         # code to execute for each request before view is called.
         logger.info(f"Request Method: {request.method}, Request Path: {request.path}")
-        print(f"Request Method: {request.method}, Request Path: {request.path}")
+        #print(f"Request Method: {request.method}, Request Path: {request.path}")
         response = self.get_response(request)
         return response
 
@@ -30,9 +30,11 @@ class BlockIpMiddleware:
         # initialize the middleware
         self.block_ips = ['127.0.0.2']
         self.get_response = get_response
+        print("I am in blocked ip init call.")
 
     def __call__(self, request):
         ip = request.META.get('REMOTE_ADDR')
+        print("I am in block ip call method.")
         print("ip", ip)
         if ip in self.block_ips:
             return HttpResponseForbidden("Forbidden: you are not allowed.")

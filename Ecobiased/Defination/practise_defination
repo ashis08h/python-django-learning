@@ -771,3 +771,28 @@ Methods -
 A method is a similar of function but is associated with an object(or class).
 It is called on an object and can access the data(attributes) of that object.
 Methods are defined inside a class.
+
+What is SDLC?
+SDLC stands for software development life cycle. It is a structured process used by software developers and
+project teams to design, develop, test, deploy and maintain software applications.
+
+Goal of SDLC - Deliver high quality software that meets customer expectations, is completed within time
+and within cost estimates.
+
+Phases of SDLC -
+1) Requirement gathering and analysis.
+2) System design
+3) Implementation
+4) Testing
+5) Deployment
+6) Maintenance
+
+Why is SDLC important?
+1) Ensure clear planning and execution.
+2) Helps with cost and time management.
+3) Provides a predictable, repeatable process.
+4) Improve software quality.
+5) Makes project traceable and measurable.
+
+What is water fall model?
+Wter fall SDLC is a traditional, linear software development model, where project flows sequential

@@ -643,6 +643,44 @@ Disadvantage of views -
 3) Read only -
     By default views are read only. However, with INSTEAD OF triggers, they can be made updatable.
 
+with cte select avg(salary) as sal from table1
+select employee, department from table1
+group by department having salary > cte.sal
+
+
+print("Hello, World!")
+
+input = "aaabbccccaaaaabbccccaa"
+# a3b2c4a1
+result_list = []
+result_dict = {}
+for index in range(len(input)):
+  if index <1:
+    result_dict[input[index]] = 1
+  else:
+    if input[index - 1] == input[index]:
+      result_dict[input[index]] = result_dict[input[index]] + 1
+    else:
+      if input[index] not in result_dict:
+        result_dict[input[index]] = 1
+      else:
+        for key, value in result_dict.items():
+          result_list.append(key)
+          result_list.append(value)
+        result_dict = {}
+        result_dict[input[index]] = 1
+
+for key, value in result_dict.items():
+  result_list.append(key)
+  result_list.append(value)
+
+results = list(map(lambda x:str(x), result_list))
+main_result = "".join(results)
+print(main_result)
+
+
+
+
 
 
 

@@ -8,3 +8,5 @@ x = 4
 y = 3
 
 assert x < y, "x is always greator than y."
+
+# here inside double quotes is message whenever assertion error comes this message will print.

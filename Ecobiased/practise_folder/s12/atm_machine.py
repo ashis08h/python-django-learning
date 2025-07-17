@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 class AtmMachine(ABC):
 
     @abstractmethod
-    def withdraw(self):
+    def withdraw(self, given_amount):
         pass
 
 

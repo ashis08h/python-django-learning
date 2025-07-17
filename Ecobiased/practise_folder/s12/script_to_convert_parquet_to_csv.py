@@ -1,4 +1,4 @@
-import pandas
+import pandas as pd
 
 
 def convert_parquet_to_csv(parquet_path, csv_path):

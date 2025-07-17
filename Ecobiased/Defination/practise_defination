@@ -408,7 +408,7 @@ assert x < y, "x should be less than y"
 
 what is context in python?
 context in python is refers an environment where python execute code. python handle this
-scenario with help of with statement and context manager.
+scenario with help of "with" statement and context manager.
 Basically context manager is an object which provide two dunder methods __enter__ and __exit__
 for entering and exiting to the context.
 
@@ -796,3 +796,124 @@ Why is SDLC important?
 
 What is water fall model?
 Wter fall SDLC is a traditional, linear software development model, where project flows sequential
+
+What is SOLID principle?
+The solid principles are five design principles intended to make software designs more understandable,
+flexible, and maintainable. They are widely used in object-oriented programming, including in python, to write
+clean and scalable code.
+
+S - Single responsibility principle
+O - Open/closed principle
+L - Liskov substitution principle
+I - Interface segregation principle
+D - Dependency inversion principle
+
+1) Single responsibility principle (SRP)
+    A class should have only one reason to change, i.e It should do one thing and do it well.
+
+    Use case - If a class handles both data processing and logging, a change in logging logic would force
+    a change in the class even though its core purpose is data processing.
+
+2) Open/Close principle (OCP)
+    A class should be open for extension but closed for modification.
+
+    Use case - When adding new functionaility, we should extend existing code not modify it.
+
+3) Liskov Substitution Principle(LSP)
+    Object of a superclass should be replaceable with objects of its subclass without affecting the
+    correctness of the program.
+
+    Use case - Ensure subclass don't break behaviour expected by their parent class.
+
+4) Interface segregation Principle (ISP)
+    A class should not be forced to implement methods. it's does not use.
+    python doesn't have interfaces like java, but we use abstract base class to mimic this.
+
+    Use case - Keep interface or base classes focused and small.
+
+    In simple words don't give a class more methods than it needs.
+    Instead of one fat interface, create multiple small, focused interfaces so that classes only
+    implement what they actually use.
+
+5) Dependency Inversion Principle (DIP)
+    High level modules should not depend on low-level modules, but both should depend on abstractions.
+
+    Use case - Instead of hardcoding dependencies, pass them as interfaces/abstractions - helps in testing
+    and decoupling.
+
+    In simple words Your business logic(high-level module) should not depend directly on low level
+    concrete class(like database, file storage, etc)
+
+    instead, they should depend on interfaces or abstract classes - and actual implementations should be
+    plugged in when needed.
+
+
+Why do we follow SOLID principles?
+We follow SOLID principles in programming language especially in object-oriented software development to
+1) Improve Code maintainability.
+    problem - Code become hard to change as it grows.
+    SOLID benefit - each class or module has a specific purpose, making the code easier to update, debug,
+    or refactor.
+
+2) Enable scalability and extensibility.
+    problem - Adding new features often breaks existing functionaility.
+    SOLID benefit - You can extend code without modifying the existing, stable codebase.
+
+3) Promote reusability.
+    problem - Developers keep duplicating the logic across modules.
+    SOLID benefit - Well separated responsibilities and abstract layers allow code reuse.
+
+4) Simplify testing.
+    Problem - Tight coupling make unit testing difficult.
+    SOLID benefit - Loose coupling and abstraction allow independent testing of components.
+
+5) Improve team collaboration.
+    Problem - Teams get blocked waiting on each other due to tight coupled code.
+    SOLID benefit - Clear boundaries and contracts(interface/abstractions) allow teams to work in parallel.
+
+6) Reduce bugs.
+    Problem - Change in one area cause unexpected bugs elsewhere
+    SOLID benefit - Encapsulation and well-defined responsibilities reduce side effects.
+
+What is ACID properties in database?
+ACID is a set of four key properties that ensure reliable transactions in a database system.
+Each letter in ACID stands for
+
+A- atomicity
+All operations in a transaction either complete fully or not at all.
+
+C- consistency
+The database remains in a valid state before and after the transaction.
+
+I- isolation
+Concurrent transactions do not interfare with each other.
+
+D- durability
+Once transaction is committed, the data is permanently saved, even if the system crashes.
+
+Real Life example
+
+1. Debit ₹1000 from Account A
+2. Credit ₹1000 to Account B
+3. Commit transaction
+
+Atomicity - Either both debit and credit happens ot not at all.
+If system crashes after debit bit before credit the entire transaction is rolled back
+
+Consistency - The total amount in both the accounts remains unchanged after the transfer.
+Example:
+Before: A = ₹5000, B = ₹2000 → Total = ₹7000
+After: A = ₹4000, B = ₹3000 → Total still = ₹7000
+
+Isolation - Transaction running at the same time do not affect the same time.
+If two users try to transfer money at same time:
+User a is transferring 1000
+User b is transferring 2000
+
+They run independently don't see each other's in progress updates.
+
+Durability - Once transfer is committed, it is permanent.
+Even if there is  power failure or crash afterward - the 1000 rupees is not lost. It's safely stored in the
+database.
+
+In django we are using @transaction.atomic decorator for atomicity.

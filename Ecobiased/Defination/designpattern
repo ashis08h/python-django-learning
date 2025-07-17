@@ -124,3 +124,9 @@ software development.
     The observer design pattern are the behavioural design pattern where an object, known as the
     subject, maintains a list of its dependents, called observers, and notifies them of any
     state changes, usually by calling one of their methods.
+
+    In simple words The observer design pattern is a behavioral design pattern in which one
+    object(called subject) maintains a list of observers that are notified automatically whenever the subject
+    changes.
+
+    

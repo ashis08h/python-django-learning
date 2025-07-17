@@ -22,7 +22,7 @@ class Rectangle(Shape):
         return self.length * self.breadth
 
     def perimeter(self):
-        return 2*(self.length + self.breadth)
+        return 2 * (self.length + self.breadth)
 
 
 class Circle(Shape):
@@ -31,16 +31,16 @@ class Circle(Shape):
         self.radius = radius
 
     def area(self):
-        return 3.14 * (self.radius) * (self.radius)
+        return 3.14*(self.radius*self.radius)
 
     def perimeter(self):
         return 2 * 3.14 * self.radius
 
 
-c = Circle(5)
-print(c.area())
-print(c.perimeter())
-
 r = Rectangle(2, 3)
 print(r.area())
 print(r.perimeter())
+
+c = Circle(5)
+print(c.area())
+print(c.perimeter())

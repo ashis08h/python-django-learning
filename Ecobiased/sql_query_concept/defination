@@ -159,6 +159,13 @@ UNION -
     UNION
     SELECT id, name FROM [test_table_2];
 
+What is the difference between union and union all?
+    Union - Removes duplicate rows from combined result set.
+    performs a distinct sort, which can make it slower.
+
+    Union includes all the rows, even duplicates also.
+    Faster than UNION because it skips the duplicate elimination step.
+
 DISTINCT -
     It will return unique values.
     SELECT DISTINCT name FROM [test_table_2];
@@ -679,6 +686,9 @@ main_result = "".join(results)
 print(main_result)
 
 
+code to delete duplicate data from a table
+code to delete duplicate data from a table
+but keep first.
 
 
 

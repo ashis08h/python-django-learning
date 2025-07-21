@@ -817,7 +817,7 @@ D - Dependency inversion principle
 2) Open/Close principle (OCP)
     A class should be open for extension but closed for modification.
 
-    Use case - When adding new functionaility, we should extend existing code not modify it.
+    Use case - When adding new functionality, we should extend existing code not modify it.
 
 3) Liskov Substitution Principle(LSP)
     Object of a superclass should be replaceable with objects of its subclass without affecting the
@@ -838,7 +838,7 @@ D - Dependency inversion principle
 5) Dependency Inversion Principle (DIP)
     High level modules should not depend on low-level modules, but both should depend on abstractions.
 
-    Use case - Instead of hardcoding dependencies, pass them as interfaces/abstractions - helps in testing
+    Use case - Instead of hard coding dependencies, pass them as interfaces/abstractions - helps in testing
     and decoupling.
 
     In simple words Your business logic(high-level module) should not depend directly on low level
@@ -856,10 +856,10 @@ We follow SOLID principles in programming language especially in object-oriented
     or refactor.
 
 2) Enable scalability and extensibility.
-    problem - Adding new features often breaks existing functionaility.
+    problem - Adding new features often breaks existing functionality.
     SOLID benefit - You can extend code without modifying the existing, stable codebase.
 
-3) Promote reusability.
+3) Promote re usability.
     problem - Developers keep duplicating the logic across modules.
     SOLID benefit - Well separated responsibilities and abstract layers allow code reuse.
 
@@ -897,7 +897,7 @@ Real Life example
 2. Credit ₹1000 to Account B
 3. Commit transaction
 
-Atomicity - Either both debit and credit happens ot not at all.
+Atomicity - Either both debit and credit happens or not at all.
 If system crashes after debit bit before credit the entire transaction is rolled back
 
 Consistency - The total amount in both the accounts remains unchanged after the transfer.
@@ -905,7 +905,7 @@ Example:
 Before: A = ₹5000, B = ₹2000 → Total = ₹7000
 After: A = ₹4000, B = ₹3000 → Total still = ₹7000
 
-Isolation - Transaction running at the same time do not affect the same time.
+Isolation - Transaction running at the same time do not affect each other.
 If two users try to transfer money at same time:
 User a is transferring 1000
 User b is transferring 2000
@@ -913,7 +913,7 @@ User b is transferring 2000
 They run independently don't see each other's in progress updates.
 
 Durability - Once transfer is committed, it is permanent.
-Even if there is  power failure or crash afterward - the 1000 rupees is not lost. It's safely stored in the
+Even if there is power failure or crash afterward - the 1000 rupees is not lost. It's safely stored in the
 database.
 
 In django we are using @transaction.atomic decorator for atomicity.

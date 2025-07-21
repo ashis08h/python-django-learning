@@ -57,7 +57,7 @@ def merge_sort(input_list):
         merge_sort(second_half)
 
         i = j = k = 0
-        while i < len(first_half)  and j < len(second_half):
+        while i < len(first_half) and j < len(second_half):
             if first_half[i] < second_half[j]:
                 input_list[k] = first_half[i]
                 i += 1

@@ -78,24 +78,24 @@ Ans - Whenever we create an app by default one package create with name as app n
         views.py
 
 
-    __init__.py - It is an empty file wwhich tells us that this folder is a package.
+    __init__.py - It is an empty file which tells us that this folder is a package.
     models.py - It is a file where we keep all the models class which we have used in our application.
-    tests.py - I is a file where we write the test cases of thr available class and methods in the application.
+    tests.py - I is a file where we write the test cases of the available class and methods in the application.
     apps.py - It is a file which consists app configurations.
     admin.py - It is a file where we register our models to get visible on django admin and if we wanted to
                change any builtin design or configuration of django admin we write code in admin.py file.
-    views.py - In this file we write all hr business logics.
+    views.py - In this file we write all the business logics.
     migrations dir - In this migrations dir all the migrations files get stored.
 
 5) Why django called loosely coupled framework?
-Ans - A loosely coupled framework is such a framework where service code and client code are independent.
+Ans - A loosely coupled framework is such a framework where server code and client code are independent.
     developers can write backend code as well as frontend code independently.
     Since Django follows MVT architecture so In Views we write all the business logic ie server side code
-    and in template we rite client side code ie frontend code.
+    and in template we write client side code ie frontend code.
 
 6) Explain migrations in django?
 Ans - django migrations are used to apply the changes in models into databases. Instead of writing
-    raw query we change in models and some comand to apply the changes.
+    raw query we change in models and some command to apply the changes.
 
     python manage.py makemigrations - Command to create a migration file.
     python manage.py migrate - to apply the changes in to database.
@@ -134,7 +134,7 @@ Ans - Both select related and prefetch_related helps us to optimize the query in
 
     Example -
 
-    Example of normal orm qury and select_related query
+    Example of normal orm query and select_related query
 
     # hit the database
     book = Book.objects.get(id=1)
@@ -462,7 +462,7 @@ Ans -
 
     9) django.contrib.auth - Provide tool to work with authentiction and authorization with user model.
 
-    10) django.contrib.staticfiles - provise tool to work with static files like (image, css, js)
+    10) django.contrib.staticfiles - provide tool to work with static files like (image, css, js)
 
     11) django.contrib.session - Handles sessions means store data into sessions as per site visitors.
 
@@ -472,3 +472,34 @@ Ans -
         message between views.
 
     14) django.utils - provide multiple functions.
+
+What is microservices?
+Microservices is an architectural style where a large application is broken down into smaller, independent
+services, each responsible for a specific business functionality. These services communicate with each other
+via API(usually REST or messaging queues.)
+
+Each microservice is
+Independently deployable
+Developed using its own tech stack
+Managed by a small team
+Scalable on its own
+
+Example - Imagine you're building an e-commerce platform like Amazon. You can split the platform into
+microservices like
+User service - Handles user registration/login/profile
+Product service - Manager product catalog, categories.
+Order service - Handle order placement, tracking
+Payment service - Process Payments via credit/UPI etc
+Inventory service - Manage stock levels.
+Notification service - Sends SMS/email alert.
+Review service - Manages customer reviews/ratings
+
+
+Benefits of microservices -
+Scalability - Scale only the services that need more resources(e.g - scale only payment service during diwali sale)
+Flexibility in Tech stack - Each service can use different languages (Python for auth, node.js for payments)
+Independent deployment - You can deploy order service without affecting the prodect service.
+Faster development - Small teams can work on different services in parrallel.
+Fault Isolation - Failure in one service does not crash the whole system.
+Better maintainability - Smaller codebases are easier to understand and change.
+

@@ -503,3 +503,32 @@ Faster development - Small teams can work on different services in parrallel.
 Fault Isolation - Failure in one service does not crash the whole system.
 Better maintainability - Smaller codebases are easier to understand and change.
 
+What is the difference between class based view and function based view?
+In django views are the part of your application that receives HTTP requests and returns HTTP responses.
+
+1) Function based view - A function based view is just a python function that takes a request and returns a
+response.
+
+2) Aclass based view is a python class that inherits from django's builtin view classes and define methods
+like get(), post() etc.
+
+Key difference -
+Function based view
+
+Syntax - simple.
+structure - All logic is in one function.
+customization - Manual
+Readability - Easier for small views.
+Reusability - Harder to reuse
+Decorators - Easier to apply
+Maintainability - Can get messay in large views.
+
+Class based view
+
+Syntax - Object orientation class.
+structure - Logic split by HTTP methods (GET, POST).
+customization - Easier Via inheritance and mixins.
+Readability - Better for complex views.
+Reusability - Cn use inheritance and mixins
+Decorators - slightly more complex
+Maintainability - clean and DRY for large apps.

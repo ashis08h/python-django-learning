@@ -3,12 +3,19 @@ from django.views import View
 from django.http import HttpResponse
 from django.db.models import Q
 from django.shortcuts import render
-from .models import Author, Book, Employee, Manager, SaraswatiVidyaMandir, Man
+from .models import Author, Book, Employee, Manager, SaraswatiVidyaMandir, Man, Post, Product, NoteBook
 from django.dispatch import receiver
 from django.db.models.signals import post_save
 from django.utils.decorators import method_decorator
 from django.views.decorators.csrf import csrf_exempt
-from .serializers import AuthorSerializer
+from .serializers import AuthorSerializer, NotebookSerializer
+from django.views.generic import ListView, DetailView
+from django.contrib.auth.hashers import make_password
+from django.contrib.auth.models import User
+import json
+from rest_framework import generics, viewsets, filters
+from rest_framework.permissions import IsAuthenticated
+from .permissions import IsAdminOrReadOnly
 
 # Create your views here.
 
@@ -97,6 +104,87 @@ class AuthorView(View):
         authors = Author.objects.all()
         author_serializers = AuthorSerializer(authors, many=True)
         print("author_serializers", author_serializers.data)
-        return render(request, 'author.html', context={'authors': author_serializers})
+        return render(request, 'author.html', context={'authors': author_serializers.data})
+
+
+class PostListView(ListView):
+
+    model = Post
+    template_name = 'post_list.html'
+    context_object_name = 'posts'
+
+
+class PostDetailView(DetailView):
+
+    model = Post
+    template_name = 'post_detail.html'
+    context_object_name = 'post'
+
+
+class TestMultipleDBView(View):
+
+    def get(self, request):
+        posts = Post.objects.all().using('new_database')
+        print("posts", posts)
+        return HttpResponse(f"I am from multiple DB View. ")
+
+
+class ProductView(View):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def get(self, request):
+
+        plain_password = 'Ashish'
+        hashed_password = make_password(plain_password)
+        print("hashed_password", hashed_password)
+
+        try:
+            user_obj = User.objects.get(username='ashish')
+            is_correct_password = user_obj.check_password('ashish')
+            print("is_correct_password", is_correct_password)
+        except:
+            user_obj = None
+        print("user_obj", user_obj)
+        return HttpResponse("I am from ProductView")
+
+    def post(self, request):
+
+        data = json.loads(request.body)
+        name = data.get('name')
+        desc = data.get('description')
+        print("name", name)
+        print("description", desc)
+        product = Product()
+        product.name = name
+        product.desc = desc
+        product.full_clean()
+        product.save()
+        return HttpResponse(f"Successfully submitted the records.")
+
+
+class NotebookListCreateView(generics.ListCreateAPIView):
+
+    queryset = NoteBook.objects.all()
+    serializer_class = NotebookSerializer
+    permission_class = [IsAuthenticated]
+    filter_backends = [filters.SearchFilter, filters.OrderingFilter]
+    search_fields = ['title', 'author']
+    ordering_fields = ['publish_date']
+
+
+class NotebookViewSet(viewsets.ModelViewSet):
+
+    queryset = NoteBook.objects.all()
+    serializer_class = NotebookSerializer
+
+
+class NoteBookDetailView(generics.RetrieveUpdateDestroyAPIView):
+
+    queryset = NoteBook.objects.all()
+    serializer_class = NotebookSerializer
+    permission_classes = [IsAdminOrReadOnly]
 
 

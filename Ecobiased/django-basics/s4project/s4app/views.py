@@ -16,6 +16,7 @@ import json
 from rest_framework import generics, viewsets, filters
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAdminOrReadOnly
+from .tasks import add
 
 # Create your views here.
 
@@ -148,6 +149,8 @@ class ProductView(View):
         except:
             user_obj = None
         print("user_obj", user_obj)
+        # result = add.delay(2, 3)
+        # print("result", result.id)
         return HttpResponse("I am from ProductView")
 
     def post(self, request):

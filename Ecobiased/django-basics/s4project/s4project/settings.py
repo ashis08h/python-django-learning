@@ -50,6 +50,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    's4app.middleware.CustomMiddleware',
+    's4app.middleware.BlockIpAdress',
 ]
 
 ROOT_URLCONF = 's4project.urls'
@@ -65,6 +67,7 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
+                's4app.context_manager.custom_template_var'
             ],
         },
     },

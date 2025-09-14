@@ -1,0 +1,12 @@
+Pyspark - It is an interface for Apache spark in python. It is not only allow you to write spark applications
+using python APIs, but also provides the pyspark shell for interactively analyzing your data into distributed
+environment.
+
+In memory computation
+Designed to cover wide range of workloads (batch processing, ML, interactive queries, Live streaming)
+Integrate with other big data tool.
+Easy & inexpensive.
+Data processing: (Batch application, SQL, ML, Graph processing)
+
+Dataframe - It is a distributed collection of data organized into names columns. It is conceptually equivalent
+to a table in a relational database or a data frame in R/Python.

@@ -138,6 +138,7 @@ INSERT INTO STATEMENT -
 CONCATENATION -
     select '_' + column_name1 + '_' + column_name2 from [test_table_2];
 
+
 CONVERT -
     convert function is used to convert data type of a value.
 
@@ -163,7 +164,7 @@ What is the difference between union and union all?
     Union - Removes duplicate rows from combined result set.
     performs a distinct sort, which can make it slower.
 
-    Union includes all the rows, even duplicates also.
+    Union all includes all the rows, even duplicates also.
     Faster than UNION because it skips the duplicate elimination step.
 
 DISTINCT -
@@ -187,6 +188,8 @@ ORDER OF EXECUTION OF CLAUSE -
     ORDER BY [DATE] DESC
     OFFSET 3 ROWS FETCH NEXT 10 ROWS ONLY;
 
+HOW TO REMEMBER - sawere group me hath opar ofset fetch kr diye
+
 ISNULL -
     isnull function is used to handle null values in the column.
     SELECT ISNULL([TNA], 'N/A') FROM [Stg_TNA];
@@ -208,6 +211,7 @@ What is the difference between isnull and coalesce in sql server?
     syntax -
         SELECT COALESCE(Column1, Column2, Column3, 'No Value') AS NewColumn
         FROM Table;
+// UPTO HERE
 
 LEFT -
     The LEFT function is used to extract a specified number of characters from the left side of
@@ -306,10 +310,8 @@ WITH KEYWORD -
     and avoid code duplication.
 
     Example 1-
-        WITH AverageCte AS(
-            SELECT AVG([Initiative]) AS AvgSal FROM [In_Inititative])
-        )
-        SELECT * FROM [In_Initiative] WHERE [Inititative] >= (SELECT AvgSal FROM AverageCte);
+       with avgsalcte as (select avg(convert(int, [promo_id])) as avgsal from [In_Initiative])
+        select * from [In_Initiative] where [promo_id] >= (select avgsal from avgsalcte);
 
     Example 2-
         WITH CTE_TEMP AS (
@@ -418,7 +420,7 @@ What is the difference between PARTITION BY AND GROUP BY IN SQL SERVER?
 WINDOWS FUNCTION IN SQL SERVER -
     In SQL Server, a window function (also known as an analytic function or a windowed function) is
     a type of function that performs calculations across a set of rows related to the current row,
-    without reducing the the result set. Windows function are applied in conjunction with the
+    without reducing the result set. Windows function are applied in conjunction with the
     OVER clause and are used to perform complex analytical tasks, such as calculating running
     total, ranking, moving average and more.
 
@@ -690,6 +692,12 @@ code to delete duplicate data from a table
 code to delete duplicate data from a table
 but keep first.
 
+
+with cte as(
+select [Date], [ROOT], row_number() over(partition by [Date], [ROOT] order by [ROOT] desc) as row_number
+from [Stg_TNA])
+delete from [Stg_TNA] where [Date] in (select [Date] from cte where row_number >1) and
+[ROOT] in (select [ROOT] from cte where row_number >1)
 
 
 

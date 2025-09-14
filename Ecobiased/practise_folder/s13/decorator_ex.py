@@ -66,6 +66,7 @@ def subtract_number(a, b):
 
 print(subtract_number(3, 5))
 
+
 def tag_print(tag):
     def decorator(func):
         def wrapper(*args, **kwargs):

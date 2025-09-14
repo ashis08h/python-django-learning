@@ -1,0 +1,77 @@
+Apache spark -
+Apache spark is a lightning-fast unified analytics engine for big data processing and machine learning.
+
+100% open source under apache license
+simple and easy to use api
+in-memory processing engine.
+distributed computing platform
+unified engine which supports SQL, streaming, ML and graphing processing
+integrates closely with other big data tools.
+
+cluster - It is a backbone of apache spark. Here we can decide what are the nodes, what are the executors.
+
+Inside Azure databricks we can see below things -
+1) Clusters
+2) Workspace/Notebook
+3) Administration control
+4) Optimized speed
+5) Database/Table
+6) Delta lake
+7) SQL Analytics
+8) ML Flow
+
+All the above components are utilized by databricks.
+
+Azure databricks can do below things
+1) It has unified billing - means whenever cluster will run then only cost will cut. Once it stopped
+cost will not come.
+
+2) For messaging service we can use Azure IOT hub, Azure event hub,
+3) It can integrate with Power BI, Azure ML, Azure data factory, Azure Devops, Azure active directory.
+4) It can work with below data services
+    a) Azure data Lake
+    b) Azure blob storage
+    c) Azure cosmos DB
+    d) Azure SQL database
+    e) Azure Synapse
+
+What is the difference between Azure data factory and Azure databricks?
+
+Azure Data Factory -
+Purpose - ADF is primarily used for data integration services to perform ETL processes and orchestration
+data movements at scale
+
+Ease of use - ADF provides a drag-drop feature to create and maintain data pipelines visually.
+
+Flexibility in coding - ADF faciliates the ETL pipeline process using GUI tools, developers have less
+flexibility as they can not modify backend code.
+
+Data processing - ADF does not support live streaming.
+
+Azure Databricks -
+Purpose - Databricks provides a collaboarative platform for data engineers and data scientists to perform
+ETL as well as build machine learning models under single platform.
+
+Ease of use - Databricks uses python, Spark, R, Java or SQL for performing Data Engineering and Data Science
+activities using notebooks.
+
+Flexibility in coding - Databricks implements a programmatic approach that provides the flexibility of fine
+-tuning code to optimize performance
+
+Data processing - Databricks supports both live and archive streaming options through Spark API.
+
+Workspace - The workspace is the environment for accessing all your databricks assets. It organizes objects
+(like: - Notebook, Libraries, Dashboards, and experiments) into folders and provides access to data objects
+and computational resources.
+
+Notebooks - A web-based interface to documents that contain runnable commands, visualization and narrative
+text.
+
+Folder - It's used to maintain the grouping and hierarchy.
+
+Library - A package of code available to the notebook or job running on your cluster. Databricks runtimes
+include many libraries, and you can add your own.
+
+MLflow - A collection of MLflow runs for training a machine learning model.
+
+Data -

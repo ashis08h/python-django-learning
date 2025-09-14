@@ -532,3 +532,102 @@ Readability - Better for complex views.
 Reusability - Cn use inheritance and mixins
 Decorators - slightly more complex
 Maintainability - clean and DRY for large apps.
+
+What is multithreading have you use it in your project?
+Multithreading is a programing technique where multiple threads (smaller units of a process) run concurrently
+within single process, sharing the same memory space. Each thread runs independently but can access shared data.
+This helps improve performance, especially in I/O-bound tasks like reading files, making HTTP requests, or
+database operations.
+
+Real time use case - In mygate project user used to upload 20 images, 30 images simultaneously that time i have
+used async task plus threading technique that is i used to upload images in multiple threads to save time.
+
+
+what is the difference between celery, crontab and redis?
+
+Celery - celery is a distributed task queue used to run time-consuming or asynchronous tasks in the background
+outside of the main Django request/response cycle.
+
+Why use celery?
+To perform asynchronous tasks like
+Sending emails
+Generating reports (CSV, PDF)
+Image processing
+Pushing notifications
+API Integrations
+Scheduled or recurring tasks(via celery beat)
+
+How celery works concept?
+Django app calls a @shared_task function.
+celery put this task in queue.
+A worker process picks it up and runs it.
+You don't block the user while the task runs.
+
+Crontab - Crontab is a unix-based job scheduler used to run tasks at fixed times or intervals(every
+ hours, every day at 3AM, etc)
+
+Why use crontab?
+Schedule a scripts or command at regular interval.
+useful for system-level or one-off django scripts like -
+daily backup
+auto email reminder
+expiring old records
+
+How crontab used used in django?
+You write a management command in django(python manage.py yourcommand)
+you schedule it using the crontab like
+0 3 * * * /path/to/venv/bin/python /path/to/project/manage.py cleanup_logs
+
+Redis - Redis is an in-memory key-value store used in django as:
+A celery broker(queue for task delivery)
+A cache (store sessions, query results, etc)
+A message queue or Pub/Sub
+
+Why use redis with celery?
+celery needs a broker to pass messages(tasks). redis is a fast broker, and very common with celery.
+
+#setting.py
+CELERY_BROKER_URL = 'redis://localhost:637'
+
+Then celery puts the task in redis - Worker picks it up.
+We can use celery beat for scheduling purpose instead of crontab.
+
+Use case -
+celery
+
+    Background task(email, report) - Yes
+    Scheduled task inside django - yes (with celery beat)
+    External command at fixed time - No
+    queue broker - yes (via redis)
+    fast key-value cache(session API) - No
+
+Crontab
+
+    Background task(email, report) - No
+    Scheduled task inside django - No
+    External command at fixed time - Yes
+    queue broker - No
+    fast key-value cache(session API) - No
+
+Redis
+    Background task(email, report) - used by celery
+    Scheduled task inside django - No
+    External command at fixed time - No
+    queue broker - yes
+    fast key-value cache(session API) - yes
+
+what is system design?
+System design is the process of defining architecture, components, modules, data flow and communication
+between services to build a complete software system.
+
+It's not just a database design - it is a broader topic that includes -
+API design
+Authentication
+Frontend-backend interaction
+storage choices
+caching
+load balancing
+scaling (horizontal/vertical)
+security
+Monitoring/logging
+

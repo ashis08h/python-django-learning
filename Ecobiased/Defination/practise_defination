@@ -475,6 +475,7 @@ when it does not find the match.
 
 What is the difference between positional argument and keyword argument?
 
+
 positional argument -
 definition - Positional argument are passed to a function in a specific order, based on their position.
 order matters - the function expects argument in a certain order, and they are assigned to the corresponding
@@ -483,8 +484,6 @@ parameters based on their position.
 Keyword argument -
 definition - Keyword argument are passed to a function with parameter name specified explicitly.
 Order doesn't matter - Since you are using parameter name, the order in which you pass them doesn't matter.
-
-
 
 what is the difference between jwt and oauth2 authentication?
 
@@ -619,7 +618,7 @@ c) Logging and monitoring -
     Record event and monitor logs for unusual activity to detect forgeries early.
 
 d) Secure and secrets and credentials -
-    Avoid hardcoding sensitive information (ex - API Keys) in the scripts. Use environemt
+    Avoid hard coding sensitive information (ex - API Keys) in the scripts. Use environment
     variables or secure storage.
 
 e) Error Handling -
@@ -671,7 +670,7 @@ a) Fine-Grained Control -
     Provides complete control over the query's execution and optimization.
     Useful for complex queries where ORM abstractions may introduce inefficiencies.
 
-b) Bettor performance -
+b) Better performance -
     Raw SQL an be more efficient as you can optimize queries specially for the database
     and avoid ORM overhead.
 
@@ -916,4 +915,10 @@ Durability - Once transfer is committed, it is permanent.
 Even if there is power failure or crash afterward - the 1000 rupees is not lost. It's safely stored in the
 database.
 
-In django we are using @transaction.atomic decorator for atomicity.
+In django we are using @transaction.atomic decorator for atomicity
+
+reduce - In python reduce is a function from the functools modules. It's used to apply a rolling
+computation to items in an iterable (like a list), reducing it to a single cumulative value.
+Basically it combined all elements into one value (aggregation).
+
+

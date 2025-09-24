@@ -1,3 +1,0 @@
-The walrus operator is a new addition to python 3.8 and onwards.
-It assign the value to a variable in expression only.
-we use := operator for walrus operator.

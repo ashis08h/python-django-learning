@@ -1,6 +1,0 @@
-dir() method in python gives all the methods, attributes of that those things which we will pass in
-parenthesis.
-
-__dict__ will return the value in dictionary format.
-
-help() Method return all the information which is passes in parenthesis.

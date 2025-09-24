@@ -31,7 +31,7 @@ class PostAdmin(admin.ModelAdmin):
 
 admin.site.register(Post, PostAdmin)
 
-# command to migrate the non default db is python manage.py migrate  --database='new_database
+# command to migrate the non default db is python manage.py migrate  --database='new_database'
 
 
 

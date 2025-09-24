@@ -1,0 +1,73 @@
+FastApi provides swagger UI for documentation which consists of all the endpoint and you can try it out also.
+It also provides Redoc documentation also automatic documentation.
+
+FastApi based on latest python with type support also based on pydantic model.
+
+It based on open standards
+
+1) Json schema
+2) Open Api
+
+Security and authentication
+
+HTTP Basic
+OAuth2(Also with JWT tokens)
+API Keys in
+Headers
+Query parameters
+Cookies, etc
+
+Dependency Injection unlimited "Plugins"
+Tested - It used pytest for testing API.
+
+Starlette features - It is an another framework available on python programing language.
+FastApi has below features of starlette.
+
+WebSocket Support
+GraphQL Support
+In-progress background tasks
+Startup and Shutdown events.
+
+Test client built on requests.
+CORS, GZIp, Static Files, Streaming responses.
+Session and cookie support.
+
+Other Support -
+SQL databases
+NoSQL databases
+GraphQL
+
+Command to install fastapi
+pip install FastAPI
+pip install uvicorn - to run server we need uvicorn
+
+command to run the server -
+uvicorn main:app --reload
+
+here uvicorn is the library name main is the module name is file main.py and app is the instance name
+app = FastAPI()
+
+In other framework we call it endpoint, url but in fastapi we call it path.
+
+@app.get('/')
+def index():
+    return {'data': {'name': 'Ashish'}}
+
+Here
+below function is known as path operation function
+def index():
+    return {'data': {'name': 'Ashish'}}
+
+.get is called operation
+
+@app is called path operation decorator.
+
+('/') - This is called path.
+
+FastAPI reads the code line by line.
+
+below is the url to goes to swagger url
+http://localhost:800/docs
+
+below is the url to goes to redoc url
+http://localhost:800/redoc

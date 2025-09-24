@@ -1,9 +1,0 @@
-Pickling and unpickling are the modules to serialize and deserialize the object in byte stream data
-and vice versa.
-
-To pickle an object will serialize the object into byte stream data and write into a file.
-we use pickle.dump for pickling.
-To unpickle a byte stream data will de serialize the byte stream data into an object.
-we use pickle.load for unpickling
-
-

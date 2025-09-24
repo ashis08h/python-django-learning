@@ -1,6 +1,0 @@
-list comprehension are used to create a new list from another list with applied some expression
-to each element.
-
-Dict comprehension are used to create a key value pair dictionary from a list with applied
-some expression to each element.
-

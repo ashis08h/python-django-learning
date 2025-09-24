@@ -1,3 +1,0 @@
-Static methods in the python does not required self keyword. we can call static methods
-without any instance we can call that methods like class_name.method_name. To define static methods
-we use @staticmethod keyword.

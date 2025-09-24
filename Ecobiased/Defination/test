@@ -1,1 +1,0 @@
-azcopy cp --recursive 'https://s00480psta1o9adlcprdev.blob.core.windows.net/cpr-o9-k8/datalake/pluginoutput_5199/skuforecast/' `cat /home/svc-di/.cred.s00480psta1o9adlcprdev.sasToken` 'https://s00480psta1o9dataxfer.blob.core.windows.net/cpr-dataxfer-test/archive_bkp_prod_20240808/output/' `cat /home/svc-di/.cred.s00480psta1o9dataxfer.sasToken` --recursive=true

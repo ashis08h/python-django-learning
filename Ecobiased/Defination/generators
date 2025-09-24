@@ -1,4 +1,0 @@
-In Python generators is a special types of function which is used to create an iterable sequence of
-values. Generators create value on the fly it will not create the value until next value is requested.
-Yield keyword is used to generate sequence.
-Benefit of generator is it takes less memory.

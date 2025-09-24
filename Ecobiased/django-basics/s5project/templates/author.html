@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<p>I am from author html file</p>
+{% if authors %}
+  {% for author in authors %}
+    {{author.name}}
+  {% endfor %}
+{% endif %}
+</body>
+</html>

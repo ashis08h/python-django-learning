@@ -1,3 +1,0 @@
-Super() keyword helps in python programing to refer the parent classes from a child class during
-inheritance. with help of super() keyword we can call the methods of parent class from child
-class.

@@ -62,6 +62,65 @@ Ans - Whenever we create a project by default a directory creates with project n
 
     wsgi.py - It is an entry point of our application which used by webserver to serve the project.
 
+When we create a new project then by default two python files create wsgi.py and asgi.py what is the purpose
+of both of them and their difference?
+
+WSGI - Web server Gateway interface
+It is a synchronous protocol (handles one request per worker thread at a time)
+Django originally only supported wsgi(since 2008)
+You use wsgi.py when deploying django with servers like
+Gunicorn
+uWSGI
+mod_WSGI(Apache)
+
+Good for classic django apps - request/response cycle, REST APIs, HTML rendering
+
+ASGI - Asynchronous server gateway interface(successor to WSGI)
+Introduced in django 3.0+ for async support
+supports both async and sync views
+Handles websockets, long-live connections, server-sent events etc
+You use asgi.py when deploying django with
+Daphne(Used by channels)
+Uvicorn
+Hypercorn
+Good for real time apps(chat apps, live notifications, streaming)
+High concurrency (async I/O, Background tasks)
+
+The main difference between WSGI and ASGI are
+
+WSGI
+Protocol
+    Synchronous
+
+Long-live connections
+    Not-supported
+
+concurrency model
+    Thread/Process based
+
+typical servers
+    Gunicorn, uWSGI
+
+django supports
+    Since Django 1.x
+
+ASGI
+Protocol
+    Synchronous + Asynchronous
+
+Long-live connections
+    Supported(WebSockets, SSE)
+
+concurrency model
+    Async event loop(non-blocking I/O)
+
+typical servers
+    Uvicorn, Daphne, Hypercorn
+
+django supports
+    Since Django 3.0
+
+
 4) Explain the directory structure of a django apps?
 Ans - Whenever we create an app by default one package create with name as app name.
     inside the dir one __init__.py file, views.py, models.py, apps.py, admin.py, tests.py
@@ -80,7 +139,7 @@ Ans - Whenever we create an app by default one package create with name as app n
 
     __init__.py - It is an empty file which tells us that this folder is a package.
     models.py - It is a file where we keep all the models class which we have used in our application.
-    tests.py - I is a file where we write the test cases of the available class and methods in the application.
+    tests.py - It is a file where we write the test cases of the available class and methods in the application.
     apps.py - It is a file which consists app configurations.
     admin.py - It is a file where we register our models to get visible on django admin and if we wanted to
                change any builtin design or configuration of django admin we write code in admin.py file.
@@ -119,13 +178,46 @@ Ans - ORM stands for object relational mapper which is used to perform crud oper
 Ans - CSRF stands for cross site request forgeries
     It helps us to protect our server from cross site request forgeries. When someone try to inject some
     malicious website link or any javascript code then csrf token protect our server.
-    It is a unique secret key which generates to the server site and pass to the client side. Whenever
+    It is a unique secret key which generates to the server side and pass to the client side. Whenever
     request raised then first it will verify csrf token there after allow request to perform.
 
 9) What is queryset in django?
 Ans - In generally queryset is a collection of sql query.
     In django queryset is a collection of objects from our database.
     It is comparable to select query in database.
+
+what is reverse foreignkey relationship in django?
+    When we define foreignkey we create a forward relationship from one model to another model.
+
+    class Author(models.Model):
+    name = models.CharField(max_length=100)
+
+    class Book(models.Model):
+        title = models.CharField(max_length=100)
+        author = models.ForeignKey(Author, on_delete=models.CASCADE)
+
+    Book → Author is the forward relation.
+    From a Book, you can access its author:
+
+    book = Book.objects.first()
+    print(book.author.name)
+
+    Django automatically creates a reverse relation so that from an author, you can access all related books
+    That's what we call the reverse foreign key.
+
+    author = Author.objects.first()
+    books = author.book_set.all()   # reverse foreign key
+
+    If you don’t like book_set, you can rename it using related_name:
+
+    class Book(models.Model):
+    title = models.CharField(max_length=100)
+    author = models.ForeignKey(Author, on_delete=models.CASCADE, related_name="books")
+
+    author.books.all()
+
+    Forward FK → One-to-One relation (Book → Author).
+    Reverse FK → One-to-Many relation (Author → Many Books).
 
 10) What is the difference between select_related and prefetched_related in django?
 Ans - Both select related and prefetch_related helps us to optimize the query incase of ForeignKey and
@@ -630,4 +722,43 @@ load balancing
 scaling (horizontal/vertical)
 security
 Monitoring/logging
+
+What is the difference between PUT, PATCH, UPDATE Http methods in django?
+
+PUT - It replace the entire resource with the provided data.
+In django restframework
+A PUT request means you must send all the fields of the object.
+If you omit a field, It may get reset to its default value or null.
+
+Example -
+PUT /api/users/5/
+{
+  "name": "Ashish",
+  "email": "ashish@example.com"
+}
+
+This replace entire user object with those two fields (if age was there before, it will be wiped out
+unless included.)
+
+PATCH -
+It applies partial updates to the resource.
+In djangorestframework
+A PATCH request means you can send only the fields you want to update
+Example -
+PATCH /api/users/5/
+{
+  "name": "Ashish"
+}
+
+This will only update the name field and keep other fields (email, age, etc) unchanged.
+
+UPDATE() in django
+This is not an HTTP method. It is a django ORM method.
+Used in querysets to update one or more rows directly in the database.
+
+Example -
+User.objects.filter(id=5).update(name="Ashish")
+
+Executes an SQL UPDATE statement.
+Does not call save(), full_clean(), or trigger signals like pre_save/post_save.
 

@@ -1,4 +1,0 @@
-Function caching is a technique in python which improves the performance of a program by
-storing the result of a function call and reuse that result later.
-
-with help of @lru_cache decorator we do function caching.

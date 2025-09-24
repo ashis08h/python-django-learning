@@ -1,5 +1,0 @@
-Method overloading is a feature in oops in which we create methods with same name inside a class
-having different number of arguments.
-
-In python we don't have method overloading feature we handle such scenario by giving optional
-argument.

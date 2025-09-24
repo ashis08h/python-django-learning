@@ -921,4 +921,91 @@ reduce - In python reduce is a function from the functools modules. It's used to
 computation to items in an iterable (like a list), reducing it to a single cumulative value.
 Basically it combined all elements into one value (aggregation).
 
+What is closure and how does this apply to decorators?
+
+A closure in python is a function that is defined inside another function (nested function).
+It remembers variables from the outer function, even after the outer function has finished executing.
+
+A decorator in python is just a function that takes another function as an argument and returns a new one.
+closure are the mechanism that makes decorator possible.
+
+In the decorator wrapper is a closure because it defined inside decorator.
+wrapper remembers func (the original function) even after decorator finishes.
+
+closure - inner function that remember variables from outer scope.
+decorator - a function that uses closure to modify another function.
+
+Why python operates different behaviour when we do 1+1 gives 2 and '1' + '1' it gives '11'?
+
+python doesn't hard coded what + means instead, it calls special method defined on the objects involved.
+
+case 1
+1+1
+Here 1 is an int object the + operator internally calles the dunder method __add__
+so under the hood
+(1).__add__(1)
+
+The int.__add__ method knows how to perform numeric addition so it returns 2 another int.
+
+case 2
+
+'1' + '1'
+here both operands are str objects.
+python calls
+'1'.__add__('1')
+
+But str.__add__ is defined as string concatenation, not arithmetic.
+So it glues them together '11'.
+
+Because different classes implement __add__ differently.
+
+int.__add__ → does arithmetic addition
+
+str.__add__ → does concatenation
+
+list.__add__ → does list concatenation
+
+x = ([1, 2, 3], 'abc', [4, 5, 6])
+x[0].append(4)
+x[2].append(7)
+print(x)
+
+Here x is a tuple then why append is working here
+
+A tuple can hold mutable objects (like lists).
+Mutability is a property of the object, not of the container that refers to it.
+
+x[0] is [1, 2, 3] (a list).
+append(4) modifies the list object, not the tuple.
+The tuple still points to the same list object — only the contents of that list changed.
+Same logic applies to x[2].append(7).
+
+Tuple immutability means you cannot rebind tuple slots.
+But if a slot points to a mutable object (like a list), you can still mutate that object.
+
+To iterate over a list and to iterate over a set which one is faster? and why?
+
+Python's list is dynamic array (similar to C arrays but resizable).
+All elements are stored in contiguous memory blocks.
+
+Very cache-friendly because CPUs fetch memory in chunks
+So iteration = just pointer arithmetic.
+
+That’s why it’s super fast.
+
+Python’s set is implemented as an open-addressing hash table.
+Each element is placed in the table based on its hash value.
+The table is an array with gaps (empty slots).
+
+When you iterate
+The interpreter must:
+walk through the entire hash table array.
+skip empty slots
+return actual items.
+Elements are not stored in order, and they are scattered across memory.
+Iteration =  extra checks + cache misses(because of items are not in continuous memory)
+
+
+
+
 

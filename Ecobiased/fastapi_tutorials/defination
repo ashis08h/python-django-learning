@@ -71,3 +71,119 @@ http://localhost:800/docs
 
 below is the url to goes to redoc url
 http://localhost:800/redoc
+
+Response model - What is this and when we use it.
+When we wanted to see the response of a particular row in documentation also all the columns are visible.
+if we do not wanted to show some particular column suppose id in the response then we can hide them with help of
+response model. for that we write pydentic model ie pydentic schema with those columns which we wanted to display.
+
+To hash a password in fastAPI we use passlib library
+pip install passlib
+
+then from passlib.context import CryptContext
+
+In fastAPI we have tag which used to define the routes in a proper way.
+
+In the router we are doing everything means going to path fetching data from database and returning response
+But the ideal use of routes is to go to the path and return something. So we can move all the logics inside
+repository directory files.
+
+Need to install a library python-jose for jwt token.
+
+How we handle validation in FastAPI?
+
+In FastAPI, validation is automatic and powerful, thanks to pydentic models.
+We define data schemas using pydentic BaseModel, and FastAPI automatically validates input data (from JSON, query
+parameters, form etc) against those schemas.
+
+1) Basic Validation Example (Request Body)
+
+from fastapi import FastAPI, HTTPException
+from pydantic import BaseModel, Field, EmailStr
+
+app = FastAPI()
+
+# Define request body model
+class User(BaseModel):
+    name: str = Field(..., min_length=3, max_length=50)
+    age: int = Field(..., gt=0, lt=120, description="Age must be between 1 and 119")
+    email: EmailStr
+    is_active: bool = True
+
+@app.post("/users/")
+def create_user(user: User):
+    if not user.is_active:
+        raise HTTPException(status_code=400, detail="User must be active")
+
+    return {"message": "User created successfully", "user": user}
+
+FastAPI automatically validates
+    name - must be between 3 to 50
+    age - must be between 0 to 120
+    email - must be a valid email address
+    if validation fails - FastAPI automatically returns a 422 Unprocessable entity error with detailed message.
+
+
+2) Validation with Query Parameters
+
+from fastapi import Query
+
+@app.get("/items/")
+def read_items(skip: int = Query(0, ge=0), limit: int = Query(10, le=100)):
+    return {"skip": skip, "limit": limit}
+
+skip must be ≥ 0
+
+limit must be ≤ 100
+If invalid, FastAPI automatically returns a validation error.
+
+3) Validation with Path Parameters
+
+from fastapi import Path
+
+@app.get("/items/{item_id}")
+def get_item(item_id: int = Path(..., gt=0)):
+    return {"item_id": item_id}
+
+If item_id ≤ 0 → validation fails automatically.
+
+4) Custom Validation using Pydantic Validator
+
+You can add custom validation logic:
+
+from pydantic import validator
+
+class Product(BaseModel):
+    name: str
+    price: float
+    discount: float
+
+    @validator("discount")
+    def check_discount(cls, v, values):
+        if "price" in values and v > values["price"]:
+            raise ValueError("Discount cannot exceed price")
+        return v
+
+Combine with HTTPException for Business Logic Validation
+
+@app.post("/products/")
+def create_product(product: Product):
+    if product.price <= 0:
+        raise HTTPException(status_code=400, detail="Price must be positive")
+    return product
+
+
+What do you mean by pydentic model in fastapi?
+
+Pydentic model in fastapi is a data validation and serialization model that defines the structure of request and
+response data using python type hints.
+It comes from pydentic library, which ensures that data received from the client(like, JSON, query, params,
+forms, etc) is validated, converted to correct types, and handled safely before reaching your business logic.
+
+
+Key features of pydentic models -
+Automatic data validation(type checking and value constraints)
+Automatic data conversion(eg. string "25" become integer 25)
+Error reporting - (returns structured validation errors automatically)
+Serialization/Deserialization - (Convert between python objects and JSON)
+Used for request & response models in FASTAPI

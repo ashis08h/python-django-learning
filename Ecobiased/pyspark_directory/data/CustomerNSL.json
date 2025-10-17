@@ -1,0 +1,5 @@
+{"name": "Ashish kumar", "age":"30", "address": {"city": "Munger", "state": "Bihar"}},
+{"name": "Kamlesh kumar", "age":"40", "address": {"city": "Patna", "state": "Bihar"}},
+{"name": "Monu kumar", "age":"20", "address": {"city": "Bhagalpur", "state": "Bihar"}},
+{"name": "Rohit kumar", "age":"10", "address": {"city": "Bangalore", "state": "Karnataka"}},
+{"name": "Nilesh kumar", "age":"50", "address": {"city": "Chittoor", "state": "Andhra"}}

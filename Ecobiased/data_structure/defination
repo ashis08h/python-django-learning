@@ -1,0 +1,127 @@
+Data structures are building blocks or raw material for any software programs.
+array, linkedlist, tree are the containers storing data in a specific memory layout.
+
+Data structure
+    Array
+    Hash Table
+    Linked List
+Python
+    List
+    Dictionary
+    Not Available
+Java
+    Native Array
+    Array List
+    HashMap/Linked HashMap
+    LinkedList
+c++
+    Native array - std::vector
+    std::map
+    std::list
+
+Big O notation - Big O notation is used to measure how running time or space requirements for your program
+grows as input size grows.
+
+How we calculate Big O notation?
+
+time = a*n + b
+
+1) Keep fastest growing term
+    time = a*n
+
+2) Drop constraints
+    time = O(n)
+
+so the time complexity of above example is O(n)
+
+1) Example of O(n) complexity is
+def get_squared_numbers(numbers):
+    squared_numbers = []
+    for n in numbers:
+        squared_numbers.append(n*n)
+    return squared_numbers
+
+numbers = [1, 2, 3, 4]
+get_squared_numbers(numbers) # return [1, 4, 9, 16]
+here time is linearly propotional to numbers of items present in the list.
+
+2) Example of O(1) complexity is
+
+def find_first_pe(prices, eps, index):
+    pe = prices[index]/eps[index]
+    return pe
+
+here does not matter what is the size of prices and eps hence we are providing the index so it will take
+same time to find out the pe.
+
+3) Exapmple for O(N**2)
+
+find duplicate numbers from a list.
+
+numbers = [3, 6, 2, 4, 3, 6, 8, 9]
+
+for i in range(len(numbers)):
+    for j in range(i+1, len(numbers)):
+        if numbers[i] == numbers[j]:
+            print(numbers[i] + " is a duplicate")
+            break
+
+Here as number of element in list increase complexity will also increase in square since we use for loop
+inside for loop.
+
+time = a*(n**2) + b
+time = O(n**2)
+
+another example of O(n**2)
+
+numbers = [3, 6, 2, 4, 3, 6, 8, 9]
+duplicate = None
+for i in range(len(numbers)):
+    for j in range(i+1, len(numbers)):
+        if numbers[i] == numbers[j]:
+            duplicate = numbers[i]
+            break
+
+for i in range(len(numbers)):
+    if numbers[i] == duplicate:
+        print(i)
+
+here 1st block of code time complexity is O(n**2)
+2nd block of time complexity is O(n)
+
+overall - time = a(n**2) + b(n) + c
+time = O(n**2) + O(n)
+time = O(n**2) since it keeps only fastest growing things.
+
+Time complexity - Measuring running time growth.
+Space complexity - Measuring space growth.
+
+iteration k = n/(2**k)
+we get this from binary search
+Process of binary search
+if we have a sorted list and we need to find out index of some number
+numbers = [2, 4, 16, 45, 56, 68, 72]
+if we need to find index of 68 then
+by normal process we need to do at least 5 iteration
+if we go by binary search then
+get the biddle one
+iteration 1 = n/2 54
+compare if it is 68 or not if not the discard the left side elements from middle one.
+iteration 2 = (n/2)/2 56 = n/(2)**2
+compare if it is 68 or not discard left side and
+iteration 3 = ((n/2)/2)/2 = n/(2)**3 68
+got the value in 3rd iteration only.
+
+iteration = n/(2)**k
+n = 2**k
+log2(n) = log2(2**k)
+log2(n) = k*log2 2
+k = log(n) - O(log(n))
+
+hence number of iteration for a binary search is O(log(n))
+complexity of a binary search is O(log(n))
+
+In python, list is implemented as dynamic array
+In other languages like JAVA, C++ we have static and dynamic arrays both.
+
+

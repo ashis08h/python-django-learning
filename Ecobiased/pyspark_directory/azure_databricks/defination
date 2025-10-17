@@ -216,10 +216,17 @@ Mount points can be created either using account key or SAS token.
 Using Account key
 
 dbutils.fs.mount(
-    source='wasbs://<container_name>@<storage_name>.blob.core.window.net/',
+    source='wasbs://<container_name>@<storage_name>.blob.core.windows.net/',
     mount_point='/mnt/<mountName>',
-    extra_configs={'fs.azure.account.key.<StorageAccountName>.blob.core.window.net':'<AccountKey>'}
+    extra_configs={'fs.azure.account.key.<StorageAccountName>.blob.core.windows.net':'<AccountKey>'}
 )
+
+Where container_name is the name of the container
+storage_name is the name of storage account
+mountName is the name of mountpoint name by which we wanted to create mount
+StorageAccountName is the name of storage account
+AccountKey you will get this account key inside Security + networking > access keys and you can use
+key1 or key2
 
 Using SAS Token
 

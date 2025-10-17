@@ -1,0 +1,32 @@
+[
+{
+	"Id": "1",
+	"Name": "Ashish kumar",
+	"Age":"30",
+	"DeptName": "IT"
+},
+{
+	"Id": "2", 
+	"Name": "Kundan kumar",
+	"Age":"40",
+	"DeptName": "Service"
+},
+{
+	"Id": "3",
+	"Name": "Kamlesh kumar",
+	"Age":"20",
+	"DeptName": "Washing"
+},
+{
+	"Id": "4",
+	"Name": "Avimanyu kumar",
+	"Age":"10", 
+	"DeptName": "IT"
+},
+{
+	"Id": "5",
+	"Name": "Rakesh kumar",
+	"Age":"60",
+	"DeptName": "Service"
+}
+]

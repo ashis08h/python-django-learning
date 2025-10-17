@@ -8,6 +8,7 @@ class Person:
     def info(self):
         print(f"My name is {self.name} and company name is {self.company_name}")
 
+    @classmethod
     def change_company(cls, new_company):
         cls.company_name = new_company
 

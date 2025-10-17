@@ -3,7 +3,7 @@
 class Discount:
 
     def get_discount(self, customer_type):
-        if customer_type == 'regular'
+        if customer_type == 'regular':
             return 5
         elif customer_type == 'vip':
             return 10

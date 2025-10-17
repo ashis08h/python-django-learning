@@ -1,4 +1,4 @@
-# example of sort a list with builtin smethod
+# example of sort a list with builtin method
 
 a_list = [1, 2, 8, 7, 0, 1, 0, 0, 9, 9, 8]
 

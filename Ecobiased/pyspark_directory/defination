@@ -17,3 +17,119 @@ It is an API.
 
 What mounts does basically?
 It attach the external sources with databricks file storage.
+
+What are the write modes?
+
+by default if we wanted to copy a file from source to destination and that file is already present inside
+destination then it will return error that this file already present.
+
+so we can use modes here
+
+Overwrite - This will replace the older files with new file
+Append - This will keep older data and append the new data also
+Ignore - If same file already present in the destination then it will not do anything
+error - If file is already present in the destination then it will give error.
+
+By default databricks has error mode.
+
+when we write a dataframe into a mountpoint with below command df.write.csv('/mnt/output/')
+then some extra file generates what are those and why it is generating _SUCCESS, _committed_591,
+_started_5911, part-00000-tid-5?
+
+Spart doesnot write a single csv file instead it writes a directory with multiple files, because spark
+is distributed. each executor writes its own part of data.
+
+part-00000-tid-5 -
+These are actuals data files, each partition of your DataFrame becomes one or more part-xxx files.
+Example of your dataframe has 10 partitions you will see part-00000, part-00001, ... part-00009
+
+_SUCCESS -
+An empty maker file written when the job completes succefully.
+Downstream jobs/tools use this to check if the output directory is valid/complete.
+
+_committed_591 and _started_5911
+These are transactional log files created by the hadoop outputcommitter.
+_started_xxx - indicates a write attempt has started.
+_committed_xxx - indicates the attempt has committed successfully.
+they part of ensuring atomic writes (especially when writing to cloud storage like S3/ADLS)
+
+Why spark generates them -
+spark jobs are parallelized - multiple tasks write multiple part files.
+The OutputCommitter mechanism ensures data integrity
+If a task fails, incomplete files won't be marked as committed.
+The _SUCCESS file ensures reader know the dataset is complete.
+
+If you want a single csv file
+df.coalesce(1).write.mode("overwrite").csv(path)
+
+Different data types
+
+SQL
+INT: for integer values.
+BIGINT: for large integer values
+FLOAT: for floating point values
+DOUBLE: for double precision floating point values
+CHAR: for fixed-length character strings.
+VARCHAR: for variable-length character strings
+DATE: for date values
+TIMESTAMP: for timestamp values
+
+
+PYSPARK
+In PYSPARK data types are similar, but represented differently
+
+IntegerType: For integer values
+LongType: For long integer values
+FloatType: For floating point values
+DoubleType: For double precision floating point values
+StringType: For character string
+TimestampType: For timestamp values
+DateType: For date values
+
+What is StructType in PYSPARK?
+It is a type which is used to define schema inside PYSPARK and it will accept columns with type and name as
+a parameter.
+
+What is StructField in PYSPARK?
+It is used to define column inside schema in PYSPARK.
+
+schema = StructType([
+    StructField("id", IntegerType(), True),
+    StructField("name", StringType(), False),
+    StructField("age", IntegerType(), True),
+    StructField("salary", DecimalType(10, 2), True)
+])
+
+code df.schema is used to display the schema of a dataframe by default if no schema is
+
+Here In StructField first argument is column name, second argument is type and third argument is whether it is
+mandatory or not.
+df = spark.createDataFrame([], schema)
+
+Lit() - It is a function used to create a new column by adding values to that column in pyspark dataframe.
+lit('value')
+
+Cast - It is used to convert the datatypes of any columns in pyspark dataframe.
+
+We have startswith and endswith functions in pyspark sql functions module which are case sensitive means
+if we pass capital 'T' as a parameter then it won't return values starts with small 't'.
+
+but contains function is case insensitive.
+
+case and when statement in sql
+
+CASE
+    WHEN condition1 THEN result_value1
+    WHEN condition2 THEN result_value2
+    ELSE result
+END;
+
+from pyspark.sql.functions import *
+
+df1 = df.select('*',
+    when(df.ItemName=='Total income', df.Qty + 100)
+    .when (df.ItemName=='Sales', df.Qty + 200)
+    .when (df.ItemName=='Interest', df.Qty + 300)
+    .otherwise(1000).alias("NewQty")
+    )
+display(df1)

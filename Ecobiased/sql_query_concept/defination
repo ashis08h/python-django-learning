@@ -40,6 +40,7 @@ FORMAT:
     select FORMAT(CONVERT(DATE, [Date], 20), 'MM/dd/yyyy') from [In_CurrencyConversionNew];
 
 CASE STATEMENT:
+     SELECT
      CASE
 	    WHEN [Date] = '2020-03' THEN 'ASHISH'
 	    WHEN [Date] IS NULL THEN 'KUMAR'
@@ -93,6 +94,23 @@ JOINS:
 
         SELECT il1.[Item], il2.[Location] FROM [Stg_ItemLocAttr] il1
         INNER JOIN [Stg_ItemLocAttr] il2 ON il1.[Item] = il2.[IntroProgram];
+
+usecase of self join in real time scenario -
+    table
+    id, name, manager_id
+    1, john, null
+    2, priya, 1
+    3, rakesh, 1
+    4, sneha, 2
+
+1) We can use this join for version comparison
+    - means comparing rows of the same table(eg - previous and current records)
+
+Usecase of cross join -
+1) Generating product variations - product attribute(size * color)
+2) Creating time and date slots -
+suppose we have a list of employees
+and another list of slots then we can generate all possible combinations to assign shifts dynamically.
 
 MERGE STATEMENT -
     In SQL SERVER, the MERGE statement is used to perform an upsert operation which means it can
@@ -728,6 +746,19 @@ Partitioning - Done within same database/server (eg. postgres table partitioning
 Sharding - Spread partitions across multiple servers/databases.
 
 so all sharding is partitioning but not all partitioning is sharding.
+
+SELECT
+    m.name,
+    g.grade
+FROM
+    marks AS m
+JOIN
+    grade_scale AS g
+    ON m.score BETWEEN g.min_score AND g.max_score;
+
+question of above answer
+
+Table 1: marks student_id name score 1 Aditi 87 2 Rohan 67 3 Meera 91 Table 2: grade_scale grade min_score max_score A 90 100 B 80 89 C 70 79 D 0 69 output: out should be name and grade if score of marks table lies between and equal to min_score and max_score of grade_scale table grade should be grade from grade_scale give me sql server query is it join possible here because there is no common column here. name  grede aditi B Rohan D Meera A
 
 
 

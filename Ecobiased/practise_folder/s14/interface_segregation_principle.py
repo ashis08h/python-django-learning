@@ -44,7 +44,7 @@ class Eatable(ABC):
         pass
 
 
-class HumanWorker(Workable):
+class HumanWorker(Workable, Eatable):
 
     def work(self):
         print("Working")

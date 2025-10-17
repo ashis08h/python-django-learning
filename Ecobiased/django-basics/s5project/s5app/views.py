@@ -16,6 +16,7 @@ from rest_framework import generics, filters, viewsets
 from rest_framework.permissions import IsAuthenticated
 from .permissions import IsAdminOrReadOnly
 import json
+from .tasks import add
 # Create your views here.
 
 
@@ -100,6 +101,8 @@ class AuthorView(View):
         authors = Author.objects.all()
         author_serializers = AuthorSerializers(authors, many=True)
         print("author_serializers", author_serializers.data)
+        # result = add.delay(2, 4)
+        # print("result", result.id)
         return render(request, 'author.html', context={'authors': author_serializers.data})
 
     def post(self, request):

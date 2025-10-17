@@ -11,7 +11,7 @@ class ShowItemLocation:
 class FetchLocation(ShowItemLocation):
 
     def __init__(self, item_location):
-        super().__init__(item_location.split("_")[0], item_location.split("_")[0])
+        super().__init__(item_location.split("_")[0], item_location.split("_")[1])
 
 
 sil = ShowItemLocation("item", "location")

@@ -1,291 +1,209 @@
-define('o9.NGP.InboundSync', ['o9/data/query', 'o9/data/cellset'], function () {
-    var queryModule = require('o9/data/query');
-	var cellsetModule = require('o9/data/cellset');
+define('o9.NiFiInbound', ['o9/data/query', 'o9/data/cellset'], function () {
+    Log.Info("Query opened");
+    import fetch from "node-fetch";
 
-    function ValidateSupplier(SupplierID) {
-        var querySupplierCheck = `(Select ([Supplier].[Supplier Location].filter(#.Name in {[${SupplierID}]}))).count;`;
-        Log.Info("Log- querySupplierCheck: " + querySupplierCheck);
+    var ActionButtonCall = function (o9Params) {
+        Log.Info("AB Triggered: inside ActionButtonCall");
 
-        var response = queryModule.update(querySupplierCheck);
-        Log.Info("Log- querySupplierCheckResponse: " + response);
+        var parsedParams = JSON.parse(o9Params);
+        var queryModule = require('o9/data/query');
+        var cellsetModule = require('o9/data/cellset');
 
-        return JSON.parse(response).Result == 1
-            ? { Status: "Success", Status_Message: "" }
-            : { Status: "Failure", Status_Message: `${SupplierID} is not present in Supplier Master` };
-    }
+        // Date-time string
+        var now = new Date();
+        var pad = (n) => (n < 10 ? "0" + n : n);
+        var IncomingCurrentDate =
+            now.getFullYear() + "-" +
+            pad(now.getMonth() + 1) + "-" +
+            pad(now.getDate()) + ":" +
+            pad(now.getHours()) + ":" +
+            pad(now.getMinutes()) + ":" +
+            pad(now.getSeconds());
 
-    function ValidatePO_POLine(POHeaderID, POLineID) {
-        var query = `(select (Version.[Version Name].[CurrentWorkingView] * [Purchase Orders].[PO ID].[${POHeaderID}] * [Document Line].[Line ID].[${POLineID}]) on row).count;`;
-        Log.Info("Log- queryPO_POLineCheck: " + query);
+        var resLocationNumber = parsedParams.locationNumber;
+        var resPickupDate = parsedParams.pickupDate;
+        var resId = parsedParams.id;
 
-        var response = queryModule.update(query);
-        Log.Info("Log- queryPO_POLineCheckResponse: " + response);
-
-        return JSON.parse(response).Result == 1
-            ? { Status: "Success", Status_Message: "" }
-            : { Status: "Failure", Status_Message: `${POHeaderID} and ${POLineID} is not a valid PO-PO Line combination` };
-    }
-
-    function ValidateMaterial(MaterialNumber) {
-        var query = `(Select ([Item].[Item].filter(#.Name in {[${MaterialNumber}]}))).count;`;
-        Log.Info("Log- queryMaterialCheck: " + query);
-
-        var response = queryModule.update(query);
-        Log.Info("Log- queryMaterialCheckResponse: " + response);
-
-        return JSON.parse(response).Result == 1
-            ? { Status: "Success", Status_Message: "" }
-            : { Status: "Failure", Status_Message: `${MaterialNumber} is not present in Material Master` };
-    }
-
-	function ValidateLocation(Plant) {
-        var query = `(Select ([Location].[Location].filter(#.Name in {[${Plant}]}))).count;`;
-        Log.Info("Log- queryLocationCheck: " + query);
-
-        var response = queryModule.update(query);
-        Log.Info("Log- queryLocationCheckResponse: " + response);
-
-        return JSON.parse(response).Result == 1
-            ? { Status: "Success", Status_Message: "" }
-            : { Status: "Failure", Status_Message: `${Plant} is not present in Location Master` };
-    }
-
-    var PO = function (o9Params) {
-        Log.Info("Log-Started JavaScript o9.InboundSync.PO");
-        var ParsedParams = JSON.parse(o9Params);
-        Log.Info('Log- Fields...' + JSON.stringify(ParsedParams));
-
-        let { POHeaderID, SupplierID, POCreationDate, Currency, PODocumentDate, POType, IncoTermCode } = ParsedParams.header;
-        let Status_Message = [];
-
-        let supplierValidation = ValidateSupplier(SupplierID);
-        if (supplierValidation.Status === "Failure") return supplierValidation;
-
-        for (let detail of ParsedParams.details) {
-            let materialValidation = ValidateMaterial(detail.MaterialNumber);
-            if (materialValidation.Status === "Failure") {
-                Status_Message.push(materialValidation.Status_Message);
-            }
-			let locationValidation = ValidateLocation(detail.Plant);
-            if (locationValidation.Status === "Failure") {
-                Status_Message.push(locationValidation.Status_Message);
-            }
+        // --- Input validations ---
+        if (!resId) {
+            RuleOutputToUI = { Status: 'Error', Message: 'Please enter Customer Order ID.' };
+            return;
+        }
+        if (!resLocationNumber) {
+            RuleOutputToUI = { Status: 'Error', Message: 'Please enter Location Number.' };
+            return;
+        }
+        if (!resPickupDate) {
+            RuleOutputToUI = { Status: 'Error', Message: 'Please enter Pickup Date.' };
+            return;
+        }
+        if (!Array.isArray(parsedParams.items) || parsedParams.items.length === 0) {
+            RuleOutputToUI = { Status: 'Error', Message: 'Please provide at least one item with itemNumber and quantity.' };
+            return;
         }
 
-        if (Status_Message.length > 0) {
-            return { Status: "Failure", Status_Message: Status_Message.join("; ") };
-        }
+		// Global-like variables (like in your NiFi Python)
+		var Json_to_attribute = "";
+		var id_to_db = "";
+		var output_list = [];
+		var output_length = 0;
+		var output_quantity_list = [];
+		var output_item_quantity = [];
 
-           // START:- Create PO and PO Line if there are no errors
-            var queryCreatePO = `CREATEMEMBER([Purchase Orders].[PO ID] = {, "${POHeaderID}"});`;
-            Log.Info("Log- queryCreatePO : " + queryCreatePO);
+		// 1. Json_to_attribute (stringified JSON)
+		Json_to_attribute = JSON.stringify(parsedParams);
 
-            var queryCreatePOResponse = queryModule.update(queryCreatePO);
-            Log.Info("Log- queryCreatePOResponse : " + queryCreatePOResponse);
-            Status_Message = POHeaderID + ` created successfully`;
+		// 2. id_to_db (quoted id)
+		id_to_db = `'${resId}'`;
 
-			var queryupdateIncoterm = `updatemember([Purchase Orders].[PO ID]={,"${POHeaderID}"}, [Purchase Orders].[Incoterm1]={"${IncoTermCode}",});`;
-			Log.Info("Log- queryupdateIncoterm : " + queryupdateIncoterm);
+		// 3. Extract item numbers and quantities
+		parsedParams.items.forEach(function (item) {
+			output_list.push(item.itemNumber);
+			output_quantity_list.push(item.quantity);
+		});
 
-			var queryupdateIncotermResponse = queryModule.update(queryupdateIncoterm);
-			Log.Info("Log- queryupdateIncotermResponse : " + queryupdateIncotermResponse);
+		// 4. Build itemNumber_quantity list
+		for (var i = 0; i < output_list.length; i++) {
+			output_item_quantity.push(output_list[i] + "_" + output_quantity_list[i]);
+		}
 
-            // Loop through details and extract each field into separate variables and create PO Details
-            ParsedParams.details.forEach((detail, index) => {
-                let POLineId = detail.POLineId;
-                let Plant = detail.Plant;
-                let StorageLocation = detail.StorageLocation;
-                let MaterialNumber = detail.MaterialNumber;
-                let PoLineQty = detail.PoLineQty.trim();
-                let NetPrice = detail.NetPrice.trim();
-                let UnitPrice = detail.UnitPrice.trim();
-                let DelvryDate = detail.DelvryDate;
-                let ShipmentDate = detail.ShipmentDate;
-                let OrderingUOM = detail.OrderingUOM;
-                let ItemCategory = detail.ItemCategory;
-                let ConfContKey = detail.ConfContKey;
-                let OrderPriceUnit = detail.OrderPriceUnit;
-				let PODelSchLineID = detail.PODelSchLineID;
-				let POSchQty = detail.POSchQty;
-				let pdtInDays = (new Date(DelvryDate) - new Date(ShipmentDate)) / 86400000;
-				Log.Info("Log-****** pdtInDays: " + pdtInDays);
+		// 5. Unique item numbers (array)
+		function uniqueList(list) {
+			var seen = {};
+			var unique = [];
+			list.forEach(function (val) {
+				if (!seen[val]) {
+					seen[val] = true;
+					unique.push(val);
+				}
+			});
+			return unique;
+		}
+		output_list = uniqueList(output_list);
 
-				let queryCreatePODetails = `cartesian scope: (Version.[Version Name].[CurrentWorkingView] * [Location].[Location].[${Plant}] * [Supplier].[Supplier Location].[${SupplierID}] * [PO Type].[PO Type].[${POType}] * [Purchase Orders].[PO ID].[${POHeaderID}] * [Item].[Item].[${MaterialNumber}] * [Document Line].[Line ID].[${POLineId}]);
-					Measure.[ERP PO Line Requested Quantity]=${PoLineQty};
-					Measure.[ERP PO Line Requested Amount]=${NetPrice};
-					Measure.[ERP PO Line Storage Location]=${StorageLocation};
-					Measure.[ERP PO Line Requested Ship Date]="${ShipmentDate}";
-					Measure.[ERP PO Line Unit Price]=${UnitPrice};
-					Measure.[ERP PO Line Proposed Unit Price]=${UnitPrice};
-					Measure.[ERP PO Line Ordering UOM]="${OrderingUOM}";
-					Measure.[ERP PO Line Item Category]="${ItemCategory}";
-					Measure.[ERP PO Line Unit Price Multiplier]=${OrderPriceUnit};
-					Measure.[ERP PO Line Order Multiple]=1;
-					Measure.[ERP PO Line Request Modified Time]= now();
-					Measure.[ERP PO Line Confirmation Control Key]="${ConfContKey}";
-					Measure.[ERP PO Line Grouping]=37;
-					Measure.[ERP PO Line Grouping for Invoice]=37;
-					Measure.[ERP PO Line PDT in Days]=${pdtInDays};
-					end scope;`;
+		// 6. Length of unique items
+		output_length = output_list.length;
 
-                Log.Info("Log-** queryCreatePODetails : " + queryCreatePODetails);
-                var queryCreatePODetailsResponse = queryModule.update(queryCreatePODetails);
-                Log.Info("Log-******** *****queryCreatePOResponse : " + queryCreatePODetailsResponse);
+		// 7. Format output_item_quantity as "(item_qty,item_qty,...)"
+		output_item_quantity = "(" + output_item_quantity.join(",") + ")";
 
-				let queryCreatePODetailsHeader = `cartesian scope: (Version.[Version Name].[CurrentWorkingView] * [Location].[Location].[${Plant}] * [Supplier].[Supplier Location].[${SupplierID}] * [PO Type].[PO Type].[${POType}] * [Purchase Orders].[PO ID].[${POHeaderID}] * [Item].[Item].[${MaterialNumber}]);
-					Measure.[ERP PO Header Creation Date] = "${POCreationDate}";
-					Measure.[ERP PO Header Unit Price Currency]	=${Currency};
-					Measure.[ERP PO Header E Invoice Indicator]	= "YES";
-					Measure.[ERP PO Header Latest Revision]	=0;
-					Measure.[ERP PO Header Document Date] ="${PODocumentDate}";
-					Measure.[ERP PO Header Modified On] = now();
-					end scope;`;
+		Log.Info("Json_to_attribute: " + Json_to_attribute);
+		Log.Info("id_to_db: " + id_to_db);
+		Log.Info("output_list (array): " + JSON.stringify(output_list));
+		Log.Info("output_length: " + output_length);
+		Log.Info("output_quantity_list: " + JSON.stringify(output_quantity_list));
+		Log.Info("output_item_quantity: " + output_item_quantity);
 
-				Log.Info("Log-** queryCreatePODetailsHeader : " + queryCreatePODetailsHeader);
-                var queryCreatePODetailsHeaderResponse = queryModule.update(queryCreatePODetailsHeader);
-                Log.Info("Log-******** *****queryCreatePOHeaderResponse : " + queryCreatePODetailsHeaderResponse);
-
-				let queryCreatePODetailsDS = `cartesian scope: (Version.[Version Name].[CurrentWorkingView] * [Location].[Location].[${Plant}] * [Supplier].[Supplier Location].[${SupplierID}] * [PO Type].[PO Type].[${POType}] * [Purchase Orders].[PO ID].[${POHeaderID}] * [Item].[Item].[${MaterialNumber}] * [Document Line].[Line ID].[${POLineId}] * [Document Schedule].[Delivery Schedule].[${PODelSchLineID}]);
-					Measure.[ERP PO Schedule Requested Quantity] =${POSchQty};
-					Measure.[ERP PO Schedule Requested Ship Date] ="${ShipmentDate}";
-					Measure.[ERP PO Schedule Requested Delivery Date]="${DelvryDate}";
-					Measure.[ERP PO Schedule Received Quantity] =0;
-					end scope;`;
-
-				Log.Info("Log-** queryCreatePODetailsDS : " + queryCreatePODetailsDS);
-                var queryCreatePODetailsDSResponse = queryModule.update(queryCreatePODetailsDS);
-                Log.Info("Log-******** *****queryCreatePODSResponse : " + queryCreatePODetailsDSResponse);
-
-
-				let queryCreatePODetailsConfAssoc = `cartesian scope: (Version.[Version Name].[CurrentWorkingView] * [Location].[Location].[${Plant}] * [Supplier].[Supplier Location].[${SupplierID}] * [PO Type].[PO Type].[${POType}] * [Purchase Orders].[PO ID].[${POHeaderID}] * [Item].[Item].[${MaterialNumber}] * [Document Line].[Line ID].[${POLineId}] * [Confirmation Schedule].[Confirmation Schedule].[1]);
-					Measure.[NGP PO Line Confirmation Association] = 1;
-					end scope;`;
-
-				Log.Info("Log-** queryCreatePODetailsConfAssoc : " + queryCreatePODetailsConfAssoc);
-                var queryCreatePODetailsConfAssocResponse = queryModule.update(queryCreatePODetailsConfAssoc);
-                Log.Info("Log-******** *****queryCreatePOConfAssocResponse : " + queryCreatePODetailsConfAssocResponse);
-
-			});  // END:- Create PO and PO Line
-
-
-        return { Status: "Success", Status_Message: `${POHeaderID} created successfully` };
-    };
-
-var Conf = function (o9Params) {
-        Log.Info("Log-Started JavaScript o9.InboundSync.Conf");
-        var ParsedParams = JSON.parse(o9Params);
-        Log.Info('Log- Fields for Conf...' + JSON.stringify(ParsedParams));
-
-
-        let Status_Message = [];
-        let statusArray = [];
-
-			// Loop through POConfirmation and extract each field into separate variables
-			ParsedParams.POConfirmation.forEach((confirmation, index) => {
-				let POHeaderID = confirmation.POHeaderID;
-				let POLineID = confirmation.POLineID;
-				let POConfSchID = confirmation.POConfSchID;
-				let POConfQty = confirmation.POConfQty;
-				let POConfDate = confirmation.POConfDate;
-				let POCommitRef = confirmation.POCommitRef;
-
-
-            let validationPO_POLine = ValidatePO_POLine(confirmation.POHeaderID, confirmation.POLineID);
-            if (validationPO_POLine.Status === "Failure") {
-                statusArray.push("Failure");
-                Status_Message.push(validationPO_POLine.Status_Message);
-            } else {
-			var poContextQuery = 'select ( Version.[Version Name].[CurrentWorkingView] * [Purchase Orders].[PO ID].['+POHeaderID+'] * [Document Line].[Line ID].['+POLineID+'] * [Supplier].[Supplier Location] * [Location].[Location] * [PO Type].[PO Type] * [Item].[Item]) on row, ({Measure.[NGP Final PO Line Requested Quantity]}) on column;';
-
-			Log.Info("Log-****** POContext Query for POHeader ID: "+POHeaderID+" and POLine ID: "+POLineID+" ... " + poContextQuery);
-
-			var poContextData = queryModule.select(poContextQuery);
-			poContextData = cellsetModule.createCellSet(poContextData);
-
-			var Location = "", Item = "", SupplierLocation = "", POType = "";
-
-			if (poContextData !== null && poContextData !== undefined && poContextData.rowCount !== 0) {
-				Location = (poContextData.row(0).cell(poContextData.memberColumnIndex('Location', 'Location')).Name);
-				Item = (poContextData.row(0).cell(poContextData.memberColumnIndex('Item', 'Item')).Name);
-				SupplierLocation = (poContextData.row(0).cell(poContextData.memberColumnIndex('Supplier', 'Supplier Location')).Name);
-				POType = (poContextData.row(0).cell(poContextData.memberColumnIndex('PO Type', 'PO Type')).Name);
+		var ConcatenateMultiselect = function(value) {
+			if (Array.isArray(value)) {
+				return '"' + value.join('","') + '"';
 			}
+			return value;
+		};
 
-			 Log.Info("Log-****** SupplierLocation: " + SupplierLocation);
-			 Log.Info("Log-****** Location: " + Location);
-			 Log.Info("Log-****** POType: " + POType);
-			 Log.Info("Log-****** Item: " + Item);
+	var output_list_str = ConcatenateMultiselect(output_list);
+	Log.Info("output_list_str: " + output_list_str);
 
-			// Get IncoTerm and Leadtime using IBPL query
-			var query = 'Select ([Version].[Version Name].[CurrentWorkingView] * [Location].[Location].['+Location+'] * [Item].[Item].['+Item+'] *  [Purchase Orders].[PO ID].['+POHeaderID+'] * [Supplier].[Supplier Location].['+SupplierLocation+'] * [PO Type].[PO Type].['+POType+'] * [Document Line].[Line ID].['+POLineID+'] ) on row, ({Measure.[NGP PO Line Incoterm Type], Measure.[NGP Final PO Line Requested Ship Date], Measure.[NGP Final PO Line Requested Delivery Date], datediff(Measure.[NGP Final PO Line Requested Ship Date], Measure.[NGP Final PO Line Requested Delivery Date], Day) as Transient.Leadtime}) on column;';
+	//var output1 = `(select (&CWV * [SCSItem].[Item].filter(#.Name in {${output_list_str}}) * [SCSLocation].[Location].[${resLocationNumber}]) on row,({if (Measure.[Delivered_Frozen] == True) then if (Measure.[DeliveryDate_1] < "${resPickupDate}") then 1 else 0 else if (Measure.[DeliveryDate_1] <= "${resPickupDate}") then 1 else 0 as transient.[ValidDelivery]})on column).count;`;
+	var output1 = `select (&CWV * [SCSItem].[Item].filter(#.Name in {${output_list_str}}) * [SCSLocation].[Location].[${resLocationNumber}]) on row,({if (Measure.[Delivered_Frozen] == True) then if (Measure.[DeliveryDate_1] < "${resPickupDate}") then 1 else 0 else if (Measure.[DeliveryDate_1] <= "${resPickupDate}") then 1 else 0 as transient.[ValidDelivery]})on column;`;
+	Log.Info("Up to here1: ");
+	var query = cellsetModule.createCellSet(queryModule.select(output1));
+	Log.Info("Up to here2: ");
+	var output1_1=query.rowCount;
+	Log.Info("Up to here3: " + output1_1);
+	Log.Info("output1_1: " );
+	output_query = (output1_1 === output_length) ? output1 : null;
+	Log.Info("final_output_query: " + output_query);
 
-			Log.Info("Running query for POHeaderID: "+POHeaderID+", POLineID: "+POLineID+" ... " + query);
-			var queryData = queryModule.select(query);
-			queryData = cellsetModule.createCellSet(queryData);
+	const o9_PLATFORM_API_URL_FACT = "https://o9cprcert.starbucks.net/api/v2/fact/StarbucksCPR"; // Replace with your actual base URL
+	const filters = [
+      { AttributeName: "Item", Values: output_list },
+      { AttributeName: "Location", Values: [resLocationNumber] }
+    ];
 
-			var IncoTerm = "", LeadTimeMS = 0;
-			if (queryData !== null && queryData !== undefined && queryData.rowCount !== 0) {
-				IncoTerm = queryData.row(0).cell(queryData.measureColumnIndex('NGP PO Line Incoterm Type'));
-				LeadTimeMS = queryData.row(0).cell(queryData.measureColumnIndex('Leadtime'));
-			}
-
-			Log.Info("IncoTerm: " + IncoTerm);
-			Log.Info("Leadtime: " + LeadTimeMS);
-
-			// Compute POConfShipDate and POConfDelDate
-			let confDate = new Date(POConfDate);
-			var POConfShipDate = "", POConfDelDate = "";
-
-			if (IncoTerm === 'Prepaid') {
-				POConfDelDate = formatDate(new Date(confDate));
-				POConfShipDate = formatDate(new Date(confDate.getTime() - (LeadTimeMS * 24 * 60 * 60 * 1000)));
-			} else {
-				POConfDelDate = formatDate(new Date(confDate.getTime() + (LeadTimeMS * 24 * 60 * 60 * 1000)));
-				POConfShipDate = formatDate(new Date(confDate));
-			}
-
-			Log.Info("POConfShipDate: " + POConfShipDate);
-			Log.Info("POConfDelDate: " + POConfDelDate);
-
-			// Utility function to format date
-			function formatDate(date) {
-				return date.getFullYear() + '-' +
-					   (date.getMonth() + 1).toString().padStart(2, '0') + '-' +
-					   date.getDate().toString().padStart(2, '0');
-			}
-
-
-			var queryUpdateInboundConfirm = `cartesian scope:(Version.[Version Name].[CurrentWorkingView] * [Location].[Location].[${Location}] * [Supplier].[Supplier Location].[${SupplierLocation}] * [PO Type].[PO Type].[${POType}] * [Purchase Orders].[PO ID].[${POHeaderID}] * [Document Line].[Line ID].[${POLineID}] * [Item].[Item].[${Item}] * [Confirmation Schedule].[Confirmation Schedule].[${POConfSchID}]);
-			Measure.[NGP PO Confirmation Commit Reference Number] = coalesce(Measure.[NGP Final PO Confirmation Commit Reference Number],${POCommitRef});
-			Measure.[ERP PO Confirmations Delivery Date] = "${POConfDelDate}";
-			Measure.[ERP PO Confirmations Quantity] = ${POConfQty};
-			Measure.[ERP PO Confirmations Ship Date] = "${POConfShipDate}";
-			Measure.[NGP PO Line Confirmation Association] = 1;
-			Measure.[ERP PO Confirmations Modified On] = now();
-			Measure.[ERP PO Confirmations Changed By] = "ERP";
-			Measure.[ERP PO Confirmations Modified By]= "Buyer";
-			end scope;`;
-
-			Log.Info("Log-************************queryUpdateInboundConfirm : "+queryUpdateInboundConfirm);
-			var queryUpdateConfirmResponse = queryModule.update(queryUpdateInboundConfirm);
-			Log.Info("Log-************************queryUpdateConfirmResponse : "+queryUpdateConfirmResponse);
-
-
-			};
-
-                Status_Message.push(`Confirmation created successfully for PO: ${confirmation.POHeaderID} - POLine: ${confirmation.POLineID}`);
-                statusArray.push("Success");
+    const url = `${o9_PLATFORM_API_URL_FACT}/ItemxStore1?Filters=${encodeURIComponent(JSON.stringify(filters))}&size=20`;
+    Log.Info("url is  " + url);
+    // Perform GET request
+    async function callAPI() {
+      try {
+        const response = await fetch(url, {
+          method: "GET",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": "ApiKey mjbt1dbw.gifrys7pzkyi143lme9bbdz"
+          }
         });
 
-        let finalStatus = statusArray.includes("Failure")
-            ? (statusArray.includes("Success") ? "Partial Success" : "Failure")
-            : "Success";
+        if (!response.ok) {
+          Log.Info("Response not okay");
+          return;
+        }
 
-        return { Status: finalStatus, Status_Message: Status_Message.join("; ") };
+        const data = await response.json();
+        Log.Info("API Response:", data);
+      } catch (error) {
+        Log.Info("API Request Failed:", error);
+      }
+    }
+    callAPI();
+        // --- Loop through items ---
+        parsedParams.items.forEach(function (it, i) {
+            if (!it.itemNumber || !it.quantity || isNaN(it.quantity) || it.quantity < 0) {
+                RuleOutputToUI = {
+                    Status: 'Error',
+                    Message: `Invalid item at index ${i}: itemNumber and quantity are required, quantity must be >= 0`,
+                };
+                return;
+            }
+
+            var resItemNumber = it.itemNumber;
+            var resQuantity = it.quantity;
+
+            // Check if a record already exists for same combination
+            var dupQuery = `
+				Select(
+                    Version.[Version Name].[CurrentWorkingView] *
+                    [SCSItem].[Item].[${resItemNumber}] *
+                    [SCSLocation].[Location].[${resLocationNumber}] *
+                    [CustomerOrderID].[CustomerOrderID].[${resId}] *
+                    [Time].[Day].[${resPickupDate}]
+                ) on row, ({Measure.[COQtyJS]}) on column WHERE {Measure.[COQtyJS] == ${resQuantity}};
+                `;
+			Log.Info("duplicate validation query: " +JSON.stringify(dupQuery));
+
+			var dupCellsetObj = cellsetModule.createCellSet(queryModule.select(dupQuery));
+
+            var isDuplicate = false;
+            if (dupCellsetObj.rowCount > 0) {
+					isDuplicate = true;
+            }
+
+            // --- Decide COReasonCodeJS ---
+            var reasonCode = isDuplicate ? 400 : 202;
+            var statusMsg = isDuplicate ? 'Order already exist' : '';
+
+            // --- Insert / Update query ---
+            var insertQuery = `cartesian scope:(
+                Version.[Version Name].[CurrentWorkingView] *
+                [SCSItem].[Item].[${resItemNumber}] *
+                [SCSLocation].[Location].[${resLocationNumber}] *
+                [CustomerOrderID].[CustomerOrderID].[${resId}] *
+                [Time].[Day].filter(#.Key == todatetime("${resPickupDate}"))
+            );
+            Measure.[COQtyJS] = ${resQuantity};
+            Measure.[IncomingCurrentDate] = todatetime("2022-09-30");
+            Measure.[COReasonCodeJS] = ${reasonCode};
+            Measure.[COStatusJS] = "${statusMsg}";
+            end scope;`;
+			Log.Info("Insert query " + insertQuery);
+            queryModule.update(insertQuery);
+
+            Log.Info("Inserted itemNumber=" + resItemNumber +
+                     ", quantity=" + resQuantity +
+                     ", COReasonCodeJS=" + reasonCode +
+                     (isDuplicate ? " (duplicate)" : " (new)"));
+        });
     };
 
-    return {
-        PO: PO,
-        Conf: Conf
-    };
+    return { ActionButtonCall: ActionButtonCall };
 });

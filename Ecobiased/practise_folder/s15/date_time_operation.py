@@ -67,3 +67,69 @@ print(formatted)
 date_str = "2025-10-16 17:50:35"
 parsed = datetime.strptime(date_str, "%Y-%m-%d %H:%M:%S")
 print(parsed)
+
+# Get date difference
+
+from datetime import datetime
+
+d1 = datetime(2025, 10, 16)
+d2 = datetime(2025, 8, 1)
+
+diff = d1 - d2
+print("difference in days: ", diff.days)
+
+# check if date is expired
+
+expiry_date = datetime(2025, 10, 10)
+
+today = datetime.now()
+if today > expiry_date:
+    print("Expired")
+else:
+    print("Active")
+
+# get start and end of day
+
+today = datetime.now()
+start_of_day = datetime(today.year, today.month, today.day, 0, 0, 0)
+end_of_day = datetime(today.year, today.month, today.day, 23, 59, 59)
+print("start of day", start_of_day)
+print("end of day", end_of_day)
+
+# calculate age or duration between dates
+
+dob = date(1995, 12, 30)
+today = date.today()
+
+age_years = today.year - dob.year - ((today.month, today.day) < (dob.month, dob.day))
+print("Age: ", age_years, "years")
+
+# get the first day of current month
+
+today = date.today()
+first_day = today.replace(day=1)
+print("first day of month", first_day)
+
+# get first day of a particular month
+
+year = 2025
+month = 3
+first_day_of_month = date(year, month, 1)
+print("first day of march 2025", first_day_of_month)
+
+# get weekday name
+
+today = date.today()
+
+week_name = today.strftime("%A")
+short_week_name = today.strftime("%a")
+month_name = today.strftime("%B")
+short_month_name = today.strftime("%b")
+year_name_4_digit = today.strftime("%Y")
+year_name_2_digit = today.strftime("%y")
+print(week_name)
+print(short_week_name)
+print(month_name)
+print(short_month_name)
+print(year_name_4_digit)
+print(year_name_2_digit)

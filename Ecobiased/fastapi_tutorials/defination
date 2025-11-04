@@ -1,5 +1,5 @@
-FastApi provides swagger UI for documentation which consists of all the endpoint and you can try it out also.
-It also provides Redoc documentation also automatic documentation.
+FastApi provides swagger UI for documentation which consists of all the endpoint and you can try it
+out also. It also provides Redoc documentation also automatic documentation.
 
 FastApi based on latest python with type support also based on pydantic model.
 
@@ -187,3 +187,116 @@ Automatic data conversion(eg. string "25" become integer 25)
 Error reporting - (returns structured validation errors automatically)
 Serialization/Deserialization - (Convert between python objects and JSON)
 Used for request & response models in FASTAPI
+
+What is the difference between restapi and fastapi?
+defination -
+RestAPI is a design style or architecture for building APIs over HTTP(not a framework or library)
+FastAPI is a python web framework used to build RESTAPIs quickly and efficiently.
+
+Type -
+RESTAPI is a concept/standard
+FASTAPI is an implementation(framework)
+
+Purpose -
+RESTAPI defines how clients and servers communicate using HTTP methods(GET, POST, PUT, DELETE, etc)
+FastAPI provides tools and libraries to easily build RESTful APIS that follow REST principles.
+
+Protocol -
+RestAPI - based on HTTP/HTTPS and follow stateless communication.
+FASTAPI - Uses starlette for async and pydentic for validation to build restful APIs over HTTP.
+
+Language/platform -
+RESTAPI can be implemented in any language(python, java, Nodejs, etc)
+FASTAPI  - Python only framework that helps you implement REST APIs.
+
+Why FASTAPI is popular?
+FASTAPI stands out because
+Super fast performance - built on starlette + async support
+automatic documentation - via swagger doc UI and redoc ui
+builtin validation - using pydentic models
+easy authentication/authorization handling
+Type hinting support - great with modern python typing
+Asynchronous support - handles thousands of requests efficiently.
+
+what are the json dependencies in fastAPI?
+
+When we say json dependencies in FastAPI, we are talking about the libraries, and mechanisms FastAPI uses to
+handle JSON data - ie parsing(reading), validation and serialization (returning JSON Response)
+
+FastAPI is built on top of starlette and pydentic, so it relies on their JSON-handling capabilities.
+
+Core JSON dependencies in FastAPI -
+Pydentic - data validation and serialization - validates request JSON body and converts python objects to JSON.
+
+JSON(python standard library) - basic JSON encode/decode - converts between python dict and json string internally
+
+orjson(optional, faster) - High performance JSON parser - used when you install FastAPI with [all] extras
+
+ujson(option, alternative) - ultra-fast json library - another option for faster json handling
+
+starlette.responses.JSONResponse - Returns HTTP responses in JSON format - Used automatically when you return dict
+or return JSONResponse()
+
+What are the difference between path parameter and query parameter?
+Path parameter are part of the URL path itself, they are required and typically used to identify a specific
+resource.
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/{item_id}")
+def get_item(item_id: int):
+    return {"item_id": item_id}
+
+GET /items/10
+The {item_id} part is a path parameter.
+it's required -/items/ without id it gives 404 error.
+Typically use - Get, update, or delete a single resource by id
+
+Query parameter -
+Query parameter are passed after ? in the URL
+They are optional and usually used for filtering, sorting, pagination or search.
+
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/items/")
+def list_items(skip: int = 0, limit: int = 10):
+    return {"skip": skip, "limit": limit}
+
+GET /items/?skip=20&limit=5
+
+both skip and limit are query parameters. they are optional because default values are provided.
+you can pass one, both or none.
+
+You can combine path + query in the same endpoint.
+
+i am using above code and provided port as 9000 but when i run my app with below command uvicorn main:app --reload
+it started on 8000 port only
+
+i am using above code and provided port as 9000 but when i run my app with below
+command uvicorn main:app --reload it started on 8000 port only
+
+That block only executes when you directly run your script like this:
+python main.py
+
+In that case, it will indeed start the server on port 9000.
+uvicorn main:app --reload
+
+But when you use this command:
+
+uvicorn main:app --reload
+
+
+👉 You are not running your script directly — instead, the uvicorn CLI imports your app (main:app) and starts the server itself.
+
+That means the line inside
+
+if __name__ == '__main__': ...
+
+
+is never executed, so your port settings there are ignored.
+By default, Uvicorn starts on port 8000 unless you specify another one in the CLI command.
+

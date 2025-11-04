@@ -95,7 +95,7 @@ JOINS:
         SELECT il1.[Item], il2.[Location] FROM [Stg_ItemLocAttr] il1
         INNER JOIN [Stg_ItemLocAttr] il2 ON il1.[Item] = il2.[IntroProgram];
 
-usecase of self join in real time scenario -
+use case of self join in real time scenario -
     table
     id, name, manager_id
     1, john, null
@@ -106,7 +106,7 @@ usecase of self join in real time scenario -
 1) We can use this join for version comparison
     - means comparing rows of the same table(eg - previous and current records)
 
-Usecase of cross join -
+Use case of cross join -
 1) Generating product variations - product attribute(size * color)
 2) Creating time and date slots -
 suppose we have a list of employees
